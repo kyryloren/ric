@@ -6,11 +6,16 @@ import IconFacebook from './facebook'
 import IconX from './x'
 import IconLinkedIn from './linkedin'
 import IconTikTok from './tiktok'
+import IconLeftArrow from './left-arrow'
 
 const Icon = forwardRef((props, ref) => {
   switch (props.name) {
     case 'logo':
       return <IconLogo ref={ref} {...props} />
+    case 'right-arrow':
+      return <IconRightArrow ref={ref} {...props} />
+    case 'left-arrow':
+      return <IconLeftArrow ref={ref} {...props} />
     case 'right-arrow':
       return <IconRightArrow ref={ref} {...props} />
     case 'linkedin':

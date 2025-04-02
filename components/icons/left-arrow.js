@@ -1,11 +1,12 @@
 import { forwardRef } from 'react'
 
-const IconRightArrow = forwardRef((props, ref) => (
+const IconLeftArrow = forwardRef((props, ref) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    xmlnsXlink="http://www.w3.org/1999/xlink"
     fill="none"
     viewBox="0 0 15 14"
+    xmlnsXlink="http://www.w3.org/1999/xlink"
+    transform="matrix(-1,0,0,-1,0,0)"
     ref={ref}
     {...props}
   >
@@ -16,4 +17,4 @@ const IconRightArrow = forwardRef((props, ref) => (
   </svg>
 ))
 
-export default IconRightArrow
+export default IconLeftArrow
