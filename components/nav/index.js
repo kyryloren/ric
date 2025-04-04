@@ -1,20 +1,22 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useLenis } from 'lenis/react'
 import Icon from 'components/icons'
 import {
   ButtonsWrapper,
   CustomContainer,
+  HamburgerLine,
+  HamburgerWrapper,
   Header,
   InnerWrapper,
   LogoWrapper,
+  MenuWrapperButton,
   NavWrapper,
   OverflowWrapper,
 } from './styles'
 import CustomLink from 'components/link'
 import CustomButton from 'components/button'
-import RevealText from 'components/reveal-text'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
 import { usePathname, useRouter } from 'next/navigation'
@@ -27,6 +29,8 @@ const Nav = () => {
   const pathname = usePathname()
   const router = useRouter()
   const lenis = useLenis()
+
+  const [menuOpen, setMenuOpen] = useState(false)
 
   useEffect(() => {
     document.getElementById('main').style.paddingTop =
@@ -128,7 +132,7 @@ const Nav = () => {
             </OverflowWrapper>
           </NavWrapper>
           <ButtonsWrapper>
-            <div ref={(el) => buttonsAnim.current.push(el)}>
+            <div className="call" ref={(el) => buttonsAnim.current.push(el)}>
               <CustomButton $secondary $internal href={'/'}>
                 Call Now
               </CustomButton>
@@ -138,6 +142,14 @@ const Nav = () => {
                 Book Now
               </CustomButton>
             </div>
+
+            <MenuWrapperButton onClick={() => setMenuOpen(!menuOpen)}>
+              <HamburgerWrapper $open={menuOpen}>
+                <HamburgerLine />
+                <HamburgerLine />
+                <HamburgerLine />
+              </HamburgerWrapper>
+            </MenuWrapperButton>
           </ButtonsWrapper>
         </InnerWrapper>
       </CustomContainer>

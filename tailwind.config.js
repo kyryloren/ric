@@ -12,9 +12,11 @@ const config = {
   ],
   theme: {
     screens: {
-      sm: '375px',
+      xxs: '375px',
+      xs: '500px',
+      sm: '600px',
       md: '768px',
-      lg: '1024px',
+      lg: '1050px',
       xl: '1280px',
     },
     colors: {

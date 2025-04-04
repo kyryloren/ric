@@ -43,7 +43,8 @@ const SharedButtonStyles = css`
     }
   }
 
-  ${({ $primary }) => $primary && tw`bg-blue text-white`}
+  ${({ $primary }) =>
+    $primary && tw`bg-blue text-white border-[1px] border-blue border-solid`}
   ${({ $secondary }) =>
     $secondary && tw`border-[1px] border-gray text-black border-solid`}
 `
