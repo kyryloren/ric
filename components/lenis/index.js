@@ -1,9 +1,9 @@
 'use client'
 
+import { useStore } from 'lib'
 import { ReactLenis, useLenis } from 'lenis/react'
 import { useEffect, useRef } from 'react'
-import { useTempus } from 'tempus/react'
-import { useStore } from 'lib'
+import gsap from 'gsap'
 
 import 'lenis/dist/lenis.css'
 
@@ -12,11 +12,15 @@ export default function Lenis({ root, options }) {
   const isNavOpened = useStore((state) => state.isNavOpened)
   const lenis = useLenis()
 
-  useTempus((time) => {
-    if (lenisRef.current?.lenis) {
-      lenisRef.current.lenis.raf(time)
+  useEffect(() => {
+    function update(time) {
+      lenisRef.current?.lenis?.raf(time * 1000)
     }
-  })
+
+    gsap.ticker.add(update)
+
+    return () => gsap.ticker.remove(update)
+  }, [])
 
   useEffect(() => {
     if (isNavOpened) {

@@ -1,6 +1,4 @@
-import { GSAP, RealViewport } from 'components'
 import { StyledComponentsRegistry } from 'lib'
-import { ReactTempus } from 'tempus/react'
 
 const title = 'Robotic Implant Center | Tooth Implant Solutions | RIC'
 const description = `Dental implants can help you achieve the smile you’ve always wanted. Discover Robotic Implant Center for expert care. Book your consultation today!`
@@ -82,10 +80,7 @@ export default function RootLayout({ children }) {
         {/* END FAVICON */}
       </head>
       <body suppressHydrationWarning>
-        <RealViewport />
         <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
-        <GSAP scrollTrigger />
-        <ReactTempus patch />
       </body>
     </html>
   )

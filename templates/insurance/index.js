@@ -32,12 +32,7 @@ const Insurance = () => {
             <CustomButton $secondary $internal href={'/technology'}>
               Explore Financing
             </CustomButton>
-            <Marquee
-              className={'marquee'}
-              repeat={3}
-              scrollVelocity={false}
-              pauseOnHover={true}
-            >
+            <Marquee className={'marquee'} repeat={3}>
               <ImageObject src="/zip.svg" alt="Zip" />
               <ImageObject src="/afterpay.svg" alt="Afterpay" />
               <ImageObject src="/humm.svg" alt="Humm" />
