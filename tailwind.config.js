@@ -110,16 +110,16 @@ const config = {
       ],
 
       p: [
-        '16px',
+        '14px',
         {
-          lineHeight: '19.2px',
+          lineHeight: '17.2px',
           fontWeight: '400',
         },
       ],
       'p-xl': [
-        pxCutOff(16),
+        pxCutOff(14),
         {
-          lineHeight: pxCutOff(19.2),
+          lineHeight: pxCutOff(17.2),
           fontWeight: '400',
         },
       ],
