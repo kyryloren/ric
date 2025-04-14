@@ -43,6 +43,21 @@ const CustomStyles = createGlobalStyle`
       clip-path: inset(0.6px);
     }
   }
+
+  .line-wrapper {
+    display: block;
+  }
+
+  .overflow {
+    overflow: hidden;
+    display: inline-block;
+    margin-top: -3%;
+  }
+
+  .anim-word {
+    position: relative;
+    display: inline-block;
+  }
 `
 
 const GlobalStyle = () => (

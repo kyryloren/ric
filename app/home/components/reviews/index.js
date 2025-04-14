@@ -1,6 +1,7 @@
 'use client'
 
-import { Container, CustomGrid, H2, H4, P } from 'styles'
+import { useRef } from 'react'
+import { Container, CustomGrid, H2, P, splitText } from 'styles'
 import {
   CardWrapper,
   Col,
@@ -13,26 +14,46 @@ import {
   ReviewsSection,
   TextWrapper,
 } from './styles'
-import { CustomImage, Parallax, RevealText } from 'components'
+import { CustomImage, Parallax } from 'components'
 import Image from 'next/image'
-import { useRef } from 'react'
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/all'
+import { useGSAP } from '@gsap/react'
+
+gsap.registerPlugin(ScrollTrigger)
 
 const DESCRIPTION = `Why patients are saying we’re the top
 choice for their dental implant provider.`
 
 const Reviews = () => {
-  const gridEl = useRef(null)
+  const sectionEl = useRef(null)
+
+  useGSAP(
+    () => {
+      gsap.from(gsap.utils.toArray('.anim-word'), {
+        yPercent: 100,
+        ease: 'power3.out',
+        duration: 1.5,
+        delay: 0.3,
+        scrollTrigger: {
+          trigger: sectionEl.current,
+          start: 'top bottom',
+        },
+      })
+    },
+    { dependencies: [sectionEl], scope: sectionEl },
+  )
 
   return (
-    <ReviewsSection>
+    <ReviewsSection ref={sectionEl}>
       <Container>
         <TextWrapper>
-          <RevealText el={H2} text={'Patient-First Excellence'} scroll={true} />
-          <RevealText el={P} text={DESCRIPTION} scroll={true} />
+          <H2>{splitText('Patient-First Excellence')}</H2>
+          <P>{splitText(DESCRIPTION)}</P>
         </TextWrapper>
 
-        <CustomGrid ref={gridEl}>
-          <Parallax trigger={gridEl} speed={-3}>
+        <CustomGrid>
+          <Parallax trigger={sectionEl} speed={-3}>
             <Col>
               <ImageWrapper>
                 <CustomImage src={'/1.webp'} alt={'One'} />
@@ -75,7 +96,7 @@ const Reviews = () => {
               </CardWrapper>
             </Col>
           </Parallax>
-          <Parallax trigger={gridEl} speed={-1}>
+          <Parallax trigger={sectionEl} speed={-1}>
             <Col>
               <CardWrapper $blue>
                 <CustomQuoteText>
@@ -119,7 +140,7 @@ const Reviews = () => {
               </ImageWrapper>
             </Col>
           </Parallax>
-          <Parallax trigger={gridEl} speed={-3}>
+          <Parallax trigger={sectionEl} speed={-3}>
             <Col>
               <CardWrapper $orange>
                 <CustomQuoteText>

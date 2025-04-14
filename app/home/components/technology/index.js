@@ -1,4 +1,6 @@
-import { Container, H2, H3, P } from 'styles'
+'use client'
+
+import { Container, H2, H3, P, splitText } from 'styles'
 import {
   Col,
   ColInfoWrapper,
@@ -6,7 +8,13 @@ import {
   TechnologySection,
   TextWrapper,
 } from './styles'
-import { CustomButton, CustomImage, RevealButton, RevealText } from 'components'
+import { CustomButton, CustomImage } from 'components'
+import { useRef } from 'react'
+import { useGSAP } from '@gsap/react'
+import { ScrollTrigger } from 'gsap/all'
+import gsap from 'gsap'
+
+gsap.registerPlugin(ScrollTrigger)
 
 const TITLE = `Better Precision
 Better Health`
@@ -24,20 +32,50 @@ unexpected movements, ensuring steady,
 controlled implant placement.`
 
 const Technology = () => {
+  const sectionEl = useRef(null)
+
+  useGSAP(
+    () => {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: sectionEl.current,
+          start: 'top bottom',
+        },
+        defaults: { ease: 'power3.out' },
+      })
+
+      tl.from(gsap.utils.toArray('.anim-word'), {
+        yPercent: 100,
+        duration: 1.5,
+        stagger: 0.02,
+        delay: 0.3,
+      }).from(
+        '.anim-button',
+        {
+          scale: 0,
+          duration: 1,
+        },
+        0.3,
+      )
+    },
+    { dependencies: [sectionEl], scope: sectionEl },
+  )
+
   return (
-    <TechnologySection>
+    <TechnologySection ref={sectionEl}>
       <Container>
         <TextWrapper>
-          <RevealText el={H2} text={TITLE} scroll />
-          <RevealText el={P} text={DESCRIPTION} scroll />
-          <RevealButton
-            scroll
-            buttons={[
-              <CustomButton $secondary $internal href={'/technology'}>
-                Learn More
-              </CustomButton>,
-            ]}
-          />
+          <H2>{splitText(TITLE)}</H2>
+          <P>{splitText(DESCRIPTION)}</P>
+
+          <CustomButton
+            className="anim-button"
+            $secondary
+            $internal
+            href={'/technology'}
+          >
+            Learn More
+          </CustomButton>
         </TextWrapper>
         <ImageWrapper>
           <CustomImage src={'/technology.webp'} alt={'Technology'} />
@@ -45,16 +83,16 @@ const Technology = () => {
 
         <ColInfoWrapper>
           <Col>
-            <RevealText el={H3} text={'± 0.2mm'} scroll />
-            <RevealText el={P} text={TEXT1} scroll />
+            <H3>{splitText('± 0.2mm')}</H3>
+            <P>{splitText(TEXT1)}</P>
           </Col>
           <Col>
-            <RevealText el={H3} text={'50% Faster'} scroll />
-            <RevealText el={P} text={TEXT2} scroll />
+            <H3>{splitText('50% Faster')}</H3>
+            <P>{splitText(TEXT2)}</P>
           </Col>
           <Col>
-            <RevealText el={H3} text={'100% Safer'} scroll />
-            <RevealText el={P} text={TEXT3} scroll />
+            <H3>{splitText('100% Safer')}</H3>
+            <P>{splitText(TEXT3)}</P>
           </Col>
         </ColInfoWrapper>
       </Container>

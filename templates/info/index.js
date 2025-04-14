@@ -1,9 +1,8 @@
 'use client'
 
 import { useRef } from 'react'
-import { Container, H3, P } from 'styles'
+import { Container, H3, P, splitText } from 'styles'
 import { Col, ColInfoWrapper, InfoSection } from './styles'
-import { RevealText } from 'components'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/all'
@@ -29,34 +28,49 @@ const Info = () => {
 
   useGSAP(
     () => {
-      gsap.to(sectionEl.current, {
-        '--width': '100%',
-        duration: 1,
-        ease: 'power3.out',
+      const tl = gsap.timeline({
         scrollTrigger: {
           trigger: sectionEl.current,
           start: 'top bottom',
         },
+        defaults: { ease: 'power3.out' },
       })
+
+      tl.to(
+        '.anim-wrapper',
+        {
+          '--width': '100%',
+          duration: 1,
+          delay: 0.3,
+        },
+        0,
+      ).from(
+        gsap.utils.toArray('.anim-word'),
+        {
+          yPercent: 100,
+          duration: 1.5,
+        },
+        0.3,
+      )
     },
-    { dependencies: [sectionEl] },
+    { dependencies: [sectionEl], scope: sectionEl },
   )
 
   return (
-    <InfoSection>
+    <InfoSection ref={sectionEl}>
       <Container>
-        <ColInfoWrapper ref={sectionEl}>
+        <ColInfoWrapper className="anim-wrapper">
           <Col>
-            <RevealText el={H3} text={TITLE1} scroll />
-            <RevealText el={P} text={TEXT1} scroll />
+            <H3>{splitText(TITLE1)}</H3>
+            <P>{splitText(TEXT1)}</P>
           </Col>
           <Col>
-            <RevealText el={H3} text={TITLE2} scroll />
-            <RevealText el={P} text={TEXT2} scroll />
+            <H3>{splitText(TITLE2)}</H3>
+            <P>{splitText(TEXT2)}</P>
           </Col>
           <Col>
-            <RevealText el={H3} text={TITLE3} scroll />
-            <RevealText el={P} text={TEXT3} scroll />
+            <H3>{splitText(TITLE3)}</H3>
+            <P>{splitText(TEXT3)}</P>
           </Col>
         </ColInfoWrapper>
       </Container>
