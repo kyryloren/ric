@@ -14,12 +14,13 @@ export const Header = tw.header`
 export const CustomContainer = styled(Container)`
   --width: 0%;
 
+  ${tw`relative z-[31]`}
   ${tw`after:content-['']`}
   ${tw`after:block`}
   ${tw`after:border-b-[1px]`}
   ${tw`after:border-b-gray`}
   ${tw`after:border-solid`}
-  ${tw`after:w-[var(--width)]`}
+  ${tw`after:w-[var(--width)] `}
 `
 export const InnerWrapper = tw.div`
   py-xs

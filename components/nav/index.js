@@ -20,6 +20,7 @@ import CustomButton from 'components/button'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
 import { usePathname, useRouter } from 'next/navigation'
+import Menu from './menu'
 
 const Nav = () => {
   const logoAnim = useRef(null)
@@ -153,6 +154,7 @@ const Nav = () => {
           </ButtonsWrapper>
         </InnerWrapper>
       </CustomContainer>
+      <Menu menuOpen={menuOpen} />
     </Header>
   )
 }

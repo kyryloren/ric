@@ -110,9 +110,9 @@ const config = {
       ],
 
       p: [
-        '14px',
+        '16px',
         {
-          lineHeight: '17.2px',
+          lineHeight: '19.2px',
           fontWeight: '400',
         },
       ],
