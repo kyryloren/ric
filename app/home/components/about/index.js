@@ -15,6 +15,7 @@ import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
 import { ScrollTrigger } from 'gsap/all'
 
+gsap.registerPlugin(useGSAP)
 gsap.registerPlugin(ScrollTrigger)
 
 const TEXT = `We are pioneering the future of precision dentistry, utilizing cutting-edge robotic technology to deliver faster, safer, and more personalized dental implants.`

@@ -23,6 +23,7 @@ import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/all'
 import { useGSAP } from '@gsap/react'
 
+gsap.registerPlugin(useGSAP)
 gsap.registerPlugin(ScrollTrigger)
 
 const DESCRIPTION = `Why patients are saying we’re the top
@@ -74,7 +75,11 @@ const Reviews = () => {
           <Parallax trigger={sectionEl} speed={-3}>
             <Col>
               <ImageWrapper>
-                <CustomImage src={'/1.webp'} alt={'One'} />
+                <CustomImage
+                  src={'/1.webp'}
+                  alt={'One'}
+                  sizes="(min-width: 1400px) 41vw, (min-width: 1120px) calc(15.77vw + 348px), calc(-17.81vw + 721px)"
+                />
               </ImageWrapper>
               <CardWrapper $yellow>
                 <CustomQuoteText>
@@ -84,7 +89,12 @@ const Reviews = () => {
                 </CustomQuoteText>
                 <CreditWrapper>
                   <PfP>
-                    <Image src={'/person1.webp'} alt="Person 1" fill />
+                    <Image
+                      src={'/person1.webp'}
+                      alt="Person 1"
+                      fill
+                      sizes="(min-width: 940px) 50px, calc(5vw + 4px)"
+                    />
                   </PfP>
                   <CreditTextWrapper>
                     <CreditName>
@@ -102,7 +112,12 @@ const Reviews = () => {
                 </CustomQuoteText>
                 <CreditWrapper>
                   <PfP>
-                    <Image src={'/person1.webp'} alt="Person 1" fill />
+                    <Image
+                      src={'/person1.webp'}
+                      alt="Person 1"
+                      fill
+                      sizes="(min-width: 940px) 50px, calc(5vw + 4px)"
+                    />
                   </PfP>
                   <CreditTextWrapper>
                     <CreditName>
@@ -125,7 +140,12 @@ const Reviews = () => {
                 </CustomQuoteText>
                 <CreditWrapper>
                   <PfP>
-                    <Image src={'/person1.webp'} alt="Person 1" fill />
+                    <Image
+                      src={'/person1.webp'}
+                      alt="Person 1"
+                      fill
+                      sizes="(min-width: 940px) 50px, calc(5vw + 4px)"
+                    />
                   </PfP>
                   <CreditTextWrapper>
                     <CreditName>
@@ -143,7 +163,12 @@ const Reviews = () => {
                 </CustomQuoteText>
                 <CreditWrapper>
                   <PfP>
-                    <Image src={'/person1.webp'} alt="Person 1" fill />
+                    <Image
+                      src={'/person1.webp'}
+                      alt="Person 1"
+                      fill
+                      sizes="(min-width: 940px) 50px, calc(5vw + 4px)"
+                    />
                   </PfP>
                   <CreditTextWrapper>
                     <CreditName>
@@ -154,7 +179,11 @@ const Reviews = () => {
                 </CreditWrapper>
               </CardWrapper>
               <ImageWrapper>
-                <CustomImage src={'/2.webp'} alt={'Two'} />
+                <CustomImage
+                  src={'/2.webp'}
+                  alt={'Two'}
+                  sizes="(min-width: 1400px) 41vw, (min-width: 1120px) calc(15.77vw + 348px), calc(-17.81vw + 721px)"
+                />
               </ImageWrapper>
             </Col>
           </Parallax>
@@ -168,7 +197,12 @@ const Reviews = () => {
                 </CustomQuoteText>
                 <CreditWrapper>
                   <PfP>
-                    <Image src={'/person1.webp'} alt="Person 1" fill />
+                    <Image
+                      src={'/person1.webp'}
+                      alt="Person 1"
+                      fill
+                      sizes="(min-width: 940px) 50px, calc(5vw + 4px)"
+                    />
                   </PfP>
                   <CreditTextWrapper>
                     <CreditName>
@@ -179,7 +213,11 @@ const Reviews = () => {
                 </CreditWrapper>
               </CardWrapper>
               <ImageWrapper>
-                <CustomImage src={'/3.webp'} alt={'Three'} />
+                <CustomImage
+                  src={'/3.webp'}
+                  alt={'Three'}
+                  sizes="(min-width: 1400px) 41vw, (min-width: 1120px) calc(15.77vw + 348px), calc(-17.81vw + 721px)"
+                />
               </ImageWrapper>
               <CardWrapper $yellow>
                 <CustomQuoteText>
@@ -190,7 +228,12 @@ const Reviews = () => {
                 </CustomQuoteText>
                 <CreditWrapper>
                   <PfP>
-                    <Image src={'/person1.webp'} alt="Person 1" fill />
+                    <Image
+                      src={'/person1.webp'}
+                      alt="Person 1"
+                      fill
+                      sizes="(min-width: 940px) 50px, calc(5vw + 4px)"
+                    />
                   </PfP>
                   <CreditTextWrapper>
                     <CreditName>

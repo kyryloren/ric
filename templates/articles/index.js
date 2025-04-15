@@ -25,7 +25,11 @@ const Articles = () => {
             <SliderContainer>
               <CardWrapper href="/">
                 <ImageWrapper>
-                  <CustomImage src="/1.webp" alt="Image" />
+                  <CustomImage
+                    src="/1.webp"
+                    alt="Image"
+                    sizes="(min-width: 600px) 45vw, (min-width: 420px) 477px, (min-width: 380px) calc(65vw - 23px), 468px"
+                  />
                 </ImageWrapper>
                 <H4>Lorem ipsum dolor sit amet, consectetur.</H4>
               </CardWrapper>
@@ -33,7 +37,11 @@ const Articles = () => {
             <SliderContainer>
               <CardWrapper href="/">
                 <ImageWrapper>
-                  <CustomImage src="/1.webp" alt="Image" />
+                  <CustomImage
+                    src="/1.webp"
+                    alt="Image"
+                    sizes="(min-width: 600px) 45vw, (min-width: 420px) 477px, (min-width: 380px) calc(65vw - 23px), 468px"
+                  />
                 </ImageWrapper>
                 <H4>Lorem ipsum dolor sit amet, consectetur.</H4>
               </CardWrapper>
@@ -41,7 +49,11 @@ const Articles = () => {
             <SliderContainer>
               <CardWrapper href="/">
                 <ImageWrapper>
-                  <CustomImage src="/1.webp" alt="Image" />
+                  <CustomImage
+                    src="/1.webp"
+                    alt="Image"
+                    sizes="(min-width: 600px) 45vw, (min-width: 420px) 477px, (min-width: 380px) calc(65vw - 23px), 468px"
+                  />
                 </ImageWrapper>
                 <H4>Lorem ipsum dolor sit amet, consectetur.</H4>
               </CardWrapper>
@@ -49,7 +61,11 @@ const Articles = () => {
             <SliderContainer>
               <CardWrapper href="/">
                 <ImageWrapper>
-                  <CustomImage src="/1.webp" alt="Image" />
+                  <CustomImage
+                    src="/1.webp"
+                    alt="Image"
+                    sizes="(min-width: 600px) 45vw, (min-width: 420px) 477px, (min-width: 380px) calc(65vw - 23px), 468px"
+                  />
                 </ImageWrapper>
                 <H4>Lorem ipsum dolor sit amet, consectetur.</H4>
               </CardWrapper>
@@ -57,7 +73,11 @@ const Articles = () => {
             <SliderContainer>
               <CardWrapper href="/">
                 <ImageWrapper>
-                  <CustomImage src="/1.webp" alt="Image" />
+                  <CustomImage
+                    src="/1.webp"
+                    alt="Image"
+                    sizes="(min-width: 600px) 45vw, (min-width: 420px) 477px, (min-width: 380px) calc(65vw - 23px), 468px"
+                  />
                 </ImageWrapper>
                 <H4>Lorem ipsum dolor sit amet, consectetur.</H4>
               </CardWrapper>

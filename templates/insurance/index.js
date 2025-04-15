@@ -14,7 +14,11 @@ const Insurance = () => {
       <Container>
         <ContentWrapper>
           <ImageWrapper>
-            <CustomImage src={'/smiles.webp'} alt={'Smiles'} />
+            <CustomImage
+              src={'/smiles.webp'}
+              alt={'Smiles'}
+              sizes="(min-width: 780px) 59.01vw, (min-width: 580px) 95.56vw, (min-width: 420px) calc(23.57vw + 380px), (min-width: 380px) calc(95vw - 21px), 468px"
+            />
           </ImageWrapper>
           <TextWrapper>
             <H2>

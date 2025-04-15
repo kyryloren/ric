@@ -14,6 +14,7 @@ import { useGSAP } from '@gsap/react'
 import { ScrollTrigger } from 'gsap/all'
 import gsap from 'gsap'
 
+gsap.registerPlugin(useGSAP)
 gsap.registerPlugin(ScrollTrigger)
 
 const TITLE = `Better Precision
@@ -78,7 +79,11 @@ const Technology = () => {
           </CustomButton>
         </TextWrapper>
         <ImageWrapper>
-          <CustomImage src={'/technology.webp'} alt={'Technology'} />
+          <CustomImage
+            src={'/technology.webp'}
+            alt={'Technology'}
+            sizes="(min-width: 660px) 94.27vw, (min-width: 420px) calc(8.64vw + 533px), (min-width: 380px) calc(95vw - 21px), 570px"
+          />
         </ImageWrapper>
 
         <ColInfoWrapper>

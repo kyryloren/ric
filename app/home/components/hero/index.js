@@ -7,6 +7,8 @@ import { CustomButton } from 'components'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
 
+gsap.registerPlugin(useGSAP)
+
 const TITLE = `Get the Perfect\nSmile You Deserve`
 const DESCRIPTION = `We specialize in advanced dental implants using\ncutting-edge robotic technology, making the procedure\nsafer, more precise, and less stressful than ever before.`
 
