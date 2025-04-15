@@ -29,20 +29,22 @@ export const MenuLink = styled(Link)`
 `
 export const BottomContact = tw.div`
   absolute
-  bottom-gutter
+  bottom-lg
   flex
   flex-col
 
+  xs:bottom-gutter
   xl:bottom-gutter-xl
 `
 export const SocialsWrapper = tw.div`
   absolute
-  bottom-gutter
+  bottom-lg
   right-gutter
   flex
   flex-col
   gap-xxs
 
+  xs:bottom-gutter
   xl:bottom-gutter-xl
   xl:right-gutter-xl
   xl:gap-xxs-xl

@@ -34,16 +34,15 @@ export const LogoWrapper = styled(Link)`
   ${tw`
     xl:w-[${`${(225 / 1280) * 100}vw`}]
     xs:w-[225px]
-    xxs:w-[200px]
-    w-[38px]
+    w-[34px]
   `}
 
   .desktop {
-    ${tw`hidden xxs:block`}
+    ${tw`hidden xs:block`}
   }
 
   .mobile {
-    ${tw`block xxs:hidden`}
+    ${tw`block xs:hidden`}
   }
 `
 export const NavWrapper = tw.nav`
