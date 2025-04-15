@@ -3,9 +3,13 @@
 import Image from 'next/image'
 import tw, { styled, theme } from 'twin.macro'
 import gsap from 'gsap'
-import { useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import { useWindowSize } from 'react-use'
 import { useGSAP } from '@gsap/react'
+import { ScrollTrigger } from 'gsap/all'
+
+gsap.registerPlugin(useGSAP)
+gsap.registerPlugin(ScrollTrigger)
 
 const ParallaxWrapper = styled.div`
   ${tw`absolute h-[inherit] w-[inherit] min-h-[inherit] overflow-hidden [border-radius: inherit]`}
@@ -24,50 +28,87 @@ export default function CustomImage({
   priority = false,
 }) {
   const target = useRef(null)
+  const timeline = useRef()
 
-  const { height: windowWidth } = useWindowSize()
-  const y = windowWidth * speed * 0.1
+  const { height: windowHeight } = useWindowSize()
+  const y = windowHeight * speed * 0.1
 
-  useGSAP(() => {
-    // create a matchMedia instance
+  useEffect(() => {
+    const y = windowHeight * speed * 0.1
     const mm = gsap.matchMedia()
+
+    timeline.current = gsap
+      .timeline({
+        scrollTrigger: {
+          trigger: target.current,
+          scrub: true,
+          start: 'top bottom',
+          end: 'bottom top',
+        },
+      })
+      .fromTo(target.current, { y: -y }, { y: y, ease: 'none' })
 
     mm.add(
       {
-        // these conditions will be matched by GSAP
         reduceMotion: '(prefers-reduced-motion: reduce)',
         mobile: `(max-width: ${theme`screens.sm`})`,
       },
       (context) => {
         const { reduceMotion, mobile } = context.conditions
 
-        console.log(mobile)
-
-        // If the user prefers reduced motion or we are on mobile,
-        // do not initialize the parallax animation.
         if (reduceMotion || mobile) {
-          // Optionally, reset any transforms
-          gsap.set(target.current, { y: 0 })
-          return
+          timeline?.current?.from(target.current, { y: 0 })
+          timeline?.current?.kill()
         }
-
-        // Otherwise, create the timeline with scrollTrigger
-        const tl = gsap.timeline({
-          scrollTrigger: {
-            trigger: target.current,
-            scrub: true,
-            start: 'top bottom',
-            end: 'bottom top',
-          },
-        })
-
-        tl.fromTo(target.current, { y: -y }, { y: y, ease: 'none' })
       },
     )
 
-    // cleanup
-    return () => mm.revert()
-  }, [windowWidth])
+    return () => {
+      timeline?.current?.kill()
+    }
+  }, [windowHeight])
+
+  useGSAP(
+    () => {
+      const mm = gsap.matchMedia()
+
+      mm.add(
+        {
+          // these conditions will be matched by GSAP
+          reduceMotion: '(prefers-reduced-motion: reduce)',
+        },
+        (context) => {
+          const { reduceMotion } = context.conditions
+
+          console.log(reduceMotion)
+          if (reduceMotion) {
+            // Optionally, reset any transforms
+            gsap.set(target.current, { y: 0 })
+            return
+          }
+
+          gsap.fromTo(
+            target.current,
+            { y: -y },
+            {
+              y: y,
+              ease: 'none',
+              scrollTrigger: {
+                trigger: target.current,
+                scrub: true,
+                start: 'top bottom',
+                end: 'bottom top',
+              },
+            },
+          )
+        },
+      )
+
+      // cleanup
+      return () => mm.revert()
+    },
+    { dependencies: [y, target] },
+  )
 
   return (
     <ParallaxWrapper>

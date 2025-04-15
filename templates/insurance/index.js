@@ -33,10 +33,38 @@ const Insurance = () => {
               Explore Financing
             </CustomButton>
             <Marquee className={'marquee'} repeat={3}>
-              <ImageObject src="/zip.svg" alt="Zip" />
-              <ImageObject src="/afterpay.svg" alt="Afterpay" />
-              <ImageObject src="/humm.svg" alt="Humm" />
-              <ImageObject src="/affirm.svg" alt="Affirm" />
+              <ImageObject
+                src="/zip.svg"
+                alt="Zip"
+                width={200}
+                height={200}
+                loading="lazy"
+                priority={false}
+              />
+              <ImageObject
+                src="/afterpay.svg"
+                alt="Afterpay"
+                width={200}
+                height={200}
+                loading="lazy"
+                priority={false}
+              />
+              <ImageObject
+                src="/humm.svg"
+                alt="Humm"
+                width={200}
+                height={200}
+                loading="lazy"
+                priority={false}
+              />
+              <ImageObject
+                src="/affirm.svg"
+                alt="Affirm"
+                width={200}
+                height={200}
+                loading="lazy"
+                priority={false}
+              />
             </Marquee>
           </TextWrapper>
         </ContentWrapper>

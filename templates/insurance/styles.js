@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import { CustomGrid } from 'styles'
 import tw, { styled } from 'twin.macro'
 
@@ -37,7 +38,7 @@ export const TextWrapper = styled.div`
     }
   }
 `
-export const ImageObject = tw.img`
+export const ImageObject = tw(Image)`
   relative
   mr-sm
   w-[100px]
