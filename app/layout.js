@@ -1,11 +1,11 @@
-import { StyledComponentsRegistry } from 'lib'
+import { RealViewport, StyledComponentsRegistry } from 'lib'
 
 const title = 'Robotic Implant Center | Tooth Implant Solutions | RIC'
 const description = `Dental implants can help you achieve the smile you’ve always wanted. Discover Robotic Implant Center for expert care. Book your consultation today!`
 
 export const metadata = {
   title: {
-    template: '%s | Robotic Implant Center',
+    template: '%s | Robotic Implant Center New York',
     default: title,
   },
   description: description,
@@ -22,14 +22,14 @@ export const metadata = {
   openGraph: {
     title: title,
     description: description,
-    url: 'https://www.ri.center',
+    url: 'https://roboticimplantsnyc.com/',
     locale: 'en_US',
     type: 'website',
     images: {
       url: `${
         process.env.NODE_ENV === 'development'
           ? 'http://localhost:3000'
-          : 'https://www.ri.center'
+          : 'https://roboticimplantsnyc.com/'
       }/images/og-image.jpg`,
       width: 1200,
       height: 630,
@@ -39,12 +39,12 @@ export const metadata = {
     card: 'summary_large_image',
     title: title,
     description: description,
-    creator: '@ricenter',
+    creator: '@roboticimplant.center',
     images: [
       `${
         process.env.NODE_ENV === 'development'
           ? 'http://localhost:3000'
-          : 'https://www.ri.center'
+          : 'https://roboticimplantsnyc.com/'
       }/images/og-image.jpg`,
     ],
   },
@@ -81,6 +81,7 @@ export default function RootLayout({ children }) {
       </head>
       <body suppressHydrationWarning>
         <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
+        <RealViewport />
       </body>
     </html>
   )
