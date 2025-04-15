@@ -98,7 +98,8 @@ const Nav = () => {
               else router.push('/')
             }}
           >
-            <Icon name="logo" />
+            <Icon className="desktop" name="logo" />
+            <Icon className="mobile" name="logo-icon" />
           </LogoWrapper>
           <NavWrapper>
             <OverflowWrapper>

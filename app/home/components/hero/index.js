@@ -48,7 +48,7 @@ const Hero = () => {
       <Container>
         <TextWrapper>
           <H1>{splitText(TITLE)}</H1>
-          <P>{splitText(DESCRIPTION)}</P>
+          <P className="description">{splitText(DESCRIPTION)}</P>
           <ButtonsWrapper>
             <CustomButton className="anim-button" $primary $internal href={'/'}>
               Book Now

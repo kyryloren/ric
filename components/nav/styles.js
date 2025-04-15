@@ -30,9 +30,21 @@ export const InnerWrapper = tw.div`
 
   xl:py-xs-xl
 `
-export const LogoWrapper = tw(Link)`
-  xl:w-[${`${(225 / 1280) * 100}vw`}]
-  w-[225px]
+export const LogoWrapper = styled(Link)`
+  ${tw`
+    xl:w-[${`${(225 / 1280) * 100}vw`}]
+    xs:w-[225px]
+    xxs:w-[200px]
+    w-[38px]
+  `}
+
+  .desktop {
+    ${tw`hidden xxs:block`}
+  }
+
+  .mobile {
+    ${tw`block xxs:hidden`}
+  }
 `
 export const NavWrapper = tw.nav`
   absolute
