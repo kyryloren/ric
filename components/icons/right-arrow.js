@@ -4,14 +4,32 @@ const IconRightArrow = forwardRef((props, ref) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     xmlnsXlink="http://www.w3.org/1999/xlink"
-    fill="none"
-    viewBox="0 0 15 14"
+    id="Layer_1"
+    xmlSpace="preserve"
+    viewBox="3 9 24.49 14"
     ref={ref}
     {...props}
   >
-    <path
-      fill="#020202"
-      d="m7.6087 14-1.1685-1.206 5.462-4.9026H0V6.1086h11.9022L6.4402 1.206 7.6087 0 15 6.9476v.1048L7.6087 14Z"
+    <line
+      style={{
+        fill: 'none',
+        stroke: '#020202',
+        strokeWidth: 2,
+        strokeMiterlimit: 10,
+      }}
+      x1={26}
+      y1={16}
+      x2={4}
+      y2={16}
+    />
+    <polyline
+      style={{
+        fill: 'none',
+        stroke: '#020202',
+        strokeWidth: 2,
+        strokeMiterlimit: 10,
+      }}
+      points="20.485,10 26.485,16 20.485,22 "
     />
   </svg>
 ))
