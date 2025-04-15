@@ -24,7 +24,7 @@ export const CTAWrapper = styled(CustomGrid)`
   ${tw`grid-cols-1 md:[grid-template-columns: var(--fr-value-1) var(--fr-value-2)]`}
 `
 const CardWrapper = styled(Link)`
-  ${tw`flex flex-col justify-between h-[25svw] [border-radius: 10px]`}
+  ${tw`flex flex-col justify-between h-[15rem] md:h-[25svw] [border-radius: 10px]`}
   ${tw`px-md py-md xl:px-md-xl xl:py-md-xl`}
 
   h1 {
@@ -54,30 +54,38 @@ export const FooterWrapper = styled(CustomGrid)`
     ${tw`text-gray`}
   }
 
-  ${tw`py-md xl:py-md-xl`}
+  ${tw`px-md py-md xl:py-md-xl xl:px-md-xl`}
 `
 export const FooterTextWrapper = tw.div`
-  pl-md
   col-start-1
-  col-end-5
+  col-end-13
   text-blue
 
-  xl:pl-md-xl
+  sm:col-end-5
 `
 const FooterCol = tw.div`
   flex
   flex-col
-  gap-md
+  gap-xl
 
+  xs:gap-md
   xl:gap-md-xl
 `
 export const LeftColWrapper = tw(FooterCol)`
-  col-start-7
-  col-end-9
+  col-start-1
+  col-end-7
+
+  sm:col-start-5
+  sm:col-end-9
+  md:col-start-7
 `
 export const RightColWrapper = tw(FooterCol)`
-  col-start-10
+  col-start-7
   col-end-13
+
+  sm:col-start-9
+  sm:col-end-13
+  md:col-start-10
 `
 export const BlackLinkWrapper = tw.div`
   flex
@@ -92,16 +100,29 @@ export const LinkListWrapper = tw.div`
   text-gray
 `
 export const LogoWrapper = tw.div`
-  col-start-7
-  col-end-9
+  col-start-1
+  col-end-7
+  pt-xxl
+  flex
+  items-center
+
+  sm:col-start-7
+  sm:col-end-9
+  lg:pt-[0]
 `
 export const SocialsWrapper = tw.div`
-  col-start-10
+  col-start-9
   col-end-13
   flex
   gap-xxs
   items-center
+  pt-xxl
+  justify-end
 
+  sm:justify-start
+  sm:col-start-10
+  sm:col-end-13
+  lg:pt-[0]
   xl:gap-xxs-xl
 `
 export const SocialLink = styled.a`
