@@ -17,7 +17,7 @@ const ScrollbarWrapper = styled.div`
     ${tw`absolute right-[0] min-h-[150px] w-[8px] bg-gray cursor-grab`}
   }
 
-  @include mobile {
+  @media (pointer: none), (pointer: coarse) {
     display: none;
   }
 `

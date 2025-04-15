@@ -3,6 +3,7 @@
 import { useEffect, useRef, cloneElement, forwardRef } from 'react'
 import { gsap } from 'gsap'
 import { useWindowSize } from 'react-use'
+import { theme } from 'twin.macro'
 
 const Parallax = forwardRef(function Parallax(
   {
@@ -51,11 +52,12 @@ const Parallax = forwardRef(function Parallax(
     mm.add(
       {
         reduceMotion: '(prefers-reduced-motion: reduce)',
+        mobile: `(max-width: ${theme`screens.sm`})`,
       },
       (context) => {
-        const { reduceMotion } = context.conditions
+        const { reduceMotion, mobile } = context.conditions
 
-        if (reduceMotion) {
+        if (reduceMotion || mobile) {
           timeline?.current?.from(target.current, { y: 0 })
           timeline?.current?.kill()
         }
