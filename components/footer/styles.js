@@ -60,7 +60,9 @@ export const FooterTextWrapper = tw.div`
   col-start-1
   col-end-13
   text-blue
+  pb-xxl
 
+  sm:pb-[0]
   sm:col-end-5
 `
 const FooterCol = tw.div`
