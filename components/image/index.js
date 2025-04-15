@@ -21,7 +21,7 @@ export default function CustomImage({
   alt,
   sizes,
   blur,
-  speed = 1,
+  speed = 0.75,
   priority = false,
 }) {
   const target = useRef()

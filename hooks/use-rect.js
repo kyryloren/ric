@@ -1,4 +1,4 @@
-import { useResizeObserver } from './use-resize-observer'
+import useResizeObserver from './use-resize-observer'
 import { debounce } from 'lib'
 import { useCallback, useEffect, useRef, useState } from 'react'
 

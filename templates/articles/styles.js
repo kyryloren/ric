@@ -1,13 +1,14 @@
 'use client'
 
 import Link from 'next/link'
-import tw from 'twin.macro'
+import tw, { styled } from 'twin.macro'
 
-export const ArticlesSection = tw.section`
-  relative
-  py-xxl
+export const ArticlesSection = styled.section`
+  ${tw`relative py-xxl xl:py-xxl-xl`}
 
-  xl:py-xxl-xl
+  .slider .container {
+    ${tw`gap-gutter xl:gap-gutter-xl`}
+  }
 `
 export const TitleLine = tw.div`
   flex
@@ -17,6 +18,12 @@ export const TitleLine = tw.div`
   mb-lg
 
   xl:mb-lg-xl
+`
+export const SliderContainer = tw.div`
+  flex-[0 0 66%]
+
+  sm:flex-[0 0 40%]
+  md:flex-[0 0 25%]
 `
 export const CardWrapper = tw(Link)`
   flex
@@ -28,6 +35,8 @@ export const CardWrapper = tw(Link)`
 export const ImageWrapper = tw.div`
   relative
   w-full
-  h-[30svw]
   [border-radius: 10px]
+  h-[20rem]
+
+  sm:h-[30svw]
 `

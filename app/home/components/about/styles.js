@@ -13,9 +13,10 @@ export const TextWrapper = tw.div`
   items-center
   justify-center
   mx-auto
-  text-center
   py-xxl
   max-w-[880px]
+
+  sm:text-center
 
   xl:max-w-[${`${(880 / 1280) * 100}vw`}]
   xl:py-xxl-xl
@@ -23,10 +24,9 @@ export const TextWrapper = tw.div`
 export const GridWrapper = styled(CustomGrid)`
   --fr-value-1: 1fr;
   --fr-value-2: 1fr;
-  grid-template-columns: var(--fr-value-1) var(--fr-value-2);
 
-  ${tw`py-lg
-  xl:py-lg-xl`}
+  ${tw`grid-cols-1 sm:grid-cols-2 lg:[grid-template-columns: var(--fr-value-1) var(--fr-value-2)]`}
+  ${tw`py-lg xl:py-lg-xl`}
 `
 export const CardWrapper = styled(Link)`
   ${tw`
@@ -36,8 +36,11 @@ export const CardWrapper = styled(Link)`
     relative
     overflow-hidden
     w-full
-    h-[50svh]
+    h-[15rem]
     [border-radius: 10px]
+
+    sm:h-[20rem]
+    lg:h-[50svh]
   `}
 `
 export const Overlay = tw.div`

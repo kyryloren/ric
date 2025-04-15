@@ -14,15 +14,20 @@ export const ContentWrapper = tw(CustomGrid)`
   items-center
 `
 export const ImageWrapper = tw.div`
+  flex
   relative
   col-start-1
-  col-end-7
+  col-end-13
   w-full
-  h-[70svh]
+  h-[20rem]
   [border-radius: 10px]
+
+  md:h-[70svh]
+  md:col-end-7
 `
 export const TextWrapper = styled.div`
-  ${tw`flex flex-col gap-sm col-start-8 col-end-13 xl:gap-sm`}
+  ${tw`flex flex-col gap-sm col-end-13 xl:gap-sm`}
+  ${tw`col-start-1 md:col-start-8`}
 
   .marquee {
     ${tw`mt-lg xl:mt-lg-xl`}

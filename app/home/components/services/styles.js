@@ -11,20 +11,25 @@ export const ServicesSection = tw.section`
 `
 export const TextWrapper = tw.div`
   col-start-1
-  col-end-7
+  col-end-13
   flex
   flex-col
-  gap-sm
+  gap-xxs
 
+  md:col-end-7
+  md:gap-sm
   xl:gap-sm-xl
 `
 export const ServicesCol = tw.div`
   flex
   flex-col
   gap-xs
-  col-start-7
+  col-start-1
   col-end-13
+  pt-gutter
 
+  md:pt-[0]
+  md:col-start-7
   xl:gap-xs-xl
 `
 export const ServiceButton = styled(Link)`

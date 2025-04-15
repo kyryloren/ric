@@ -1,6 +1,6 @@
 'use client'
 
-import tw from 'twin.macro'
+import tw, { styled } from 'twin.macro'
 
 export const TechnologySection = tw.section`
   relative
@@ -9,13 +9,15 @@ export const TechnologySection = tw.section`
   xl:pb-xxl
 `
 export const TextWrapper = tw.div`
-  text-center
   mx-auto
   flex
   flex-col
-  gap-sm
-  items-center
+  gap-xxs
   mb-lg
+
+  sm:text-center
+  sm:items-center
+  sm:gap-sm
 
   xl:gap-sm
   xl:mb-lg-xl
@@ -23,19 +25,42 @@ export const TextWrapper = tw.div`
 export const ImageWrapper = tw.div`
   relative
   w-full
-  h-[80svh]
+  h-[20rem]
+  [border-radius: 10px]
+  
+  md:h-[80svh]
 `
 export const ColInfoWrapper = tw.div`
   flex
   justify-between
   mt-md
+  flex-col
+
+  sm:flex-row
+  sm:justify-between
+  sm:gap-md
 
   xl:mt-md-xl
-`
-export const Col = tw.div`
-  flex
-  flex-col
-  gap-md
-
   xl:gap-md-xl
+`
+export const Col = styled.div`
+  ${tw`
+    flex
+    flex-col
+    gap-md
+    py-md
+    border-t
+    border-gray
+
+    sm:py-[0]
+    sm:border-0
+
+    xl:gap-md-xl
+  `}
+
+  .description {
+    .line-wrapper {
+      ${tw`inline lg:block`}
+    }
+  }
 `

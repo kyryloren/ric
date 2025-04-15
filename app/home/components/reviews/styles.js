@@ -1,25 +1,33 @@
 'use client'
 
-import { P } from 'styles'
+import { CustomGrid, P } from 'styles'
 import tw, { styled } from 'twin.macro'
 
-export const ReviewsSection = tw.section`
-  relative
-  py-xxl
+export const ReviewsSection = styled.section`
+  ${tw`relative py-xxl xl:py-xxl-xl`}
 
-  xl:py-xxl-xl
+  .slider {
+    ${tw`md:hidden`}
+  }
 `
 export const TextWrapper = tw.div`
-  text-center
   mx-auto
   flex
   flex-col
-  gap-sm
-  items-center
+  gap-xxs
   mb-lg
+
+  sm:text-center
+  sm:items-center
+  sm:gap-sm
 
   xl:gap-sm
   xl:mb-lg-xl
+`
+export const DesktopGrid = tw(CustomGrid)`
+  hidden
+  
+  md:grid
 `
 export const Col = styled.div`
   ${tw`grid grid-cols-1 gap-sm xl:gap-sm-xl`}
@@ -39,8 +47,15 @@ export const ImageWrapper = styled.div`
   xl:min-h-[${`${(350 / 1280) * 100}vw`}]
   `}
 `
+export const SlideContainer = tw.div`
+  flex-[0 0 100%]
+
+  xs:flex-[0 0 70%]
+  mr-gutter
+`
 export const CardWrapper = styled.div`
-  ${tw`flex min-h-[350px] flex-col justify-between px-md py-md [border-radius: 10px] xl:px-md-xl xl:py-md-xl xl:min-h-[${`${(350 / 1280) * 100}vw`}]`}
+  ${tw`flex min-h-[350px] flex-col justify-between px-md py-md [border-radius: 10px] `}
+  ${tw`xl:px-md-xl xl:py-md-xl xl:min-h-[${`${(350 / 1280) * 100}vw`}]`}
 
   ${({ $orange, $blue, $yellow }) =>
     $orange
@@ -80,4 +95,13 @@ export const CreditTextWrapper = tw.div`
   flex
   flex-col
   text-gray
+`
+export const SlideButtonsWrapper = styled.div`
+  ${tw`flex gap-xs mt-gutter md:hidden`}
+
+  button {
+    svg {
+      ${tw`w-md h-md`}
+    }
+  }
 `

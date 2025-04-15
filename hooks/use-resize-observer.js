@@ -10,7 +10,7 @@ import { debounce } from 'lib'
  * @param {Array} deps - props that should trigger a new computation
  */
 
-export function useResizeObserver(
+export default function useResizeObserver(
   {
     lazy = false,
     debounce: debounceDelay = 500,

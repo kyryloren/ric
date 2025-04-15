@@ -14,6 +14,7 @@ export const ColInfoWrapper = tw.div`
   flex
   justify-between
   mt-md
+  flex-col
   before:content-['']
   before:block
   before:absolute
@@ -25,6 +26,7 @@ export const ColInfoWrapper = tw.div`
   before:w-[var(--width)]
   pt-lg
 
+  md:flex-row
   xl:pt-lg-xl
   xl:mt-md-xl
 `
@@ -32,6 +34,8 @@ export const Col = tw.div`
   flex
   flex-col
   gap-md
+  pb-lg
 
+  md:pb-[0]
   xl:gap-md-xl
 `

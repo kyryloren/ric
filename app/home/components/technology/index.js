@@ -84,15 +84,15 @@ const Technology = () => {
         <ColInfoWrapper>
           <Col>
             <H3>{splitText('± 0.2mm')}</H3>
-            <P>{splitText(TEXT1)}</P>
+            <P className="description">{splitText(TEXT1)}</P>
           </Col>
           <Col>
             <H3>{splitText('50% Faster')}</H3>
-            <P>{splitText(TEXT2)}</P>
+            <P className="description">{splitText(TEXT2)}</P>
           </Col>
           <Col>
             <H3>{splitText('100% Safer')}</H3>
-            <P>{splitText(TEXT3)}</P>
+            <P className="description">{splitText(TEXT3)}</P>
           </Col>
         </ColInfoWrapper>
       </Container>

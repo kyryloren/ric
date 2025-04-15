@@ -9,12 +9,15 @@ import {
   CreditTextWrapper,
   CreditWrapper,
   CustomQuoteText,
+  DesktopGrid,
   ImageWrapper,
   PfP,
   ReviewsSection,
+  SlideButtonsWrapper,
+  SlideContainer,
   TextWrapper,
 } from './styles'
-import { CustomImage, Parallax } from 'components'
+import { CustomImage, Icon, Parallax, Slider, useSlider } from 'components'
 import Image from 'next/image'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/all'
@@ -24,6 +27,21 @@ gsap.registerPlugin(ScrollTrigger)
 
 const DESCRIPTION = `Why patients are saying we’re the top
 choice for their dental implant provider.`
+
+const SliderButtons = () => {
+  const { scrollPrev, scrollNext } = useSlider()
+
+  return (
+    <SlideButtonsWrapper>
+      <button onClick={scrollPrev}>
+        <Icon name="left-arrow" />
+      </button>
+      <button onClick={scrollNext}>
+        <Icon name="right-arrow" />
+      </button>
+    </SlideButtonsWrapper>
+  )
+}
 
 const Reviews = () => {
   const sectionEl = useRef(null)
@@ -52,7 +70,7 @@ const Reviews = () => {
           <P>{splitText(DESCRIPTION)}</P>
         </TextWrapper>
 
-        <CustomGrid>
+        <DesktopGrid>
           <Parallax trigger={sectionEl} speed={-3}>
             <Col>
               <ImageWrapper>
@@ -184,7 +202,145 @@ const Reviews = () => {
               </CardWrapper>
             </Col>
           </Parallax>
-        </CustomGrid>
+        </DesktopGrid>
+
+        <Slider
+          className="slider"
+          emblaApi={{
+            slidesToScroll: 1,
+            skipSnaps: false,
+            align: 'start',
+            loop: true,
+            autoScroll: true,
+          }}
+        >
+          <Slider.Slides className={'slider'}>
+            <SlideContainer>
+              <CardWrapper $yellow>
+                <CustomQuoteText>
+                  Dr. Pedro was so thoughtful and took his time to explain
+                  everything- I had a great experience and highly recommend Dr
+                  Pedro.
+                </CustomQuoteText>
+                <CreditWrapper>
+                  <PfP>
+                    <Image src={'/person1.webp'} alt="Person 1" fill />
+                  </PfP>
+                  <CreditTextWrapper>
+                    <CreditName>
+                      <b>Katherine Contino</b>
+                    </CreditName>
+                    <P>Google Review</P>
+                  </CreditTextWrapper>
+                </CreditWrapper>
+              </CardWrapper>
+            </SlideContainer>
+            <SlideContainer>
+              <CardWrapper>
+                <CustomQuoteText>
+                  Truly the best dental experience I’ve ever had. The office was
+                  immaculate and the customer attention was impeccable. I highly
+                  recommend this dental office with no hesitation.
+                </CustomQuoteText>
+                <CreditWrapper>
+                  <PfP>
+                    <Image src={'/person1.webp'} alt="Person 1" fill />
+                  </PfP>
+                  <CreditTextWrapper>
+                    <CreditName>
+                      <b>Katherine Contino</b>
+                    </CreditName>
+                    <P>Google Review</P>
+                  </CreditTextWrapper>
+                </CreditWrapper>
+              </CardWrapper>
+            </SlideContainer>
+            <SlideContainer>
+              <CardWrapper $blue>
+                <CustomQuoteText>
+                  Other dentists did not want to try– with time and expertise,
+                  Dr. Pedro succeeded in creating a perfect bridge! He has
+                  successfully branched into the field of aesthetics. It’s
+                  heaven!!!
+                </CustomQuoteText>
+                <CreditWrapper>
+                  <PfP>
+                    <Image src={'/person1.webp'} alt="Person 1" fill />
+                  </PfP>
+                  <CreditTextWrapper>
+                    <CreditName>
+                      <b>Katherine Contino</b>
+                    </CreditName>
+                    <P>Google Review</P>
+                  </CreditTextWrapper>
+                </CreditWrapper>
+              </CardWrapper>
+            </SlideContainer>
+            <SlideContainer>
+              <CardWrapper $orange>
+                <CustomQuoteText>
+                  The finished result was amazing and over our expectations. I
+                  can write this review with a great big smile. I would highly
+                  recommend anyone who wishes to have their smile restored.
+                </CustomQuoteText>
+                <CreditWrapper>
+                  <PfP>
+                    <Image src={'/person1.webp'} alt="Person 1" fill />
+                  </PfP>
+                  <CreditTextWrapper>
+                    <CreditName>
+                      <b>Katherine Contino</b>
+                    </CreditName>
+                    <P>Google Review</P>
+                  </CreditTextWrapper>
+                </CreditWrapper>
+              </CardWrapper>
+            </SlideContainer>
+            <SlideContainer>
+              <CardWrapper $orange>
+                <CustomQuoteText>
+                  The finished result was amazing and over our expectations. I
+                  can write this review with a great big smile. I would highly
+                  recommend anyone who wishes to have their smile restored.
+                </CustomQuoteText>
+                <CreditWrapper>
+                  <PfP>
+                    <Image src={'/person1.webp'} alt="Person 1" fill />
+                  </PfP>
+                  <CreditTextWrapper>
+                    <CreditName>
+                      <b>Katherine Contino</b>
+                    </CreditName>
+                    <P>Google Review</P>
+                  </CreditTextWrapper>
+                </CreditWrapper>
+              </CardWrapper>
+            </SlideContainer>
+            <SlideContainer>
+              <CardWrapper $yellow>
+                <CustomQuoteText>
+                  I had my first appointment at this office today. My experience
+                  with each staff member was excellent. I had a gentle and
+                  thorough cleaning. There was no wait time. I highly recommend
+                  this office.
+                </CustomQuoteText>
+                <CreditWrapper>
+                  <PfP>
+                    <Image src={'/person1.webp'} alt="Person 1" fill />
+                  </PfP>
+                  <CreditTextWrapper>
+                    <CreditName>
+                      <b>Katherine Contino</b>
+                    </CreditName>
+                    <P>Google Review</P>
+                  </CreditTextWrapper>
+                </CreditWrapper>
+              </CardWrapper>
+            </SlideContainer>
+          </Slider.Slides>
+
+          <SliderButtons />
+        </Slider>
       </Container>
     </ReviewsSection>
   )

@@ -1,10 +1,14 @@
 'use client'
 
-import 'swiper/css'
-import { ArticlesSection, CardWrapper, ImageWrapper, TitleLine } from './styles'
+import {
+  ArticlesSection,
+  CardWrapper,
+  ImageWrapper,
+  SliderContainer,
+  TitleLine,
+} from './styles'
 import { Container, H2, H4 } from 'styles'
-import { CustomButton, CustomImage } from 'components'
-import { Swiper, SwiperSlide } from 'swiper/react'
+import { CustomButton, CustomImage, Slider } from 'components'
 
 const Articles = () => {
   return (
@@ -16,56 +20,50 @@ const Articles = () => {
             Read All
           </CustomButton>
         </TitleLine>
-        <Swiper slidesPerView={4} loop={true} spaceBetween={20}>
-          <SwiperSlide>
-            <CardWrapper href="/">
-              <ImageWrapper>
-                <CustomImage src="/1.webp" alt="Image" />
-              </ImageWrapper>
-              <H4>Lorem ipsum dolor sit amet, consectetur.</H4>
-            </CardWrapper>
-          </SwiperSlide>
-          <SwiperSlide>
-            <CardWrapper href="/">
-              <ImageWrapper>
-                <CustomImage src="/1.webp" alt="Image" />
-              </ImageWrapper>
-              <H4>Lorem ipsum dolor sit amet, consectetur.</H4>
-            </CardWrapper>
-          </SwiperSlide>
-          <SwiperSlide>
-            <CardWrapper href="/">
-              <ImageWrapper>
-                <CustomImage src="/1.webp" alt="Image" />
-              </ImageWrapper>
-              <H4>Lorem ipsum dolor sit amet, consectetur.</H4>
-            </CardWrapper>
-          </SwiperSlide>
-          <SwiperSlide>
-            <CardWrapper href="/">
-              <ImageWrapper>
-                <CustomImage src="/1.webp" alt="Image" />
-              </ImageWrapper>
-              <H4>Lorem ipsum dolor sit amet, consectetur.</H4>
-            </CardWrapper>
-          </SwiperSlide>
-          <SwiperSlide>
-            <CardWrapper href="/">
-              <ImageWrapper>
-                <CustomImage src="/1.webp" alt="Image" />
-              </ImageWrapper>
-              <H4>Lorem ipsum dolor sit amet, consectetur.</H4>
-            </CardWrapper>
-          </SwiperSlide>
-          <SwiperSlide>
-            <CardWrapper href="/">
-              <ImageWrapper>
-                <CustomImage src="/1.webp" alt="Image" />
-              </ImageWrapper>
-              <H4>Lorem ipsum dolor sit amet, consectetur.</H4>
-            </CardWrapper>
-          </SwiperSlide>
-        </Swiper>
+        <Slider>
+          <Slider.Slides className={'slider'}>
+            <SliderContainer>
+              <CardWrapper href="/">
+                <ImageWrapper>
+                  <CustomImage src="/1.webp" alt="Image" />
+                </ImageWrapper>
+                <H4>Lorem ipsum dolor sit amet, consectetur.</H4>
+              </CardWrapper>
+            </SliderContainer>
+            <SliderContainer>
+              <CardWrapper href="/">
+                <ImageWrapper>
+                  <CustomImage src="/1.webp" alt="Image" />
+                </ImageWrapper>
+                <H4>Lorem ipsum dolor sit amet, consectetur.</H4>
+              </CardWrapper>
+            </SliderContainer>
+            <SliderContainer>
+              <CardWrapper href="/">
+                <ImageWrapper>
+                  <CustomImage src="/1.webp" alt="Image" />
+                </ImageWrapper>
+                <H4>Lorem ipsum dolor sit amet, consectetur.</H4>
+              </CardWrapper>
+            </SliderContainer>
+            <SliderContainer>
+              <CardWrapper href="/">
+                <ImageWrapper>
+                  <CustomImage src="/1.webp" alt="Image" />
+                </ImageWrapper>
+                <H4>Lorem ipsum dolor sit amet, consectetur.</H4>
+              </CardWrapper>
+            </SliderContainer>
+            <SliderContainer>
+              <CardWrapper href="/">
+                <ImageWrapper>
+                  <CustomImage src="/1.webp" alt="Image" />
+                </ImageWrapper>
+                <H4>Lorem ipsum dolor sit amet, consectetur.</H4>
+              </CardWrapper>
+            </SliderContainer>
+          </Slider.Slides>
+        </Slider>
       </Container>
     </ArticlesSection>
   )

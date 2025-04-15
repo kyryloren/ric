@@ -9,24 +9,26 @@ export const TextWrapper = tw.div`
   w-full
   flex
   flex-col
-  py-lg
-  text-center
-  items-center
+  py-xxl
+  text-left
   justify-center
   gap-md
 
-  xl:py-xl-xl
+  sm:text-center
+  sm:items-center
+  sm:py-lg
+
+  xl:py-lg-xl
   xl:gap-md-xl
 `
 export const ButtonsWrapper = tw.div`
   flex
   gap-xs
   items-center
-  justify-center
-//   mt-sm
+
+  sm:justify-center
   
   xl:gap-xs-xl
-//   xl:mt-sm-xl
 `
 export const CustomVideo = tw.video`
   w-full

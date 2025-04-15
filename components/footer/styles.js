@@ -20,7 +20,8 @@ export const InnerWrapper = tw.div`
 export const CTAWrapper = styled(CustomGrid)`
   --fr-value-1: 2fr;
   --fr-value-2: 1fr;
-  grid-template-columns: var(--fr-value-1) var(--fr-value-2);
+
+  ${tw`grid-cols-1 md:[grid-template-columns: var(--fr-value-1) var(--fr-value-2)]`}
 `
 const CardWrapper = styled(Link)`
   ${tw`flex flex-col justify-between h-[25svw] [border-radius: 10px]`}
@@ -46,7 +47,7 @@ export const RightCard = tw(CardWrapper)`
 `
 
 export const FooterWrapper = styled(CustomGrid)`
-  ${tw`bg-azure [border-radius: 10px] h-[40svw]`}
+  ${tw`bg-azure [border-radius: 10px] h-auto lg:h-[40svw]`}
   grid-template-rows: 1fr auto;
 
   .copy {
