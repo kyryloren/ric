@@ -6,6 +6,7 @@ import Icon from 'components/icons'
 import {
   ButtonsWrapper,
   CustomContainer,
+  FloatingNavButton,
   HamburgerLine,
   HamburgerWrapper,
   Header,
@@ -85,78 +86,85 @@ const Nav = () => {
   )
 
   return (
-    <Header id="header">
-      <CustomContainer ref={lineAnim}>
-        <InnerWrapper>
-          <LogoWrapper
-            ref={logoAnim}
-            href={'/'}
-            onClick={(e) => {
-              e.preventDefault()
+    <>
+      <Header id="header">
+        <CustomContainer ref={lineAnim}>
+          <InnerWrapper>
+            <LogoWrapper
+              ref={logoAnim}
+              href={'/'}
+              onClick={(e) => {
+                e.preventDefault()
 
-              if (pathname === '/') lenis.scrollTo(0)
-              else router.push('/')
-            }}
-          >
-            <Icon className="desktop" name="logo" />
-            <Icon className="mobile" name="logo-icon" />
-          </LogoWrapper>
-          <NavWrapper>
-            <OverflowWrapper>
-              <div ref={(el) => textAnims.current.push(el)}>
-                <CustomLink href={'/about'}>About</CustomLink>
+                if (pathname === '/') lenis.scrollTo(0)
+                else router.push('/')
+              }}
+            >
+              <Icon name="logo" />
+            </LogoWrapper>
+            <NavWrapper>
+              <OverflowWrapper>
+                <div ref={(el) => textAnims.current.push(el)}>
+                  <CustomLink href={'/about'}>About</CustomLink>
+                </div>
+              </OverflowWrapper>
+              <OverflowWrapper>
+                <div ref={(el) => textAnims.current.push(el)}>
+                  <CustomLink href={'/services'}>Services</CustomLink>
+                </div>
+              </OverflowWrapper>
+              <OverflowWrapper>
+                <div ref={(el) => textAnims.current.push(el)}>
+                  <CustomLink href={'/technology'}>Technology</CustomLink>
+                </div>
+              </OverflowWrapper>
+              <OverflowWrapper>
+                <div ref={(el) => textAnims.current.push(el)}>
+                  <CustomLink href={'/finances'}>Finances</CustomLink>
+                </div>
+              </OverflowWrapper>
+              <OverflowWrapper>
+                <div ref={(el) => textAnims.current.push(el)}>
+                  <CustomLink href={'/articles'}>Articles</CustomLink>
+                </div>
+              </OverflowWrapper>
+              <OverflowWrapper>
+                <div ref={(el) => textAnims.current.push(el)}>
+                  <CustomLink href={'/contact'}>Contact</CustomLink>
+                </div>
+              </OverflowWrapper>
+            </NavWrapper>
+            <ButtonsWrapper>
+              <div className="call" ref={(el) => buttonsAnim.current.push(el)}>
+                <CustomButton $secondary $internal href={'/'}>
+                  Call Now
+                </CustomButton>
               </div>
-            </OverflowWrapper>
-            <OverflowWrapper>
-              <div ref={(el) => textAnims.current.push(el)}>
-                <CustomLink href={'/services'}>Services</CustomLink>
+              <div className="book" ref={(el) => buttonsAnim.current.push(el)}>
+                <CustomButton $primary $internal href={'/'}>
+                  Book Now
+                </CustomButton>
               </div>
-            </OverflowWrapper>
-            <OverflowWrapper>
-              <div ref={(el) => textAnims.current.push(el)}>
-                <CustomLink href={'/technology'}>Technology</CustomLink>
-              </div>
-            </OverflowWrapper>
-            <OverflowWrapper>
-              <div ref={(el) => textAnims.current.push(el)}>
-                <CustomLink href={'/finances'}>Finances</CustomLink>
-              </div>
-            </OverflowWrapper>
-            <OverflowWrapper>
-              <div ref={(el) => textAnims.current.push(el)}>
-                <CustomLink href={'/articles'}>Articles</CustomLink>
-              </div>
-            </OverflowWrapper>
-            <OverflowWrapper>
-              <div ref={(el) => textAnims.current.push(el)}>
-                <CustomLink href={'/contact'}>Contact</CustomLink>
-              </div>
-            </OverflowWrapper>
-          </NavWrapper>
-          <ButtonsWrapper>
-            <div className="call" ref={(el) => buttonsAnim.current.push(el)}>
-              <CustomButton $secondary $internal href={'/'}>
-                Call Now
-              </CustomButton>
-            </div>
-            <div ref={(el) => buttonsAnim.current.push(el)}>
-              <CustomButton $primary $internal href={'/'}>
-                Book Now
-              </CustomButton>
-            </div>
 
-            <MenuWrapperButton onClick={() => setMenuOpen(!menuOpen)}>
-              <HamburgerWrapper $open={menuOpen}>
-                <HamburgerLine />
-                <HamburgerLine />
-                <HamburgerLine />
-              </HamburgerWrapper>
-            </MenuWrapperButton>
-          </ButtonsWrapper>
-        </InnerWrapper>
-      </CustomContainer>
-      <Menu menuOpen={menuOpen} />
-    </Header>
+              <MenuWrapperButton onClick={() => setMenuOpen(!menuOpen)}>
+                <HamburgerWrapper $open={menuOpen}>
+                  <HamburgerLine />
+                  <HamburgerLine />
+                  <HamburgerLine />
+                </HamburgerWrapper>
+              </MenuWrapperButton>
+            </ButtonsWrapper>
+          </InnerWrapper>
+        </CustomContainer>
+        <Menu menuOpen={menuOpen} />
+
+        <FloatingNavButton>
+          <CustomButton $primary $internal href={'/'}>
+            Book Now
+          </CustomButton>
+        </FloatingNavButton>
+      </Header>
+    </>
   )
 }
 

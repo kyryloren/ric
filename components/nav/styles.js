@@ -33,17 +33,8 @@ export const InnerWrapper = tw.div`
 export const LogoWrapper = styled(Link)`
   ${tw`
     xl:w-[${`${(225 / 1280) * 100}vw`}]
-    xs:w-[225px]
-    w-[34px]
+    w-[225px]
   `}
-
-  .desktop {
-    ${tw`hidden xs:block`}
-  }
-
-  .mobile {
-    ${tw`block xs:hidden`}
-  }
 `
 export const NavWrapper = tw.nav`
   absolute
@@ -63,6 +54,9 @@ export const ButtonsWrapper = styled.div`
 
   .call {
     ${tw`hidden sm:block`}
+  }
+  .book {
+    ${tw`hidden xs:block`}
   }
 `
 export const OverflowWrapper = tw.div`
@@ -114,4 +108,9 @@ export const HamburgerLine = styled.span`
   &:nth-child(3) {
     ${tw`top-[10px]`}
   }
+`
+export const FloatingNavButton = tw.div`
+  fixed bottom-gutter right-gutter
+  
+  xs:hidden
 `
