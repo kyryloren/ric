@@ -101,16 +101,24 @@ export const LinkListWrapper = tw.div`
   gap-[4px]
   text-gray
 `
-export const LogoWrapper = tw.div`
-  col-start-1
-  col-end-7
-  pt-xxl
-  flex
-  items-center
+export const LogoWrapper = styled.div`
+  ${tw`
+    pt-xxl
+    flex
+    col-start-1
+    col-end-7
 
-  sm:col-start-7
-  sm:col-end-9
-  lg:pt-[0]
+    sm:col-start-5
+    sm:col-end-9
+    md:col-start-7
+    md:col-end-10
+    lg:col-end-9
+    lg:pt-[0]
+  `}
+
+  svg {
+    ${tw`w-full`}
+  }
 `
 export const SocialsWrapper = tw.div`
   col-start-9
