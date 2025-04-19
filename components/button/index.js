@@ -5,10 +5,8 @@ import { StyledCustomButton } from './styles'
 import { Icon } from 'components'
 
 const CustomButton = ({
-  $internal = false,
   $primary,
   $secondary = $primary === false ? true : false,
-  $form,
   href,
   ref,
   onClick,
