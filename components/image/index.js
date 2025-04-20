@@ -111,7 +111,7 @@ export default function CustomImage({
   )
 
   return (
-    <ParallaxWrapper>
+    <ParallaxWrapper className="parallax">
       <Image
         src={src}
         alt={alt}

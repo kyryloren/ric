@@ -9,11 +9,17 @@ export const WhoSection = tw.section`
   xl:py-xxl-xl
 `
 export const TextWrapper = tw.div`
+  flex
+  flex-col
+  items-center
+  justify-center
   mx-auto
-  text-center
-  max-w-[60%]
-  pb-xxl
+  py-xxl
+  max-w-[880px]
 
+  sm:text-center
+
+  xl:max-w-[${`${(880 / 1280) * 100}vw`}]
   xl:py-xxl-xl
 `
 export const ImageWrapper = tw.div`

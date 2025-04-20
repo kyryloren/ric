@@ -2,9 +2,17 @@
 
 import { useRef, useState, useEffect } from 'react'
 import { Container, CustomGrid, H1, splitText } from 'styles'
-import { StickyWrapper, StyledCanvas, TeamSection, TextWrapper } from './styles'
+import {
+  ImageWrapper,
+  StickyWrapper,
+  StyledCanvas,
+  TeamSection,
+  TextWrapper,
+} from './styles'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/all'
+import { theme } from 'twin.macro'
+import { CustomImage } from 'components'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -31,7 +39,7 @@ export default function Team() {
   const [images, setImages] = useState([])
   const [ratio, setRatio] = useState(0)
 
-  // Preload all frames and compute aspect ratio
+  // Preload frames on mount
   useEffect(() => {
     const paths = generateImagePaths()
     Promise.all(
@@ -45,78 +53,77 @@ export default function Team() {
       ),
     ).then((loaded) => {
       setImages(loaded)
-      if (loaded[0]) {
-        setRatio(loaded[0].height / loaded[0].width)
-      }
+      if (loaded[0]) setRatio(loaded[0].height / loaded[0].width)
     })
   }, [])
 
-  // Resize canvas and draw initial frame
+  // Setup animations via GSAP matchMedia
   useEffect(() => {
     if (!images.length) return
+    const mm = gsap.matchMedia()
 
-    const canvas = canvasRef.current
-    const ctx = canvas.getContext('2d')
-    const dpr = window.devicePixelRatio || 1
+    mm.add({ isMobile: `(max-width: ${theme`screens.sm`}px)` }, (context) => {
+      const { isMobile } = context.conditions
+      const canvas = canvasRef.current
+      const ctx = canvas?.getContext('2d')
+      const dpr = window.devicePixelRatio || 1
 
-    const resize = () => {
-      const width = canvas.parentElement.offsetWidth
-      const height = width * ratio
+      // Draw first frame or static image
+      const drawFirst = () => {
+        if (!canvas || !ctx) return
+        const width = canvas.parentElement.offsetWidth
+        const height = width * ratio
+        canvas.width = width * dpr
+        canvas.height = height * dpr
+        canvas.style.width = `${width}px`
+        canvas.style.height = `${height}px`
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
+        ctx.clearRect(0, 0, width, height)
+        const img = images[0]
+        const drawHeight = width * (img.height / img.width)
+        ctx.drawImage(img, 0, (height - drawHeight) / 2, width, drawHeight)
+      }
 
-      canvas.width = width * dpr
-      canvas.height = height * dpr
-      canvas.style.width = `${width}px`
-      canvas.style.height = `${height}px`
+      // Always draw first frame initially
+      drawFirst()
+      window.addEventListener('resize', drawFirst)
 
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
-      ctx.clearRect(0, 0, width, height)
+      // Desktop: setup scroll-trigger animation
+      let trigger
+      if (!isMobile) {
+        const drawFrame = (index) => {
+          if (!canvas || !ctx) return
+          const width = canvas.width / dpr
+          const height = canvas.height / dpr
+          ctx.clearRect(0, 0, width, height)
+          const img = images[index]
+          const drawHeight = width * (img.height / img.width)
+          ctx.drawImage(img, 0, (height - drawHeight) / 2, width, drawHeight)
+        }
 
-      // Draw first frame immediately
-      const firstImg = images[0]
-      const drawHeight = width * (firstImg.height / firstImg.width)
-      ctx.drawImage(firstImg, 0, (height - drawHeight) / 2, width, drawHeight)
-    }
+        const scrollDistance =
+          textRef.current.offsetHeight - wrapperRef.current.offsetHeight
+        trigger = ScrollTrigger.create({
+          trigger: textRef.current,
+          start: 'top top+=15%',
+          end: `+=${scrollDistance}`,
+          scrub: true,
+          pin: wrapperRef.current,
+          onUpdate: ({ progress }) =>
+            drawFrame(
+              Math.min(frameCount - 1, Math.floor(progress * (frameCount - 1))),
+            ),
+        })
+      }
 
-    resize()
-    window.addEventListener('resize', resize)
-    return () => window.removeEventListener('resize', resize)
-  }, [images, ratio])
-
-  // Scroll-triggered frame updates
-  useEffect(() => {
-    if (!images.length) return
-
-    const canvas = canvasRef.current
-    const ctx = canvas.getContext('2d')
-    const dpr = window.devicePixelRatio || 1
-
-    const drawFrame = (index) => {
-      const width = canvas.width / dpr
-      const height = canvas.height / dpr
-
-      ctx.clearRect(0, 0, width, height)
-      const img = images[index]
-      const drawHeight = width * (img.height / img.width)
-      ctx.drawImage(img, 0, (height - drawHeight) / 2, width, drawHeight)
-    }
-
-    const trigger = ScrollTrigger.create({
-      trigger: textRef.current,
-      start: 'top top+=15%',
-      end: 'bottom bottom-=21%',
-      scrub: true,
-      pin: wrapperRef.current,
-      onUpdate: (self) => {
-        const frameIndex = Math.min(
-          frameCount - 1,
-          Math.floor(self.progress * (frameCount - 1)),
-        )
-        drawFrame(frameIndex)
-      },
+      return () => {
+        window.removeEventListener('resize', drawFirst)
+        trigger?.kill()
+      }
     })
 
-    return () => trigger.kill()
-  }, [images])
+    return () => mm.revert()
+  }, [images, ratio])
 
   return (
     <TeamSection id="doctors">
@@ -125,6 +132,12 @@ export default function Team() {
           <StickyWrapper ref={wrapperRef}>
             <H1>Meet Dr. Pedro</H1>
             <StyledCanvas ref={canvasRef} />
+            <ImageWrapper>
+              <CustomImage
+                src={'/videos/team/frame-001.webp'}
+                alt={'Dr. Pedro'}
+              />
+            </ImageWrapper>
           </StickyWrapper>
           <TextWrapper ref={textRef}>{splitText(ALL_TEXT)}</TextWrapper>
         </CustomGrid>
