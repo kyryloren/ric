@@ -14,8 +14,7 @@ import { useGSAP } from '@gsap/react'
 import { ScrollTrigger } from 'gsap/all'
 import gsap from 'gsap'
 
-gsap.registerPlugin(useGSAP)
-gsap.registerPlugin(ScrollTrigger)
+gsap.registerPlugin(ScrollTrigger, useGSAP)
 
 const TITLE = `Better Precision
 Better Health`

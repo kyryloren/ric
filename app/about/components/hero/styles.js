@@ -33,6 +33,7 @@ export const MovementWrapper = tw.div`
   w-full
   h-full
   z-20
+  drop-shadow
 `
 export const StyledCanvas = tw.canvas`
   absolute
