@@ -109,8 +109,10 @@ export const HamburgerLine = styled.span`
     ${tw`top-[10px]`}
   }
 `
-export const FloatingNavButton = tw.div`
-  fixed bottom-gutter right-gutter
-  
-  xs:hidden
+export const FloatingNavButton = styled.div`
+  ${tw`fixed bottom-gutter px-gutter w-full xs:hidden`}
+
+  a {
+    ${tw`w-full!`}
+  }
 `
