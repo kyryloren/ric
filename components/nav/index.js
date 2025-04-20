@@ -105,32 +105,92 @@ const Nav = () => {
             <NavWrapper>
               <OverflowWrapper>
                 <div className="anim-link">
-                  <CustomLink href={'/about'}>About</CustomLink>
+                  <CustomLink
+                    href={'/about'}
+                    onClick={(e) => {
+                      e.preventDefault()
+
+                      if (pathname === '/about') lenis.scrollTo(0)
+                      else router.push('/about')
+                    }}
+                  >
+                    About
+                  </CustomLink>
                 </div>
               </OverflowWrapper>
               <OverflowWrapper>
                 <div className="anim-link">
-                  <CustomLink href={'/services'}>Services</CustomLink>
+                  <CustomLink
+                    href={'/services'}
+                    onClick={(e) => {
+                      e.preventDefault()
+
+                      if (pathname === '/services') lenis.scrollTo(0)
+                      else router.push('/services')
+                    }}
+                  >
+                    Services
+                  </CustomLink>
                 </div>
               </OverflowWrapper>
               <OverflowWrapper>
                 <div className="anim-link">
-                  <CustomLink href={'/technology'}>Technology</CustomLink>
+                  <CustomLink
+                    href={'/technology'}
+                    onClick={(e) => {
+                      e.preventDefault()
+
+                      if (pathname === '/technology') lenis.scrollTo(0)
+                      else router.push('/technology')
+                    }}
+                  >
+                    Technology
+                  </CustomLink>
                 </div>
               </OverflowWrapper>
               <OverflowWrapper>
                 <div className="anim-link">
-                  <CustomLink href={'/finances'}>Finances</CustomLink>
+                  <CustomLink
+                    href={'/finances'}
+                    onClick={(e) => {
+                      e.preventDefault()
+
+                      if (pathname === '/finances') lenis.scrollTo(0)
+                      else router.push('/finances')
+                    }}
+                  >
+                    Finances
+                  </CustomLink>
                 </div>
               </OverflowWrapper>
               <OverflowWrapper>
                 <div className="anim-link">
-                  <CustomLink href={'/articles'}>Articles</CustomLink>
+                  <CustomLink
+                    href={'/articles'}
+                    onClick={(e) => {
+                      e.preventDefault()
+
+                      if (pathname === '/articles') lenis.scrollTo(0)
+                      else router.push('/articles')
+                    }}
+                  >
+                    Articles
+                  </CustomLink>
                 </div>
               </OverflowWrapper>
               <OverflowWrapper>
                 <div className="anim-link">
-                  <CustomLink href={'/contact'}>Contact</CustomLink>
+                  <CustomLink
+                    href={'/contact'}
+                    onClick={(e) => {
+                      e.preventDefault()
+
+                      if (pathname === '/contact') lenis.scrollTo(0)
+                      else router.push('/contact')
+                    }}
+                  >
+                    Contact
+                  </CustomLink>
                 </div>
               </OverflowWrapper>
             </NavWrapper>
