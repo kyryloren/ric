@@ -51,7 +51,7 @@ export const MiddleRightCard = styled(Card)`
   `}
 
   svg {
-    ${tw`w-[45%] sm:w-[90%] h-auto`}
+    ${tw`w-[75%] sm:w-[90%] h-auto`}
   }
 `
 export const BottomLeftCard = tw(Card)`
