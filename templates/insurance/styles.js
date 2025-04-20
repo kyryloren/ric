@@ -27,7 +27,7 @@ export const ImageWrapper = tw.div`
   md:col-end-7
 `
 export const TextWrapper = styled.div`
-  ${tw`flex flex-col gap-sm col-end-13 xl:gap-sm`}
+  ${tw`flex flex-col gap-sm col-end-13 xl:gap-sm-xl`}
   ${tw`col-start-1 md:col-start-8`}
 
   .marquee {

@@ -18,7 +18,7 @@ export const TextWrapper = tw.div`
 
   md:col-end-7
   md:gap-sm
-  xl:gap-sm-xl
+  xl:gap-xs-xl
 `
 export const ServicesCol = tw.div`
   flex

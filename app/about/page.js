@@ -1,4 +1,4 @@
-import { Hero, History, Team, Who } from './components'
+import { FAQ, Hero, History, Team, Who } from './components'
 
 export default function About() {
   return (
@@ -7,6 +7,7 @@ export default function About() {
       <Who />
       <History />
       <Team />
+      <FAQ />
     </>
   )
 }
