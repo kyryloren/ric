@@ -52,7 +52,7 @@ export const Col = styled.div`
     border-t
     border-gray
 
-    sm:py-[0]
+    sm:py-0
     sm:border-0
 
     xl:gap-md-xl

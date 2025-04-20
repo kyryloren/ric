@@ -1,7 +1,7 @@
 'use client'
 
 import { useRef } from 'react'
-import { Container, CustomGrid, H2, P, splitText } from 'styles'
+import { Container, H2, P, splitText } from 'styles'
 import {
   CardWrapper,
   Col,

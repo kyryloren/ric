@@ -7,14 +7,14 @@ import { mapRange } from 'lib/maths'
 import tw, { styled } from 'twin.macro'
 
 const ScrollbarWrapper = styled.div`
-  ${tw`fixed right-[0] bottom-[0] top-[0] z-50`}
+  ${tw`fixed right-0 bottom-0 top-0 z-50`}
 
   .inner {
     ${tw`h-full relative`};
   }
 
   .thumb {
-    ${tw`absolute right-[0] min-h-[150px] w-[8px] bg-gray cursor-grab`}
+    ${tw`absolute right-0 min-h-[150px] w-[8px] bg-gray cursor-grab`}
   }
 
   @media (pointer: none), (pointer: coarse) {

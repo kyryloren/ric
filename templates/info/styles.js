@@ -18,7 +18,7 @@ export const ColInfoWrapper = tw.div`
   before:content-['']
   before:block
   before:absolute
-  before:top-[0]
+  before:top-0
   before:h-fit
   before:border-t-[1px]
   before:border-t-gray
@@ -36,6 +36,6 @@ export const Col = tw.div`
   gap-md
   pb-lg
 
-  md:pb-[0]
+  md:pb-0
   xl:gap-md-xl
 `

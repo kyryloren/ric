@@ -17,7 +17,7 @@ const SharedButtonStyles = css`
     ${tw`w-xs h-xs xl:w-xs-xl xl:h-xs-xl transition-all ease-default duration-500`}
   }
   .left {
-    ${tw`absolute ml-xs xl:ml-xs-xl scale-0 left-[0] top-1/2 -translate-y-1/2`}
+    ${tw`absolute ml-xs xl:ml-xs-xl scale-0 left-0 top-1/2 -translate-y-1/2`}
   }
   .right {
     ${tw`scale-100`}

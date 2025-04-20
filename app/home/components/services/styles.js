@@ -28,7 +28,7 @@ export const ServicesCol = tw.div`
   col-end-13
   pt-gutter
 
-  md:pt-[0]
+  md:pt-0
   md:col-start-7
   xl:gap-xs-xl
 `
@@ -38,7 +38,7 @@ export const ServiceButton = styled(Link)`
   ${tw`xl:py-sm-xl xl:px-xs-xl`}
   
   .text {
-    ${tw`transition-transform translate-x-[0] ease-default duration-500`}
+    ${tw`transition-transform translate-x-0 ease-default duration-500`}
   }
 
   svg {

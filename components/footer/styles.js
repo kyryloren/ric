@@ -28,7 +28,7 @@ const CardWrapper = styled(Link)`
   ${tw`px-md py-md xl:px-md-xl xl:py-md-xl`}
 
   h1 {
-    ${tw`transition-transform translate-x-[0] ease-default duration-500`}
+    ${tw`transition-transform translate-x-0 ease-default duration-500`}
   }
 
   &:hover {
@@ -62,7 +62,7 @@ export const FooterTextWrapper = tw.div`
   text-blue
   pb-xxl
 
-  sm:pb-[0]
+  sm:pb-0
   sm:col-end-5
 `
 const FooterCol = tw.div`
@@ -113,7 +113,7 @@ export const LogoWrapper = styled.div`
     md:col-start-7
     md:col-end-10
     lg:col-end-9
-    lg:pt-[0]
+    lg:pt-0
   `}
 
   svg {
@@ -132,7 +132,7 @@ export const SocialsWrapper = tw.div`
   sm:justify-start
   sm:col-start-10
   sm:col-end-13
-  lg:pt-[0]
+  lg:pt-0
   xl:gap-xxs-xl
 `
 export const SocialLink = styled.a`

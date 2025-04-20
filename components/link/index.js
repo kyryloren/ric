@@ -11,7 +11,7 @@ const StyledCustomLink = styled(Link)`
 
   &:before,
   &:after {
-    ${tw`absolute w-full h-[1px] bg-[currentColor] top-full left-[0] pointer-events-none`}
+    ${tw`absolute w-full h-[1px] bg-[currentColor] top-full left-0 pointer-events-none`}
   }
 
   &:before {

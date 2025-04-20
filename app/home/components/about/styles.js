@@ -45,8 +45,8 @@ export const CardWrapper = styled(Link)`
 `
 export const Overlay = tw.div`
   absolute
-  top-[0]
-  left-[0]
+  top-0
+  left-0
   w-full
   h-full
   flex

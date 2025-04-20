@@ -24,10 +24,8 @@ import { usePathname, useRouter } from 'next/navigation'
 import Menu from './menu'
 
 const Nav = () => {
-  const logoAnim = useRef(null)
-  const textAnims = useRef([])
-  const buttonsAnim = useRef([])
-  const lineAnim = useRef(null)
+  const navEl = useRef(null)
+
   const pathname = usePathname()
   const router = useRouter()
   const lenis = useLenis()
@@ -35,16 +33,18 @@ const Nav = () => {
   const [menuOpen, setMenuOpen] = useState(false)
 
   useEffect(() => {
-    document.getElementById('main').style.paddingTop =
-      document.getElementById('header').offsetHeight + 'px'
-  }, [])
+    if (pathname === '/') {
+      document.getElementById('main').style.paddingTop =
+        document.getElementById('header').offsetHeight + 'px'
+    }
+  }, [pathname])
 
   useGSAP(
     () => {
       let tl = gsap.timeline({ delay: 0.5 })
 
       tl.from(
-        logoAnim.current,
+        'anim-logo',
         {
           opacity: 0,
           duration: 1.5,
@@ -53,7 +53,7 @@ const Nav = () => {
         0.5,
       )
         .from(
-          textAnims.current,
+          gsap.utils.toArray('.anim-link'),
           {
             yPercent: 100,
             stagger: true,
@@ -63,7 +63,7 @@ const Nav = () => {
           0.5,
         )
         .from(
-          buttonsAnim.current,
+          gsap.utils.toArray('.anim-button'),
           {
             yPercent: 50,
             opacity: 0,
@@ -73,7 +73,7 @@ const Nav = () => {
           0.5,
         )
         .to(
-          lineAnim.current,
+          '.anim-line',
           {
             '--width': '100%',
             duration: 1,
@@ -82,16 +82,16 @@ const Nav = () => {
           0,
         )
     },
-    { dependencies: [textAnims, buttonsAnim, lineAnim] },
+    { dependencies: [navEl, pathname], scope: navEl },
   )
 
   return (
     <>
-      <Header id="header">
-        <CustomContainer ref={lineAnim}>
+      <Header ref={navEl} id="header">
+        <CustomContainer className="anim-line">
           <InnerWrapper>
             <LogoWrapper
-              ref={logoAnim}
+              className="anim-logo"
               href={'/'}
               onClick={(e) => {
                 e.preventDefault()
@@ -104,43 +104,43 @@ const Nav = () => {
             </LogoWrapper>
             <NavWrapper>
               <OverflowWrapper>
-                <div ref={(el) => textAnims.current.push(el)}>
+                <div className="anim-link">
                   <CustomLink href={'/about'}>About</CustomLink>
                 </div>
               </OverflowWrapper>
               <OverflowWrapper>
-                <div ref={(el) => textAnims.current.push(el)}>
+                <div className="anim-link">
                   <CustomLink href={'/services'}>Services</CustomLink>
                 </div>
               </OverflowWrapper>
               <OverflowWrapper>
-                <div ref={(el) => textAnims.current.push(el)}>
+                <div className="anim-link">
                   <CustomLink href={'/technology'}>Technology</CustomLink>
                 </div>
               </OverflowWrapper>
               <OverflowWrapper>
-                <div ref={(el) => textAnims.current.push(el)}>
+                <div className="anim-link">
                   <CustomLink href={'/finances'}>Finances</CustomLink>
                 </div>
               </OverflowWrapper>
               <OverflowWrapper>
-                <div ref={(el) => textAnims.current.push(el)}>
+                <div className="anim-link">
                   <CustomLink href={'/articles'}>Articles</CustomLink>
                 </div>
               </OverflowWrapper>
               <OverflowWrapper>
-                <div ref={(el) => textAnims.current.push(el)}>
+                <div className="anim-link">
                   <CustomLink href={'/contact'}>Contact</CustomLink>
                 </div>
               </OverflowWrapper>
             </NavWrapper>
             <ButtonsWrapper>
-              <div className="call" ref={(el) => buttonsAnim.current.push(el)}>
+              <div className="anim-button call">
                 <CustomButton $secondary $internal href={'/'}>
                   Call Now
                 </CustomButton>
               </div>
-              <div className="book" ref={(el) => buttonsAnim.current.push(el)}>
+              <div className="anim-button book">
                 <CustomButton $primary $internal href={'/'}>
                   Book Now
                 </CustomButton>

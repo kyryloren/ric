@@ -4,7 +4,7 @@ import Link from 'next/link'
 import tw, { styled } from 'twin.macro'
 
 export const MenuLayover = styled.div`
-  ${tw`fixed top-[0] w-screen h-[calc(var(--dvh) * 100)] z-30 bg-white py-[6rem]`}
+  ${tw`fixed top-0 w-screen h-[calc(var(--dvh) * 100)] z-30 bg-white py-[6rem]`}
 
   display: ${({ $menuOpen }) => ($menuOpen ? 'block' : 'none')};
 `

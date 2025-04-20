@@ -65,7 +65,7 @@ const config = {
       h2: [
         'clamp(35px, 29.6133px + 1.4365vw, 48px)',
         {
-          lineHeight: 1.2,
+          lineHeight: 1.175,
           letterSpacing: '-0.9px',
           fontWeight: '400',
         },
@@ -73,7 +73,7 @@ const config = {
       'h2-xl': [
         pxCutOff(48),
         {
-          lineHeight: 1.2,
+          lineHeight: 1.175,
           letterSpacing: pxCutOff(-0.9),
           fontWeight: '400',
         },
@@ -141,6 +141,7 @@ const config = {
       'xs-xl': pxCutOff(16),
       xxs: '8px',
       'xxs-xl': pxCutOff(8),
+      0: 0,
     },
     borderRadius: '1px',
   },

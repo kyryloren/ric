@@ -6,7 +6,7 @@ import tw, { styled } from 'twin.macro'
 
 export const Header = tw.header`
   fixed
-  top-[0]
+  top-0
   w-full
   bg-white
   z-40
@@ -96,11 +96,11 @@ export const HamburgerWrapper = styled.div`
   }
 `
 export const HamburgerLine = styled.span`
-  ${tw`block absolute h-[2px] w-full bg-black opacity-100 left-[0]`}
+  ${tw`block absolute h-[2px] w-full bg-black opacity-100 left-0`}
   ${tw`rotate-0 transition-all duration-500 ease-default [transform-origin: left center]`}
 
   &:nth-child(1) {
-    ${tw`top-[0]`}
+    ${tw`top-0`}
   }
   &:nth-child(2) {
     ${tw`top-[5px]`}
