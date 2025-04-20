@@ -190,7 +190,7 @@ export default function FAQ() {
   )
 
   return (
-    <FAQSection ref={sectionEl}>
+    <FAQSection id="faq" ref={sectionEl}>
       <Container>
         <CustomGrid>
           <TextWrapper>

@@ -60,13 +60,13 @@ const Footer = () => {
               </BlackLinkWrapper>
 
               <LinkListWrapper>
-                <CustomLink href="/about">FAQ</CustomLink>
+                <CustomLink href="/about#faq">FAQ</CustomLink>
                 <CustomLink href="/about">About</CustomLink>
-                <CustomLink href="/about">Doctors</CustomLink>
+                <CustomLink href="/about#doctors">Doctors</CustomLink>
                 <CustomLink href="/services">Services</CustomLink>
                 <CustomLink href="/technology">Technology</CustomLink>
-                <CustomLink href="/technology">Finances</CustomLink>
-                <CustomLink href="/technology">Insurance</CustomLink>
+                <CustomLink href="/finances">Finances</CustomLink>
+                <CustomLink href="/insurance">Insurance</CustomLink>
                 <CustomLink href="/articles">Articles</CustomLink>
                 <CustomLink href="/contact">Contact</CustomLink>
               </LinkListWrapper>

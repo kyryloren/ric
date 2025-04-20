@@ -119,7 +119,7 @@ export default function Team() {
   }, [images])
 
   return (
-    <TeamSection>
+    <TeamSection id="doctors">
       <Container>
         <CustomGrid>
           <StickyWrapper ref={wrapperRef}>
