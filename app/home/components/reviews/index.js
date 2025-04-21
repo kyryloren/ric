@@ -77,7 +77,7 @@ const Reviews = () => {
                 <CustomImage
                   src={'/1.webp'}
                   alt={'One'}
-                  sizes="(min-width: 1400px) 41vw, (min-width: 1120px) calc(15.77vw + 348px), calc(-17.81vw + 721px)"
+                  sizes="(min-width: 1380px) 41.05vw, (min-width: 1060px) calc(10vw + 423px), calc(-21.54vw + 750px)"
                 />
               </ImageWrapper>
               <CardWrapper $yellow>
