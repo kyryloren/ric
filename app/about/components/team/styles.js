@@ -38,7 +38,7 @@ export const TextWrapper = tw.section`
 export const ImageWrapper = styled.div`
   ${tw`
     w-full
-    h-[50svh]
+    h-[40rem]
     col-start-1
     col-end-13
     sm:hidden

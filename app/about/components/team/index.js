@@ -1,7 +1,7 @@
 'use client'
 
 import { useRef, useState, useEffect } from 'react'
-import { Container, CustomGrid, H1, splitText } from 'styles'
+import { Container, CustomGrid, H1, H4, splitText } from 'styles'
 import {
   ImageWrapper,
   StickyWrapper,
@@ -146,7 +146,9 @@ export default function Team() {
               />
             </ImageWrapper>
           </StickyWrapper>
-          <TextWrapper ref={textRef}>{splitText(ALL_TEXT)}</TextWrapper>
+          <TextWrapper ref={textRef}>
+            <H4>{splitText(ALL_TEXT)}</H4>
+          </TextWrapper>
         </CustomGrid>
       </Container>
     </TeamSection>
