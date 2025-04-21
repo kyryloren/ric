@@ -61,64 +61,70 @@ export default function Team() {
   useEffect(() => {
     if (!images.length) return
     const mm = gsap.matchMedia()
+    const sm = parseInt(theme`screens.sm`, 10)
 
-    mm.add({ isMobile: `(max-width: ${theme`screens.sm`}px)` }, (context) => {
-      const { isMobile } = context.conditions
+    // ——— Mobile (≤sm) ———
+    mm.add(`(max-width: ${sm})`, () => {
+      return () => {}
+    })
+
+    // ——— Desktop (>sm) ———
+    mm.add(`(min-width: ${sm + 1}px)`, () => {
       const canvas = canvasRef.current
       const ctx = canvas?.getContext('2d')
       const dpr = window.devicePixelRatio || 1
 
-      // Draw first frame or static image
       const drawFirst = () => {
         if (!canvas || !ctx) return
-        const width = canvas.parentElement.offsetWidth
-        const height = width * ratio
-        canvas.width = width * dpr
-        canvas.height = height * dpr
-        canvas.style.width = `${width}px`
-        canvas.style.height = `${height}px`
+        const w = canvas.parentElement.offsetWidth
+        const h = w * ratio
+        canvas.width = w * dpr
+        canvas.height = h * dpr
+        canvas.style.width = `${w}px`
+        canvas.style.height = `${h}px`
         ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
-        ctx.clearRect(0, 0, width, height)
+        ctx.clearRect(0, 0, w, h)
         const img = images[0]
+        const dh = w * (img.height / img.width)
+        ctx.drawImage(img, 0, (h - dh) / 2, w, dh)
+      }
+
+      // draw initial frame immediately
+      drawFirst()
+      window.addEventListener('resize', drawFirst)
+
+      const drawFrame = (index) => {
+        if (!canvas || !ctx) return
+        const width = canvas.width / dpr
+        const height = canvas.height / dpr
+        ctx.clearRect(0, 0, width, height)
+        const img = images[index]
         const drawHeight = width * (img.height / img.width)
         ctx.drawImage(img, 0, (height - drawHeight) / 2, width, drawHeight)
       }
 
-      // Always draw first frame initially
-      drawFirst()
-      window.addEventListener('resize', drawFirst)
+      const scrollDistance =
+        textRef.current.offsetHeight - wrapperRef.current.offsetHeight
 
-      // Desktop: setup scroll-trigger animation
-      let trigger
-      if (!isMobile) {
-        const drawFrame = (index) => {
-          if (!canvas || !ctx) return
-          const width = canvas.width / dpr
-          const height = canvas.height / dpr
-          ctx.clearRect(0, 0, width, height)
-          const img = images[index]
-          const drawHeight = width * (img.height / img.width)
-          ctx.drawImage(img, 0, (height - drawHeight) / 2, width, drawHeight)
-        }
-
-        const scrollDistance =
-          textRef.current.offsetHeight - wrapperRef.current.offsetHeight
-        trigger = ScrollTrigger.create({
-          trigger: textRef.current,
-          start: 'top top+=15%',
-          end: `+=${scrollDistance}`,
-          scrub: true,
-          pin: wrapperRef.current,
-          onUpdate: ({ progress }) =>
-            drawFrame(
-              Math.min(frameCount - 1, Math.floor(progress * (frameCount - 1))),
-            ),
-        })
-      }
+      const trigger = ScrollTrigger.create({
+        trigger: textRef.current,
+        start: 'top top+=15%',
+        end: `+=${scrollDistance}`,
+        scrub: true,
+        pin: wrapperRef.current,
+        onUpdate: ({ progress }) => {
+          const frame = Math.min(
+            frameCount - 1,
+            Math.floor(progress * (frameCount - 1)),
+          )
+          // same drawFrame logic you already had
+          drawFrame(frame)
+        },
+      })
 
       return () => {
         window.removeEventListener('resize', drawFirst)
-        trigger?.kill()
+        trigger.kill()
       }
     })
 
@@ -133,10 +139,7 @@ export default function Team() {
             <H1>Meet Dr. Pedro</H1>
             <StyledCanvas ref={canvasRef} />
             <ImageWrapper>
-              <CustomImage
-                src={'/videos/team/frame-001.webp'}
-                alt={'Dr. Pedro'}
-              />
+              <CustomImage src={'/drpedro.webp'} alt={'Dr. Pedro'} />
             </ImageWrapper>
           </StickyWrapper>
           <TextWrapper ref={textRef}>{splitText(ALL_TEXT)}</TextWrapper>

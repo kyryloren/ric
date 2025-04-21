@@ -44,7 +44,7 @@ const Nav = () => {
       let tl = gsap.timeline({ delay: 0.5 })
 
       tl.from(
-        'anim-logo',
+        '.anim-logo',
         {
           opacity: 0,
           duration: 1.5,

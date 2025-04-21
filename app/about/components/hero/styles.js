@@ -14,17 +14,19 @@ export const HeroSection = tw.section`
 export const CenterTextWrapper = styled.div`
   ${tw`
     absolute
-    left-1/2
-    top-1/2
-    text-center
-    -translate-x-1/2
-    -translate-y-1/2
-    w-full
     z-10
+    left-gutter
+    top-1/2
+    -translate-y-1/2
+    
+    sm:w-full
+    sm:left-1/2
+    sm:-translate-x-1/2
+    sm:text-center
   `}
 
   .custom-line-wrapper {
-    ${tw`block`}
+    ${tw`inline-block pt-xxs sm:pt-0 sm:block`}
   }
 `
 export const MovementWrapper = tw.div`
