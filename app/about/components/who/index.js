@@ -29,7 +29,7 @@ export default function Who() {
         </TextWrapper>
 
         <ImageWrapper>
-          <CustomImage src="/team.webp" alt="Team" />
+          <CustomImage src="/team.webp" alt="Team" sizes="94.19vw" />
         </ImageWrapper>
       </Container>
     </WhoSection>

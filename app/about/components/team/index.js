@@ -139,7 +139,11 @@ export default function Team() {
             <H1>Meet Dr. Pedro</H1>
             <StyledCanvas ref={canvasRef} />
             <ImageWrapper>
-              <CustomImage src={'/drpedro.webp'} alt={'Dr. Pedro'} />
+              <CustomImage
+                src={'/drpedro.webp'}
+                alt={'Dr. Pedro'}
+                sizes="calc(96.79vw - 30px)"
+              />
             </ImageWrapper>
           </StickyWrapper>
           <TextWrapper ref={textRef}>{splitText(ALL_TEXT)}</TextWrapper>
