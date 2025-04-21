@@ -1,5 +1,5 @@
 export function pxCutOff(px) {
-  return `${(px / 1280) * 100}vw`
+  return `${(px / 1400) * 100}vw`
 }
 
 const config = {
