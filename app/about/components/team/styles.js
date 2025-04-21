@@ -15,7 +15,8 @@ export const StickyWrapper = tw.div`
   flex
   flex-col
   gap-xxs
-
+  
+  sm:-mt-xxs
   sm:col-end-7
   xl:gap-xxs-xl
 `

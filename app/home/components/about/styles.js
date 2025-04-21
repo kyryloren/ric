@@ -14,11 +14,11 @@ export const TextWrapper = tw.div`
   justify-center
   mx-auto
   py-xxl
-  max-w-[600px]
+  max-w-[880px]
 
   sm:text-center
 
-  xl:max-w-[${`${(600 / 1280) * 100}vw`}]
+  xl:max-w-[${`${(880 / 1280) * 100}vw`}]
   xl:py-xxl-xl
 `
 export const GridWrapper = styled(CustomGrid)`

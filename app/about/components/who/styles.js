@@ -14,17 +14,19 @@ export const TextWrapper = tw.div`
   items-center
   justify-center
   mx-auto
-  py-xxl
-  max-w-[880px]
+  max-w-[790px]
 
   sm:text-center
 
-  xl:max-w-[${`${(880 / 1280) * 100}vw`}]
-  xl:py-xxl-xl
+  xl:max-w-[${`${(790 / 1280) * 100}vw`}]
 `
 export const ImageWrapper = tw.div`
   relative
   w-full
   [border-radius: 10px]
   h-[60vw]
+  pt-xxl
+  overflow-hidden
+
+  xl:pt-xxl-xl
 `
