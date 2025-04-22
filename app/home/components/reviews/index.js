@@ -267,7 +267,12 @@ const Reviews = () => {
                 </CustomQuoteText>
                 <CreditWrapper>
                   <PfP>
-                    <Image src={'/person1.webp'} alt="Person 1" fill />
+                    <Image
+                      src={'/person1.webp'}
+                      alt="Person 1"
+                      sizes="(min-width: 940px) 50px, calc(5vw + 4px)"
+                      fill
+                    />
                   </PfP>
                   <CreditTextWrapper>
                     <CreditName>
