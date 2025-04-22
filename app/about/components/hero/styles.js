@@ -7,7 +7,7 @@ export const HeroSection = tw.section`
   py-xxl
   bg-azure
   text-klm
-  h-[calc(var(--dvh) * 100)]
+  h-screen
 
   xl:py-xxl-xl
 `
@@ -47,4 +47,22 @@ export const StyledCanvas = tw.canvas`
   w-[65vw]
   z-20
   [border-radius: 10px]
+`
+export const BottomTextWrapper = styled.div`
+  ${tw`
+    absolute
+    z-10
+    left-gutter
+    bottom-[10%]
+
+    xs:bottom-gutter
+    sm:w-full
+    sm:left-1/2
+    sm:-translate-x-1/2
+    sm:text-center
+  `}
+
+  .custom-line-wrapper {
+    ${tw`block`}
+  }
 `

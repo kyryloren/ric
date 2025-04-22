@@ -1,8 +1,9 @@
 'use client'
 
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { Container, H1 } from 'styles'
+import { Container, H1, H4 } from 'styles'
 import {
+  BottomTextWrapper,
   CenterTextWrapper,
   HeroSection,
   MovementWrapper,
@@ -32,6 +33,8 @@ const TOP_TEXT = `After 25 years
 of dental implants`
 const BOTTOM_TEXT = `we created the
 perfect solution.`
+const BOTTOM_FLOATING_TEXT = `Restoring lives through
+technology and excellence.`
 
 const generateImagePaths = () =>
   Array.from(
@@ -185,6 +188,10 @@ export default function Hero() {
         <H1 className="anim-text-top">{customSplitText(TOP_TEXT)}</H1>
         <H1 className="anim-text-bottom">{customSplitText(BOTTOM_TEXT)}</H1>
       </CenterTextWrapper>
+
+      <BottomTextWrapper>
+        <H4>{customSplitText(BOTTOM_FLOATING_TEXT)}</H4>
+      </BottomTextWrapper>
     </HeroSection>
   )
 }
