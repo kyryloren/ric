@@ -12,7 +12,7 @@ const IconLeftArrow = forwardRef((props, ref) => (
       d="M6 16h22M11.515 22l-6-6 6-6"
       style={{
         fill: 'none',
-        stroke: '#020202',
+        stroke: 'currentColor',
         strokeWidth: 2,
         strokeMiterlimit: 10,
       }}

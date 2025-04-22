@@ -76,7 +76,7 @@ export const ServiceButton = styled.button`
   }
 
   svg {
-    ${tw`transition-transform ease-default duration-500 w-sm`}
+    ${tw`transition-transform ease-default duration-500 w-sm xl:w-sm-xl`}
   }
 
   &:hover {

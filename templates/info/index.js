@@ -58,7 +58,7 @@ const Info = () => {
   )
 
   return (
-    <InfoSection ref={sectionEl}>
+    <InfoSection className="info-section" ref={sectionEl}>
       <Container>
         <ColInfoWrapper className="anim-wrapper">
           <Col>

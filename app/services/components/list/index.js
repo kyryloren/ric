@@ -24,42 +24,42 @@ const SERVICES = [
   {
     name: 'Full Mouth Reconstruction',
     text: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.`,
-    href: '/',
+    href: '/services/page',
   },
   {
     name: 'Single Tooth Dental Implants',
     text: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.`,
-    href: '/',
+    href: '/services/page',
   },
   {
     name: 'Computer-Guided Implant Surgery',
     text: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.`,
-    href: '/',
+    href: '/services/page',
   },
   {
     name: 'Zirconia Restored Dental Implants',
     text: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.`,
-    href: '/',
+    href: '/services/page',
   },
   {
     name: 'Fixed-Removable Implant Dentures',
     text: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.`,
-    href: '/',
+    href: '/services/page',
   },
   {
     name: 'Implant Overdentures',
     text: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.`,
-    href: '/',
+    href: '/services/page',
   },
   {
     name: 'Crestal Approach Sinus Lift',
     text: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.`,
-    href: '/',
+    href: '/services/page',
   },
   {
     name: 'In-House CBCT Scan Technology',
     text: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.`,
-    href: '/',
+    href: '/services/page',
   },
 ]
 
