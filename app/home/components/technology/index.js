@@ -69,12 +69,7 @@ const Technology = () => {
           <H2>{splitText(TITLE)}</H2>
           <P>{splitText(DESCRIPTION)}</P>
 
-          <CustomButton
-            className="anim-button"
-            $secondary
-            $internal
-            href={'/technology'}
-          >
+          <CustomButton className="anim-button" $secondary href={'/technology'}>
             Learn More
           </CustomButton>
         </TextWrapper>

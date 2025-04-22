@@ -33,7 +33,7 @@ const Insurance = () => {
               <br />
               can be as comfortable as it is rewarding.
             </P>
-            <CustomButton $secondary $internal href={'/technology'}>
+            <CustomButton $secondary href={'/finances'}>
               Explore Financing
             </CustomButton>
             <Marquee className={'marquee'} repeat={3}>

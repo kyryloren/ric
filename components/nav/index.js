@@ -196,12 +196,12 @@ const Nav = () => {
             </NavWrapper>
             <ButtonsWrapper>
               <div className="anim-button call">
-                <CustomButton $secondary $internal href={'/'}>
+                <CustomButton $secondary href={'/'}>
                   Call Now
                 </CustomButton>
               </div>
               <div className="anim-button book">
-                <CustomButton $primary $internal href={'/'}>
+                <CustomButton $primary href={'/'}>
                   Book Now
                 </CustomButton>
               </div>
@@ -219,7 +219,7 @@ const Nav = () => {
         <Menu menuOpen={menuOpen} />
 
         <FloatingNavButton>
-          <CustomButton $primary $internal href={'/'}>
+          <CustomButton $primary href={'/'}>
             Book Now
           </CustomButton>
         </FloatingNavButton>

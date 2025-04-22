@@ -16,7 +16,7 @@ const Articles = () => {
       <Container>
         <TitleLine>
           <H2>Top Articles</H2>
-          <CustomButton $secondary $internal href={'/articles'}>
+          <CustomButton $secondary href={'/articles'}>
             Read All
           </CustomButton>
         </TitleLine>

@@ -53,15 +53,10 @@ const Hero = () => {
           <H1>{splitText(TITLE)}</H1>
           <P className="description">{splitText(DESCRIPTION)}</P>
           <ButtonsWrapper>
-            <CustomButton className="anim-button" $primary $internal href={'/'}>
+            <CustomButton className="anim-button" $primary href={'/'}>
               Book Now
             </CustomButton>
-            <CustomButton
-              className="anim-button"
-              $secondary
-              $internal
-              href={'/'}
-            >
+            <CustomButton className="anim-button" $secondary href={'/'}>
               Call Now
             </CustomButton>
           </ButtonsWrapper>
