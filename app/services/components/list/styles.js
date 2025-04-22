@@ -26,6 +26,10 @@ export const TextWrapper = styled.div`
     xl:py-lg-xl
     xl:gap-md-xl
   `}
+
+  .line-wrapper {
+    ${tw`inline xs:block`}
+  }
 `
 export const HollowCard = styled(Link)`
   ${tw`
@@ -38,9 +42,9 @@ export const HollowCard = styled(Link)`
     border-[1px]
     px-sm
     py-sm
-    mb-xs
     h-[15rem]
 
+    sm:mb-xs
     sm:col-span-6
     sm:h-[20rem]
     lg:col-span-4
