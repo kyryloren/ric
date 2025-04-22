@@ -2,22 +2,23 @@
 
 import Image from 'next/image'
 import tw, { styled, theme } from 'twin.macro'
-import gsap from 'gsap'
 import { useEffect, useRef } from 'react'
 import { useWindowSize } from 'react-use'
-import { useGSAP } from '@gsap/react'
+import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/all'
 
-gsap.registerPlugin(useGSAP)
 gsap.registerPlugin(ScrollTrigger)
 
-const ParallaxWrapper = styled.div`
-  ${tw`absolute h-[inherit] w-[inherit] min-h-[inherit] overflow-hidden [border-radius: inherit]`}
+const ParallaxContainer = styled.div`
+  ${tw`relative w-full h-full overflow-hidden [border-radius:inherit]`}
+`
 
-  img {
-    ${tw`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2`}
-    ${tw`[border-radius: inherit] object-cover overflow-hidden`}
-  }
+const Inner = styled.div`
+  ${tw`absolute top-0 left-0 w-full h-full`}
+`
+
+const ParallaxImage = styled(Image)`
+  ${tw`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 object-cover [border-radius:inherit]`}
 `
 
 export default function CustomImage({
@@ -27,100 +28,66 @@ export default function CustomImage({
   speed = 0.75,
   priority = false,
 }) {
-  const target = useRef(null)
-  const timeline = useRef()
-
-  const { height: windowHeight } = useWindowSize()
-  const y = windowHeight * speed * 0.1
+  const container = useRef(null)
+  const inner = useRef(null)
+  const { height: winH, width: winW } = useWindowSize()
 
   useEffect(() => {
-    const y = windowHeight * speed * 0.1
-    const mm = gsap.matchMedia()
+    const el = inner.current
+    if (!el || !container.current) return
 
-    timeline.current = gsap
-      .timeline({
+    // reset
+    gsap.set(el, { y: 0 })
+
+    // breakpoints
+    const bp = parseInt(theme('screens.sm').replace('px', ''), 10)
+    const isMobile = winW <= bp
+    const reduceMotion = window.matchMedia(
+      '(prefers-reduced-motion: reduce)',
+    ).matches
+
+    if (isMobile || reduceMotion) return
+
+    const yOffset = winH * speed * 0.1
+
+    const tl = gsap.fromTo(
+      el,
+      { y: -yOffset },
+      {
+        y: yOffset,
+        ease: 'none',
         scrollTrigger: {
-          trigger: target.current,
+          trigger: container.current,
           scrub: true,
           start: 'top bottom',
           end: 'bottom top',
+          invalidateOnRefresh: true,
         },
-      })
-      .fromTo(target.current, { y: -y }, { y: y, ease: 'none' })
-
-    mm.add(
-      {
-        reduceMotion: '(prefers-reduced-motion: reduce)',
-        mobile: `(max-width: ${theme`screens.sm`})`,
-      },
-      (context) => {
-        const { reduceMotion, mobile } = context.conditions
-
-        if (reduceMotion || mobile) {
-          timeline?.current?.from(target.current, { y: 0 })
-          timeline?.current?.kill()
-        }
       },
     )
 
+    // ensure ScrollTrigger has correct bounds after any DOM changes
+    ScrollTrigger.refresh()
+
     return () => {
-      timeline?.current?.kill()
+      if (tl.scrollTrigger) tl.scrollTrigger.kill()
+      tl.kill()
     }
-  }, [windowHeight])
-
-  useGSAP(
-    () => {
-      const mm = gsap.matchMedia()
-
-      mm.add(
-        {
-          // these conditions will be matched by GSAP
-          reduceMotion: '(prefers-reduced-motion: reduce)',
-        },
-        (context) => {
-          const { reduceMotion } = context.conditions
-          
-          if (reduceMotion) {
-            // Optionally, reset any transforms
-            gsap.set(target.current, { y: 0 })
-            return
-          }
-
-          gsap.fromTo(
-            target.current,
-            { y: -y },
-            {
-              y: y,
-              ease: 'none',
-              scrollTrigger: {
-                trigger: target.current,
-                scrub: true,
-                start: 'top bottom',
-                end: 'bottom top',
-              },
-            },
-          )
-        },
-      )
-
-      // cleanup
-      return () => mm.revert()
-    },
-    { dependencies: [y, target] },
-  )
+  }, [winH, winW, speed])
 
   return (
-    <ParallaxWrapper className="parallax">
-      <Image
-        src={src}
-        alt={alt}
-        sizes={sizes}
-        fill
-        style={{ transform: 'scale(1.2)' }}
-        quality={100}
-        ref={target}
-        priority={priority}
-      />
-    </ParallaxWrapper>
+    <ParallaxContainer ref={container}>
+      <Inner ref={inner}>
+        <ParallaxImage
+          src={src}
+          alt={alt}
+          sizes={sizes}
+          fill
+          style={{ transform: 'scale(1.2)' }}
+          quality={100}
+          priority={priority}
+        />
+      </Inner>
+    </ParallaxContainer>
   )
 }
