@@ -25,7 +25,7 @@ const TEXT3 = `We prioritize your health and confidence,
 and recommend only the care you need.`
 
 const Info = () => {
-  const sectionEl = useRef()
+  const sectionEl = useRef(null)
 
   useGSAP(
     () => {

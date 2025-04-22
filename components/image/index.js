@@ -79,8 +79,7 @@ export default function CustomImage({
         },
         (context) => {
           const { reduceMotion } = context.conditions
-
-          console.log(reduceMotion)
+          
           if (reduceMotion) {
             // Optionally, reset any transforms
             gsap.set(target.current, { y: 0 })
