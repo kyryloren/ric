@@ -74,10 +74,10 @@ const Footer = () => {
 
             <RightColWrapper>
               <BlackLinkWrapper>
-                <CustomLink href="mailto:hello@ri.center">
-                  hello@ri.center
-                </CustomLink>
                 <CustomLink href="tel:7189480870">+1 (718) 948-0870</CustomLink>
+                <CustomLink href="mailto:hello@roboticimplantsnyc.com">
+                  Click to email
+                </CustomLink>
               </BlackLinkWrapper>
 
               <LinkListWrapper>

@@ -94,6 +94,7 @@ export const BlackLinkWrapper = tw.div`
   flex-col
   gap-[1px]
   text-black
+  [word-wrap: break-word]
 `
 export const LinkListWrapper = tw.div`
   flex
