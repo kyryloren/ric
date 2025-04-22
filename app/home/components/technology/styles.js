@@ -12,14 +12,13 @@ export const TextWrapper = tw.div`
   mx-auto
   flex
   flex-col
-  gap-xxs
+  gap-sm
   mb-lg
 
   sm:text-center
   sm:items-center
-  sm:gap-sm
 
-  xl:gap-sm
+  xl:gap-sm-xl
   xl:mb-lg-xl
 `
 export const ImageWrapper = tw.div`

@@ -24,9 +24,10 @@ export const ImageWrapper = tw.div`
   relative
   w-full
   [border-radius: 10px]
-  h-[60vw]
+  h-[80vw]
   pt-xxl
   overflow-hidden
 
+  sm:h-[60vw]
   xl:pt-xxl-xl
 `

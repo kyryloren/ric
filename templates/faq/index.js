@@ -108,7 +108,7 @@ export default function FAQ({ TITLE, DESCRIPTION, FAQ_ITEMS }) {
           trigger: sectionEl.current,
           start: 'top bottom',
         },
-        defaults: { ease: 'power3.out' },
+        defaults: { ease: 'power3.out', delay: 0.3 },
       })
 
       tl.from(gsap.utils.toArray('.anim-word'), {
@@ -117,7 +117,6 @@ export default function FAQ({ TITLE, DESCRIPTION, FAQ_ITEMS }) {
         stagger: 0.02,
         opacity: 0,
         ease: 'power3.out',
-        delay: 0.3,
       })
         .from(
           '.anim-button',
@@ -126,7 +125,7 @@ export default function FAQ({ TITLE, DESCRIPTION, FAQ_ITEMS }) {
             duration: 1,
             ease: 'power3.out',
           },
-          0,
+          0.5,
         )
         .from(
           gsap.utils.toArray('.anim-item'),
@@ -137,7 +136,7 @@ export default function FAQ({ TITLE, DESCRIPTION, FAQ_ITEMS }) {
             duration: 1,
             ease: 'power3.out',
           },
-          0.5,
+          0.75,
         )
     },
     { dependencies: [sectionEl], scope: sectionEl },

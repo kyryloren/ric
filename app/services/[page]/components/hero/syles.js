@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { CustomGrid } from 'styles'
-import tw, { styled, theme } from 'twin.macro'
+import tw, { styled } from 'twin.macro'
 
 export const HeroSection = tw.section`
   relative
@@ -22,6 +22,7 @@ export const ImageWrapper = tw.div`
   max-h-[100rem]
   [border-radius: 10px]
 
+  portrait:h-[60vw]
   portrait:[grid-row: 2]
   portrait:col-end-13
 `
@@ -47,9 +48,9 @@ export const GridWrapper = styled(CustomGrid)`
 export const TextWrapper = tw.div`
   flex
   flex-col
-  gap-md
+  gap-sm
 
-  xl:gap-md-xl
+  xl:gap-sm-xl
 `
 
 export const ParagraphWrapper = tw.div`
@@ -89,7 +90,7 @@ export const BackButton = styled(Link)`
     ease-default
     duration-500
 
-    portrait:mb-md
+    portrait:mb-lg
     xl:gap-xxs-xl
   `}
   &:hover {

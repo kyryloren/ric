@@ -14,7 +14,7 @@ export const TextWrapper = tw.div`
   col-end-13
   flex
   flex-col
-  gap-xxs
+  gap-sm
 
   md:col-end-7
   md:gap-sm

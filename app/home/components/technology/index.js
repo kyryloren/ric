@@ -41,16 +41,19 @@ const Technology = () => {
           trigger: sectionEl.current,
           start: 'top bottom',
         },
-        defaults: { ease: 'power3.out' },
+        defaults: { ease: 'power3.out', delay: 0.3 },
       })
 
-      tl.from(gsap.utils.toArray('.anim-word'), {
-        yPercent: 100,
-        duration: 1.5,
-        stagger: 0.02,
-        opacity: 0,
-        delay: 0.3,
-      }).from(
+      tl.from(
+        gsap.utils.toArray('.anim-word'),
+        {
+          yPercent: 100,
+          duration: 1.5,
+          stagger: 0.02,
+          opacity: 0,
+        },
+        0,
+      ).from(
         '.anim-button',
         {
           scale: 0,
