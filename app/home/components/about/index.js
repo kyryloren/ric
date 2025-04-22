@@ -55,6 +55,7 @@ const About = () => {
         ease: 'power3.out',
         duration: 1.5,
         delay: 0.3,
+        opacity: 0,
         scrollTrigger: {
           trigger: sectionEl.current,
           start: 'top bottom',

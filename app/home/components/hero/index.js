@@ -21,6 +21,7 @@ const Hero = () => {
 
       tl.from(gsap.utils.toArray('.anim-word'), {
         yPercent: 100,
+        opacity: 0,
         duration: 1.5,
         stagger: 0.02,
       })

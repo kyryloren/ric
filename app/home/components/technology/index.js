@@ -48,6 +48,7 @@ const Technology = () => {
         yPercent: 100,
         duration: 1.5,
         stagger: 0.02,
+        opacity: 0,
         delay: 0.3,
       }).from(
         '.anim-button',

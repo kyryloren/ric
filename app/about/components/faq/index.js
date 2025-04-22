@@ -12,7 +12,7 @@ import {
   FAQSection,
   TextWrapper,
 } from './styles'
-import { CustomButton, Icon } from 'components'
+import { CustomButton } from 'components'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/all'
@@ -162,6 +162,7 @@ export default function FAQ() {
         yPercent: 100,
         duration: 1.5,
         stagger: 0.02,
+        opacity: 0,
         ease: 'power3.out',
         delay: 0.3,
       })

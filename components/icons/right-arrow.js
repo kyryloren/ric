@@ -13,7 +13,7 @@ const IconRightArrow = forwardRef((props, ref) => (
     <line
       style={{
         fill: 'none',
-        stroke: '#020202',
+        stroke: 'currentColor',
         strokeWidth: 2,
         strokeMiterlimit: 10,
       }}
@@ -25,7 +25,7 @@ const IconRightArrow = forwardRef((props, ref) => (
     <polyline
       style={{
         fill: 'none',
-        stroke: '#020202',
+        stroke: 'currentColor',
         strokeWidth: 2,
         strokeMiterlimit: 10,
       }}

@@ -33,7 +33,7 @@ const Nav = () => {
   const [menuOpen, setMenuOpen] = useState(false)
 
   useEffect(() => {
-    if (pathname === '/') {
+    if (pathname !== '/about') {
       document.getElementById('main').style.paddingTop =
         document.getElementById('header').offsetHeight + 'px'
     }

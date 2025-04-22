@@ -47,6 +47,7 @@ const Services = () => {
         yPercent: 100,
         duration: 1.5,
         stagger: 0.02,
+        opacity: 0,
         ease: 'power3.out',
         delay: 0.3,
       })
