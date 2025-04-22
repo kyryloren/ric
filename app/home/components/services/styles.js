@@ -56,6 +56,24 @@ export const ServiceButton = styled(Link)`
   }
 
   svg {
-    ${tw`w-sm`}
+    ${tw`w-sm xl:w-sm-xl`}
+  }
+`
+export const AllServicesButton = styled(Link)`
+  ${tw`flex ml-auto w-fit items-center px-xs gap-xxs text-gray`}
+  ${tw`xl:px-xs-xl xl:gap-xxs-xl`}
+  
+  svg {
+    ${tw`w-sm xl:w-sm-xl`}
+  }
+  .text,
+  svg {
+    ${tw`transition-transform translate-x-0 ease-default duration-500`}
+  }
+  &:hover {
+    .text,
+    svg {
+      ${tw`transform -translate-x-xs xl:-translate-x-xs-xl`}
+    }
   }
 `

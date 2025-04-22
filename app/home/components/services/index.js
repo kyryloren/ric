@@ -3,6 +3,7 @@
 import { useRef } from 'react'
 import { Container, CustomGrid, H2, H4, P, splitText } from 'styles'
 import {
+  AllServicesButton,
   ServiceButton,
   ServicesCol,
   ServicesSection,
@@ -97,6 +98,10 @@ const Services = () => {
                 <Icon name="right-arrow" />
               </ServiceButton>
             ))}
+            <AllServicesButton className="list-anim" href="/services">
+              <H4 className="text">View All Services</H4>
+              <Icon name="right-arrow" />
+            </AllServicesButton>
           </ServicesCol>
         </CustomGrid>
       </Container>
