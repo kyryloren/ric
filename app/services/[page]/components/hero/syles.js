@@ -62,11 +62,14 @@ export const ButtonWrapper = styled.div`
   ${tw`
     flex
     gap-xs
+    flex-col
+
+    xs:flex-row
     xl:gap-xs-xl
   `}
   .primary,
   .secondary {
-    ${tw`border-cocoa`}
+    ${tw`border-cocoa w-full text-center xs:text-left xs:w-fit`}
   }
   .primary {
     ${tw`bg-cocoa text-rose`}
