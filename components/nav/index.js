@@ -93,6 +93,7 @@ const Nav = () => {
             <LogoWrapper
               className="anim-logo"
               href={'/'}
+              aria-label="Navigate Home"
               onClick={(e) => {
                 e.preventDefault()
 

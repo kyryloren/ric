@@ -94,19 +94,19 @@ const Footer = () => {
             </LogoWrapper>
 
             <SocialsWrapper>
-              <SocialLink href="/">
+              <SocialLink aria-label="Instagram" href="/">
                 <Icon name="instagram" />
               </SocialLink>
-              <SocialLink href="/">
+              <SocialLink aria-label="Facebook" href="/">
                 <Icon name="facebook" />
               </SocialLink>
-              <SocialLink href="/">
+              <SocialLink aria-label="TikTok" href="/">
                 <Icon name="tiktok" />
               </SocialLink>
-              <SocialLink href="/">
+              <SocialLink aria-label="LinkedIn" href="/">
                 <Icon name="linkedin" />
               </SocialLink>
-              <SocialLink href="/">
+              <SocialLink aria-label="X" href="/">
                 <Icon name="x" />
               </SocialLink>
             </SocialsWrapper>

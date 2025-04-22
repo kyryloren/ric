@@ -73,7 +73,7 @@ const Technology = () => {
           <P>{splitText(DESCRIPTION)}</P>
 
           <CustomButton className="anim-button" $secondary href={'/technology'}>
-            Learn More
+            Our Technology
           </CustomButton>
         </TextWrapper>
         <ImageWrapper>

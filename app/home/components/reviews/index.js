@@ -33,10 +33,10 @@ const SliderButtons = () => {
 
   return (
     <SlideButtonsWrapper>
-      <button onClick={scrollPrev}>
+      <button aria-label="Previous Slide" onClick={scrollPrev}>
         <Icon name="left-arrow" />
       </button>
-      <button onClick={scrollNext}>
+      <button aria-label="Next Slide" onClick={scrollNext}>
         <Icon name="right-arrow" />
       </button>
     </SlideButtonsWrapper>
