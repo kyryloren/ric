@@ -1,13 +1,14 @@
 'use client'
 
+import { useRef } from 'react'
 import Image from 'next/image'
 import tw, { styled, theme } from 'twin.macro'
-import { useEffect, useRef } from 'react'
 import { useWindowSize } from 'react-use'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/all'
+import { useGSAP } from '@gsap/react'
 
-gsap.registerPlugin(ScrollTrigger)
+gsap.registerPlugin(ScrollTrigger, useGSAP)
 
 const ParallaxContainer = styled.div`
   ${tw`relative w-full h-full overflow-hidden [border-radius:inherit]`}
@@ -29,55 +30,47 @@ export default function CustomImage({
   priority = false,
 }) {
   const container = useRef(null)
-  const inner = useRef(null)
-  const { height: winH, width: winW } = useWindowSize()
+  const { height: winH } = useWindowSize()
 
-  useEffect(() => {
-    const el = inner.current
-    if (!el || !container.current) return
+  useGSAP(
+    () => {
+      let mm = gsap.matchMedia()
 
-    // reset
-    gsap.set(el, { y: 0 })
-
-    // breakpoints
-    const bp = parseInt(theme('screens.sm').replace('px', ''), 10)
-    const isMobile = winW <= bp
-    const reduceMotion = window.matchMedia(
-      '(prefers-reduced-motion: reduce)',
-    ).matches
-
-    if (isMobile || reduceMotion) return
-
-    const yOffset = winH * speed * 0.1
-
-    const tl = gsap.fromTo(
-      el,
-      { y: -yOffset },
-      {
-        y: yOffset,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: container.current,
-          scrub: true,
-          start: 'top bottom',
-          end: 'bottom top',
-          invalidateOnRefresh: true,
+      mm.add(
+        {
+          isDesktop: `(min-width: ` + theme`screens.sm`,
+          isMobile: ScrollTrigger.isTouch === 1,
         },
-      },
-    )
+        (context) => {
+          let { isDesktop, isMobile } = context.conditions
+          const yOffset = winH * speed * 0.1
 
-    // ensure ScrollTrigger has correct bounds after any DOM changes
-    ScrollTrigger.refresh()
-
-    return () => {
-      if (tl.scrollTrigger) tl.scrollTrigger.kill()
-      tl.kill()
-    }
-  }, [winH, winW, speed])
+          if (isDesktop && !isMobile) {
+            gsap.fromTo(
+              '.inner',
+              { y: -yOffset },
+              {
+                y: yOffset,
+                ease: 'none',
+                scrollTrigger: {
+                  trigger: container.current,
+                  scrub: true,
+                  start: 'top bottom',
+                  end: 'bottom top',
+                  invalidateOnRefresh: true,
+                },
+              },
+            )
+          }
+        },
+      )
+    },
+    { dependencies: [container, winH, speed], scope: container },
+  )
 
   return (
     <ParallaxContainer ref={container}>
-      <Inner ref={inner}>
+      <Inner className="inner">
         <ParallaxImage
           src={src}
           alt={alt}
