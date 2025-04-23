@@ -1,3 +1,4 @@
+import { Footer, Nav } from 'components'
 import { Hero, History, Team, Who } from './components'
 import { FAQ } from 'templates'
 
@@ -51,11 +52,13 @@ const FAQ_ITEMS = [
 export default function About() {
   return (
     <>
+      <Nav />
       <Hero />
       <Who />
       <History />
       <Team />
       <FAQ TITLE={TITLE} DESCRIPTION={DESCRIPTION} FAQ_ITEMS={FAQ_ITEMS} />
+      <Footer />
     </>
   )
 }

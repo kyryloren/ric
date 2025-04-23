@@ -1,5 +1,6 @@
 import { FAQ, Info, Insurance } from 'templates'
 import { Hero } from './components'
+import { Footer, Nav } from 'components'
 
 const TITLE = 'About this service'
 const DESCRIPTION = `Getting dental implants is a big decision.
@@ -50,10 +51,12 @@ const FAQ_ITEMS = [
 export default function Page() {
   return (
     <>
+      <Nav />
       <Hero />
       <FAQ TITLE={TITLE} DESCRIPTION={DESCRIPTION} FAQ_ITEMS={FAQ_ITEMS} />
       <Insurance />
       <Info />
+      <Footer />
     </>
   )
 }

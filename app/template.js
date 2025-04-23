@@ -1,7 +1,7 @@
 'use client'
 
 import { GlobalStyle } from 'styles'
-import { Footer, Lenis, Nav, Scrollbar } from 'components'
+import { Lenis, Scrollbar } from 'components'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
 
@@ -15,11 +15,7 @@ export default function Template({ children }) {
       <GlobalStyle />
       <Scrollbar />
 
-      <main id="main">
-        <Nav />
-        {children}
-        <Footer />
-      </main>
+      <main id="main">{children}</main>
       <Lenis root />
     </>
   )
