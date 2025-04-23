@@ -69,7 +69,7 @@ const Services = () => {
             duration: 1,
             ease: 'power3.out',
           },
-          0.75,
+          0.5,
         )
     },
     { dependencies: [sectionEl], scope: sectionEl },
