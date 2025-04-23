@@ -19,10 +19,10 @@ export const CenterTextWrapper = styled.div`
     top-1/2
     -translate-y-1/2
     
-    sm:w-full
-    sm:left-1/2
-    sm:-translate-x-1/2
-    sm:text-center
+    xs:w-full
+    xs:left-1/2
+    xs:-translate-x-1/2
+    xs:text-center
   `}
 
   .custom-line-wrapper {
@@ -36,6 +36,9 @@ export const MovementWrapper = tw.div`
   h-full
   z-20
   drop-shadow
+  hidden
+
+  xs:block
 `
 export const StyledCanvas = tw.canvas`
   absolute
@@ -56,10 +59,10 @@ export const BottomTextWrapper = styled.div`
     bottom-[10%]
 
     xs:bottom-gutter
-    sm:w-full
-    sm:left-1/2
-    sm:-translate-x-1/2
-    sm:text-center
+    xs:w-full
+    xs:left-1/2
+    xs:-translate-x-1/2
+    xs:text-center
   `}
 
   .custom-line-wrapper {

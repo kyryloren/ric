@@ -86,16 +86,14 @@ export const BackButton = styled(Link)`
     no-underline
     items-center
     gap-xxs
-    transition-transform
-    ease-default
-    duration-500
 
     portrait:mb-lg
     xl:gap-xxs-xl
   `}
   &:hover {
-    ${tw`transform translate-x-xxs xl:translate-x-xxs-xl`}
+    ${tw`underline`}
   }
+
   svg {
     ${tw`w-sm xl:w-sm-xl`}
   }

@@ -30,6 +30,7 @@ export default function CustomImage({
   priority = false,
 }) {
   const container = useRef(null)
+  const inner = useRef(null)
   const { height: winH } = useWindowSize()
 
   useGSAP(
@@ -38,7 +39,7 @@ export default function CustomImage({
 
       mm.add(
         {
-          isDesktop: `(min-width: ` + theme`screens.sm`,
+          isDesktop: `(min-width: ` + theme`screens.sm` + `)`,
           isMobile: ScrollTrigger.isTouch === 1,
         },
         (context) => {
@@ -46,8 +47,9 @@ export default function CustomImage({
           const yOffset = winH * speed * 0.1
 
           if (isDesktop && !isMobile) {
+            console.log('HELLO')
             gsap.fromTo(
-              '.inner',
+              inner.current,
               { y: -yOffset },
               {
                 y: yOffset,
@@ -65,12 +67,12 @@ export default function CustomImage({
         },
       )
     },
-    { dependencies: [container, winH, speed], scope: container },
+    { dependencies: [container, winH, speed, inner], scope: container },
   )
 
   return (
     <ParallaxContainer ref={container}>
-      <Inner className="inner">
+      <Inner ref={inner}>
         <ParallaxImage
           src={src}
           alt={alt}

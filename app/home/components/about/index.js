@@ -22,7 +22,7 @@ const TEXT = `We are pioneering the future of precision dentistry, utilizing cut
 const CARDS = [
   {
     src: '/doctors.webm',
-    href: '/',
+    href: '/about',
     title: `Our Doctors,\nPractice, & History`,
   },
   {

@@ -1,7 +1,7 @@
 'use client'
 
-import { useCallback, useEffect, useRef, useState } from 'react'
-import { Container, H1, H4 } from 'styles'
+import { useEffect, useRef, useState } from 'react'
+import { H1, H4 } from 'styles'
 import {
   BottomTextWrapper,
   CenterTextWrapper,
@@ -12,6 +12,7 @@ import {
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/all'
 import { useGSAP } from '@gsap/react'
+import { theme } from 'twin.macro'
 
 gsap.registerPlugin(ScrollTrigger, useGSAP)
 
@@ -95,76 +96,6 @@ export default function Hero() {
     return () => window.removeEventListener('resize', resize)
   }, [currentFrameIndex])
 
-  // redraw on frame change (always)
-  useEffect(() => {
-    const canvas = canvasEl.current
-    if (!canvas) return
-    const ctx = canvas.getContext('2d')
-    const img = new Image()
-    img.src = images.current[currentFrameIndex]
-    img.onload = () => {
-      const aspect = img.width / img.height
-      const w = canvas.width / window.devicePixelRatio
-      const h = w / aspect
-
-      ctx.clearRect(0, 0, canvas.width, canvas.height)
-      ctx.imageSmoothingEnabled = false
-      ctx.drawImage(
-        img,
-        0,
-        (canvas.height / window.devicePixelRatio - h) / 2,
-        w,
-        h,
-      )
-    }
-  }, [currentFrameIndex])
-
-  // GSAP matchMedia for scrollTrigger + timeline
-  useEffect(() => {
-    const mm = gsap.matchMedia()
-
-    // only run on viewports > 500px
-    mm.add('(min-width: 501px)', () => {
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: sectionEl.current,
-          start: 'top top',
-          end: '+=2000',
-          scrub: true,
-          pin: true,
-          onUpdate: ({ progress }) => {
-            const idx = Math.min(
-              frameCount - 1,
-              Math.floor(progress * (frameCount - 1)),
-            )
-            setCurrentFrameIndex(idx)
-          },
-        },
-        defaults: { ease: 'linear' },
-      })
-
-      tl.set('.anim-text-bottom', { display: 'none' }, 0)
-        .fromTo(
-          '.anim-wrapper',
-          { top: '100%' },
-          { top: '0%', duration: 0.5 },
-          0,
-        )
-        .set('.anim-text-top', { display: 'none' }, 0.5)
-        .set('.anim-text-bottom', { display: 'block' }, 0.5)
-        .to('.anim-wrapper', { top: '-80%' }, 0.5)
-
-      // cleanup when this matchMedia query no longer applies
-      return () => {
-        tl.scrollTrigger && tl.scrollTrigger.kill()
-        tl.kill()
-      }
-    })
-
-    // nothing happens on ≤500px — matchMedia will auto-revert above tween
-    return () => mm.revert()
-  }, [])
-
   useGSAP(
     () => {
       gsap.from('.anim-line', {
@@ -174,6 +105,39 @@ export default function Hero() {
         stagger: 0.2,
         duration: 1.5,
         delay: 0.5,
+      })
+
+      const mm = gsap.matchMedia()
+
+      mm.add('(min-width: ' + theme`screens.xs` + ')', () => {
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: sectionEl.current,
+            start: 'top top',
+            end: '+=2000',
+            scrub: true,
+            pin: true,
+            onUpdate: ({ progress }) => {
+              const idx = Math.min(
+                frameCount - 1,
+                Math.floor(progress * (frameCount - 1)),
+              )
+              setCurrentFrameIndex(idx)
+            },
+          },
+          defaults: { ease: 'linear' },
+        })
+
+        tl.set('.anim-text-bottom', { display: 'none' }, 0)
+          .fromTo(
+            '.anim-wrapper',
+            { top: '100%' },
+            { top: '0%', duration: 0.5 },
+            0,
+          )
+          .set('.anim-text-top', { display: 'none' }, 0.5)
+          .set('.anim-text-bottom', { display: 'block' }, 0.5)
+          .to('.anim-wrapper', { top: '-80%' }, 0.5)
       })
     },
     { dependencies: [sectionEl], scope: sectionEl },
