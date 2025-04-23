@@ -32,7 +32,7 @@ export const InnerWrapper = tw.div`
 `
 export const LogoWrapper = styled(Link)`
   ${tw`
-    xl:w-[${`${(225 / 1280) * 100}vw`}]
+    xl:w-[${`${(200 / 1280) * 100}vw`}]
     w-[225px]
   `}
 `

@@ -22,6 +22,10 @@ import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
 import { usePathname, useRouter } from 'next/navigation'
 import Menu from './menu'
+import { ScrollTrigger } from 'gsap/all'
+import { theme } from 'twin.macro'
+
+gsap.registerPlugin(useGSAP, ScrollTrigger)
 
 const Nav = () => {
   const navEl = useRef(null)
@@ -38,6 +42,33 @@ const Nav = () => {
         document.getElementById('header').offsetHeight + 'px'
     }
   }, [pathname])
+
+  useGSAP(
+    () => {
+      const heroSection = document.getElementById('hero')
+
+      if (heroSection) {
+        gsap.from('.primary-button', {
+          opacity: 0,
+          scrollTrigger: {
+            trigger: heroSection,
+            start: `top+=${heroSection.offsetHeight / 2} top`,
+            end: 'bottom top',
+            toggleActions: 'play none none reverse',
+          },
+        })
+      } else {
+        gsap.from(gsap.utils.toArray('.primary-button'), {
+          yPercent: 50,
+          opacity: 0,
+          duration: 1.5,
+          ease: 'power3.out',
+          delay: 1,
+        })
+      }
+    },
+    { dependencies: [navEl, pathname], scope: navEl },
+  )
 
   useGSAP(
     () => {
@@ -196,14 +227,14 @@ const Nav = () => {
               </OverflowWrapper>
             </NavWrapper>
             <ButtonsWrapper>
+              <div className="primary-button book">
+                <CustomButton $primary href={'/'}>
+                  Book Now
+                </CustomButton>
+              </div>
               <div className="anim-button call">
                 <CustomButton $secondary href={'/'}>
                   Call Now
-                </CustomButton>
-              </div>
-              <div className="anim-button book">
-                <CustomButton $primary href={'/'}>
-                  Book Now
                 </CustomButton>
               </div>
 
@@ -219,7 +250,7 @@ const Nav = () => {
         </CustomContainer>
         <Menu menuOpen={menuOpen} />
 
-        <FloatingNavButton>
+        <FloatingNavButton className="primary-button">
           <CustomButton $primary href={'/'}>
             Book Now
           </CustomButton>

@@ -7,7 +7,7 @@ export const HeroSection = tw.section`
   py-xxl
   bg-azure
   text-klm
-  h-screen
+  h-[calc(var(--dvh) * 100)]
 
   xl:py-xxl-xl
 `

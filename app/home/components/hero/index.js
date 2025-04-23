@@ -47,7 +47,7 @@ const Hero = () => {
   )
 
   return (
-    <HeroSection ref={sectionEl}>
+    <HeroSection id="hero" ref={sectionEl}>
       <Container>
         <TextWrapper>
           <H1>{splitText(TITLE)}</H1>

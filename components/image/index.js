@@ -47,7 +47,6 @@ export default function CustomImage({
           const yOffset = winH * speed * 0.1
 
           if (isDesktop && !isMobile) {
-            console.log('HELLO')
             gsap.fromTo(
               inner.current,
               { y: -yOffset },
