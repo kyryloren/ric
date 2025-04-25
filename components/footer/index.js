@@ -66,7 +66,7 @@ const Footer = () => {
                 <CustomLink href="/services">Services</CustomLink>
                 <CustomLink href="/technology">Technology</CustomLink>
                 <CustomLink href="/finances">Finances</CustomLink>
-                <CustomLink href="/insurance">Insurance</CustomLink>
+                <CustomLink href="/finances">Insurance</CustomLink>
                 <CustomLink href="/articles">Articles</CustomLink>
                 <CustomLink href="/contact">Contact</CustomLink>
               </LinkListWrapper>
