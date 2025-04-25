@@ -46,8 +46,8 @@ export const TextWrapper = styled.div`
     flex-col
     justify-center
     gap-xxs
-    pb-xxl-xl
-    pt-md-xl
+    pb-xxl
+    pt-md
 
     md:py-0
     md:pb-0
