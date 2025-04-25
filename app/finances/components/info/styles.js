@@ -1,0 +1,75 @@
+'use client'
+
+import { CustomGrid } from 'styles'
+import tw, { styled } from 'twin.macro'
+
+export const InfoWrapper = tw.section`
+  relative
+  pb-xl
+  
+  md:pb-0
+`
+const RowWrapper = tw(CustomGrid)`
+  items-center
+`
+export const RowOne = styled(RowWrapper)`
+  ${tw`
+    mb-lg
+
+    xl:mb-lg-xl
+  `}
+  .image-wrapper {
+    ${tw`
+      col-start-1
+      col-end-13
+
+      md:col-end-7
+    `}
+  }
+  .text-wrapper {
+    ${tw`
+      col-start-1
+      col-end-13
+
+      md:col-start-8
+      md:col-end-12
+    `}
+  }
+`
+export const RowTwo = styled(RowWrapper)`
+  .image-wrapper {
+    ${tw`
+      col-start-1
+      col-end-13
+      [grid-row: 1]
+
+      md:col-start-7
+    `}
+  }
+  .text-wrapper {
+    ${tw`
+      col-start-1
+      col-end-13
+      [grid-row: 2]
+
+      md:[grid-row: 1]
+      md:col-start-2
+      md:col-end-6
+    `}
+  }
+`
+export const ImageWrapper = tw.div`
+  relative
+  w-full
+  h-[20rem]
+  [border-radius: 10px]
+
+  md:h-[30vw]
+`
+export const TextWrapper = tw.div`
+  flex
+  flex-col
+  gap-sm
+  
+  xl:gap-sm-xl
+`
