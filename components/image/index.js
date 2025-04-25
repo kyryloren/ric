@@ -28,6 +28,7 @@ export default function CustomImage({
   sizes,
   speed = 0.75,
   priority = false,
+  parallax = true,
 }) {
   const container = useRef(null)
   const inner = useRef(null)
@@ -46,7 +47,7 @@ export default function CustomImage({
           let { isDesktop, isMobile } = context.conditions
           const yOffset = winH * speed * 0.1
 
-          if (isDesktop && !isMobile) {
+          if (isDesktop && !isMobile && parallax) {
             gsap.fromTo(
               inner.current,
               { y: -yOffset },
