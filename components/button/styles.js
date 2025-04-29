@@ -50,3 +50,6 @@ const SharedButtonStyles = css`
 export const StyledCustomButton = styled(Link)`
   ${SharedButtonStyles}
 `
+export const FormButton = styled.button`
+  ${SharedButtonStyles}
+`

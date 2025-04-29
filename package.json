@@ -18,13 +18,15 @@
     "@next/third-parties": "^15.3.1",
     "embla-carousel-autoplay": "^8.6.0",
     "embla-carousel-react": "^8.6.0",
+    "formik": "^2.4.6",
     "gsap": "^3.12.7",
     "lenis": "^1.2.3",
     "next": "15.2.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-use": "^17.6.0",
-    "styled-components": "^6.1.8"
+    "styled-components": "^6.1.8",
+    "yup": "^1.6.1"
   },
   "devDependencies": {
     "@babel/core": "^7.26.10",

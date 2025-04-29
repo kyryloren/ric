@@ -1,8 +1,10 @@
 'use client'
 
+import { useContext } from 'react'
 import { P } from 'styles'
-import { StyledCustomButton } from './styles'
+import { FormButton, StyledCustomButton } from './styles'
 import { Icon } from 'components'
+import { ModalContext } from 'lib'
 
 const CustomButton = ({
   $primary,
@@ -13,6 +15,21 @@ const CustomButton = ({
   children,
   ...props
 }) => {
+  const { setModal } = useContext(ModalContext)
+
+  if (href === '/book') {
+    return (
+      <FormButton
+        $primary={$primary}
+        $secondary={$secondary}
+        onClick={() => setModal(true)}
+        {...props}
+      >
+        <P>{children}</P>
+      </FormButton>
+    )
+  }
+
   if (!href || typeof href !== 'string') {
     return (
       <FormButton

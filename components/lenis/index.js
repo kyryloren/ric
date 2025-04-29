@@ -27,6 +27,7 @@ export default function Lenis({ root, options }) {
         ...options,
         autoRaf: false,
         anchors: true,
+        prevent: (node) => node.id === 'modal',
       }}
     />
   )

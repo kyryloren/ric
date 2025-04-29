@@ -63,7 +63,7 @@ export default function Hero() {
         <TextWrapper>
           <H1>{splitText(TEXT)}</H1>
           <P className="description">{splitText(DESCRIPTION)}</P>
-          <CustomButton className="anim-button" $primary href={'/'}>
+          <CustomButton className="anim-button" $primary href={'/book'}>
             Book Now
           </CustomButton>
         </TextWrapper>

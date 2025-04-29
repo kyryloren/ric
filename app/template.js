@@ -1,9 +1,10 @@
 'use client'
 
 import { GlobalStyle } from 'styles'
-import { Lenis, Scrollbar } from 'components'
+import { Book, Lenis, Scrollbar } from 'components'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
+import { ModalProvider } from 'lib'
 
 export default function Template({ children }) {
   useGSAP(() => {
@@ -15,7 +16,10 @@ export default function Template({ children }) {
       <GlobalStyle />
       <Scrollbar />
 
-      <main id="main">{children}</main>
+      <ModalProvider>
+        <Book />
+        <main id="main">{children}</main>
+      </ModalProvider>
       <Lenis root />
     </>
   )

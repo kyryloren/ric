@@ -115,7 +115,7 @@ export default function List() {
               </ServiceButton>
             </HollowCard>
           ))}
-          <HollowCard className="anim-item" href={'/'} $custom>
+          <HollowCard className="anim-item" href={'/contact'} $custom>
             <CardTextWrapper>
               <H3>Request a Custom Service</H3>
               <P>

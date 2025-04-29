@@ -27,7 +27,7 @@ const CARDS = [
   },
   {
     src: '/technology.webm',
-    href: '/',
+    href: '/technology',
     title: `Our Latest\nTechnology`,
   },
 ]

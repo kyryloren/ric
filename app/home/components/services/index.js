@@ -82,7 +82,7 @@ const Services = () => {
           <TextWrapper>
             <H2>{splitText(TITLE)}</H2>
             <P>{splitText(DESCRIPTION)}</P>
-            <CustomButton className="anim-button" $primary href={'/'}>
+            <CustomButton className="anim-button" $primary href={'/book'}>
               Book Now
             </CustomButton>
           </TextWrapper>

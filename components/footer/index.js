@@ -1,5 +1,6 @@
 'use client'
 
+import { useContext } from 'react'
 import { Container, H1, H4, P } from 'styles'
 import {
   BlackLinkWrapper,
@@ -19,14 +20,23 @@ import {
 } from './styles'
 import CustomLink from 'components/link'
 import Icon from 'components/icons'
+import { ModalContext } from 'lib'
 
 const Footer = () => {
+  const { setModal } = useContext(ModalContext)
+
   return (
     <BottomSectionWrapper>
       <Container>
         <InnerWrapper>
           <CTAWrapper>
-            <LeftCard href={'/'}>
+            <LeftCard
+              href={'/'}
+              onClick={(e) => {
+                e.preventDefault()
+                setModal(true)
+              }}
+            >
               <H4>
                 Your new smile is
                 <br />
@@ -34,7 +44,11 @@ const Footer = () => {
               </H4>
               <H1>Book Now</H1>
             </LeftCard>
-            <RightCard href={'/'}>
+            <RightCard
+              target="_blank"
+              rel="noopener noreferrer"
+              href={'https://maps.app.goo.gl/c2tKb8pewzwNQdiY8'}
+            >
               <H4>
                 4300 Hyland Blvd.
                 <br />

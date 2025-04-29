@@ -9,6 +9,7 @@ import IconTikTok from './tiktok'
 import IconLeftArrow from './left-arrow'
 import IconLogoIcon from './logo-icon'
 import Icon25Y from './25Y'
+import IconClose from './close'
 
 const Icon = forwardRef((props, ref) => {
   switch (props.name) {
@@ -34,6 +35,8 @@ const Icon = forwardRef((props, ref) => {
       return <IconTikTok ref={ref} {...props} />
     case '25Y':
       return <Icon25Y ref={ref} {...props} />
+    case 'close':
+      return <IconClose ref={ref} {...props} />
     default:
       return null
   }

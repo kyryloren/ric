@@ -228,7 +228,7 @@ const Nav = () => {
             </NavWrapper>
             <ButtonsWrapper>
               <div className="primary-button book">
-                <CustomButton $primary href={'/'}>
+                <CustomButton $primary href={'/book'}>
                   Book Now
                 </CustomButton>
               </div>
@@ -251,7 +251,7 @@ const Nav = () => {
         <Menu menuOpen={menuOpen} />
 
         <FloatingNavButton className="primary-button">
-          <CustomButton $primary href={'/'}>
+          <CustomButton $primary href={'/book'}>
             Book Now
           </CustomButton>
         </FloatingNavButton>
