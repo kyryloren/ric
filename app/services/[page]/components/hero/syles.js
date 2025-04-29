@@ -48,9 +48,9 @@ export const GridWrapper = styled(CustomGrid)`
 export const TextWrapper = tw.div`
   flex
   flex-col
-  gap-sm
+  gap-md
 
-  xl:gap-sm-xl
+  xl:gap-md-xl
 `
 
 export const ParagraphWrapper = tw.div`
