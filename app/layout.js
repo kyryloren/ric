@@ -1,53 +1,42 @@
-import { RealViewport, StyledComponentsRegistry } from 'lib'
+import {
+  fetchAPI,
+  getStrapiURL,
+  RealViewport,
+  StyledComponentsRegistry,
+} from 'lib'
 
 const title = 'Robotic Implant Center | Tooth Implant Solutions | RIC'
 const description = `Dental implants can help you achieve the smile you’ve always wanted. Discover Robotic Implant Center for expert care. Book your consultation today!`
 
-export const metadata = {
-  title: {
-    template: '%s | Robotic Implant Center New York',
-    default: title,
-  },
-  description: description,
-  keywords: [
-    'robotic dental implants',
-    'dental implant specialist NYC',
-    'Yomi robotic implant system',
-    'full mouth dental implants',
-    'dental implants Staten Island',
-    'pain-free dental implants',
-    'advanced dental technology Staten Island',
-    'precision dental implants',
-  ],
-  openGraph: {
-    title: title,
-    description: description,
-    url: 'https://roboticimplantsnyc.com/',
-    locale: 'en_US',
-    type: 'website',
-    images: {
-      url: `${
-        process.env.NODE_ENV === 'development'
-          ? 'http://localhost:3000'
-          : 'https://roboticimplantsnyc.com/'
-      }/images/og-image.jpg`,
-      width: 1200,
-      height: 630,
+export async function generateMetadata() {
+  const data = await fetchAPI('/global', {
+    populate: {
+      SEO: {
+        populate: '*',
+      },
     },
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: title,
-    description: description,
-    creator: '@roboticimplant.center',
-    images: [
-      `${
-        process.env.NODE_ENV === 'development'
-          ? 'http://localhost:3000'
-          : 'https://roboticimplantsnyc.com/'
-      }/images/og-image.jpg`,
-    ],
-  },
+  })
+  const doc = data?.data?.attributes?.SEO
+
+  return {
+    title: doc?.metaTitle || title,
+    description: doc?.metaDescription || description,
+    keywords: doc?.keywords.split(', '),
+    openGraph: {
+      title: doc?.metaTitle,
+      description: doc?.metaDescription,
+      url: process.env.NEXT_PUBLIC_BASE_URL,
+      locale: 'en_US',
+      type: 'website',
+      images: {
+        url: getStrapiURL(
+          `${doc?.metaImage?.data?.attributes?.url}?format=jpg&resize=1200x630`,
+        ),
+        width: 1200,
+        height: 630,
+      },
+    },
+  }
 }
 
 export default function RootLayout({ children }) {
