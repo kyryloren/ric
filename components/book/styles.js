@@ -69,13 +69,19 @@ export const Split = tw.div`
 
   xl:gap-xs-xl
 `
-export const Question = tw.div`
-  flex
-  flex-col
-  gap-xxs
-  w-full
+export const Question = styled.div`
+  ${tw`
+    flex
+    flex-col
+    gap-xxs
+    w-full
+  
+    xl:gap-xxs-xl
+  `}
 
-  xl:gap-xxs-xl
+  span {
+    ${tw`text-red text-p font-sans xl:text-p-xl`}
+  }
 `
 export const InputLabel = tw.label`
   text-p

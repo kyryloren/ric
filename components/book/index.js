@@ -17,6 +17,7 @@ import {
 } from './styles'
 import Icon from 'components/icons'
 import { useFormik } from 'formik'
+import * as Yup from 'yup'
 import CustomLink from 'components/link'
 import CustomButton from 'components/button'
 import { ModalContext } from 'lib'
@@ -29,9 +30,30 @@ const DESCRIPTION = `Leave your details below and a staff member
 will get back to you in 1-2 business days.
 `
 
+// 1. Define your Yup validation schema
+const validationSchema = Yup.object({
+  fname: Yup.string().required('First name is required'),
+  lname: Yup.string().required('Last name is required'),
+  dob: Yup.date()
+    .required('Date of birth is required')
+    .max(new Date(), 'Date of birth cannot be in the future'),
+  email: Yup.string()
+    .email('Invalid email address')
+    .required('Email is required'),
+  phone: Yup.string()
+    .matches(
+      /^\(\d{3}\)\s\d{3}-\d{4}$/,
+      'Phone must be in format (XXX) XXX-XXXX',
+    )
+    .required('Phone number is required'),
+  details: Yup.string().required('Please provide any details'),
+})
+
 export default function Book() {
   const sectionEl = useRef()
   const { modal, setModal } = useContext(ModalContext)
+
+  // 2. Hook up validationSchema to Formik
   const formik = useFormik({
     initialValues: {
       fname: '',
@@ -41,6 +63,7 @@ export default function Book() {
       phone: '',
       details: '',
     },
+    validationSchema,
     onSubmit: (values) => {
       alert(JSON.stringify(values, null, 2))
     },
@@ -51,12 +74,20 @@ export default function Book() {
     scope: sectionEl,
   })
 
+  const {
+    handleChange,
+    handleBlur,
+    handleSubmit,
+    values,
+    errors,
+    touched,
+    resetForm,
+  } = formik
+
   useGSAP(
     () => {
       const tl = gsap.timeline({ defaults: { ease: 'power3.out' } })
-      tl.set('.sidebar', {
-        xPercent: 100,
-      })
+      tl.set('.sidebar', { xPercent: 100 })
 
       if (modal) {
         tl.set(sectionEl.current, { autoAlpha: 1 }, 0)
@@ -91,7 +122,10 @@ export default function Book() {
     const tl = gsap.timeline({
       defaults: {
         ease: 'power3.out',
-        onComplete: () => setModal(false),
+        onComplete: () => {
+          setModal(false)
+          resetForm()
+        },
       },
     })
 
@@ -118,29 +152,34 @@ export default function Book() {
         </TitleLine>
         <P>{splitText(DESCRIPTION)}</P>
 
-        <FormWrapper onSubmit={formik.handleSubmit}>
+        <FormWrapper onSubmit={handleSubmit}>
           <Split>
             <Question className="anim-question">
               <InputLabel htmlFor="fname">Patient First Name</InputLabel>
               <Input
                 id="fname"
-                name="firstname"
+                name="fname"
                 type="text"
-                onChange={formik.handleChange}
-                value={formik.values.fname}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.fname}
                 placeholder="First Name"
               />
+              {touched.fname && errors.fname && <span>{errors.fname}</span>}
             </Question>
+
             <Question className="anim-question">
               <InputLabel htmlFor="lname">Patient Last Name</InputLabel>
               <Input
                 id="lname"
-                name="lastname"
+                name="lname"
                 type="text"
-                onChange={formik.handleChange}
-                value={formik.values.lname}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.lname}
                 placeholder="Last Name"
               />
+              {touched.lname && errors.lname && <span>{errors.lname}</span>}
             </Question>
           </Split>
 
@@ -148,12 +187,13 @@ export default function Book() {
             <InputLabel htmlFor="dob">Patient Date of Birth</InputLabel>
             <Input
               id="dob"
-              name="birthday"
+              name="dob"
               type="date"
-              onChange={formik.handleChange}
-              value={formik.values.dob}
-              placeholder="MM/DD/YYYY"
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={values.dob}
             />
+            {touched.dob && errors.dob && <span>{errors.dob}</span>}
           </Question>
 
           <Question className="anim-question">
@@ -162,10 +202,12 @@ export default function Book() {
               id="email"
               name="email"
               type="email"
-              onChange={formik.handleChange}
-              value={formik.values.email}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={values.email}
               placeholder="email@domain.com"
             />
+            {touched.email && errors.email && <span>{errors.email}</span>}
           </Question>
 
           <Question className="anim-question">
@@ -173,11 +215,13 @@ export default function Book() {
             <Input
               id="phone"
               name="phone"
-              type="phone"
-              onChange={formik.handleChange}
-              value={formik.values.phone}
+              type="text"
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={values.phone}
               placeholder="(XXX) XXX-XXXX"
             />
+            {touched.phone && errors.phone && <span>{errors.phone}</span>}
           </Question>
 
           <Question className="anim-question">
@@ -185,10 +229,12 @@ export default function Book() {
             <TextArea
               id="details"
               name="details"
-              onChange={formik.handleChange}
-              value={formik.values.details}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={values.details}
               placeholder="Any details we should know about?"
             />
+            {touched.details && errors.details && <span>{errors.details}</span>}
           </Question>
 
           <SubmitWrapper className="anim-question">
@@ -198,7 +244,7 @@ export default function Book() {
                 (718) 948-0870
               </CustomLink>
             </P>
-            <CustomButton $primary className="submit">
+            <CustomButton type="submit" $primary className="submit">
               Submit Form
             </CustomButton>
           </SubmitWrapper>

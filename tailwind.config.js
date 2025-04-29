@@ -32,6 +32,7 @@ const config = {
       chrysler: '#480BE8',
       klm: '#104EEF',
       lavender: '#D8E4FB',
+      red: '#E93F3F',
     },
     transitionTimingFunction: {
       default: 'cubic-bezier(0.165, 0.84, 0.44, 1)',
