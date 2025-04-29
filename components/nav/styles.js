@@ -112,7 +112,7 @@ export const HamburgerLine = styled.span`
 export const FloatingNavButton = styled.div`
   ${tw`fixed bottom-gutter px-gutter w-full xs:hidden`}
 
-  a {
+  button {
     ${tw`w-full!`}
   }
 `

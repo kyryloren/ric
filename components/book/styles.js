@@ -35,11 +35,12 @@ export const SideBar = tw.aside`
   w-full
   h-full
   px-md
-  py-md
+  py-lg
   bg-white
   overflow-y-scroll
   z-[2]
 
+  sm:py-md
   sm:w-[60vw]
   md:w-[50vw]
   lg:w-[45vw]
