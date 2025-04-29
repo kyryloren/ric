@@ -10,7 +10,6 @@ import {
   Overlay,
   TextWrapper,
 } from './styles'
-import { Parallax } from 'components'
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
 import { ScrollTrigger } from 'gsap/all'
@@ -84,11 +83,9 @@ const About = () => {
                 <H3>{splitText(info.title)}</H3>
                 <P>Learn More</P>
               </Overlay>
-              <Parallax trigger={sectionEl}>
-                <CustomVideo autoPlay loop muted playsInline>
-                  <source src={info.src} type="video/webm" />
-                </CustomVideo>
-              </Parallax>
+              <CustomVideo autoPlay loop muted playsInline>
+                <source src={info.src} type="video/webm" />
+              </CustomVideo>
             </CardWrapper>
           ))}
         </GridWrapper>
