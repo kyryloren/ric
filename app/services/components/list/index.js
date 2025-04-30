@@ -20,50 +20,8 @@ Services at RIC`
 const DESCRIPTION = `At RIC, we’re here to give you your smile back with
 the help of dental implants. Learn more when you
 schedule your FREE consultation with a 3D scan.`
-const SERVICES = [
-  {
-    name: 'Full Mouth Reconstruction',
-    text: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.`,
-    href: '/services/page',
-  },
-  {
-    name: 'Single Tooth Dental Implants',
-    text: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.`,
-    href: '/services/page',
-  },
-  {
-    name: 'Computer-Guided Implant Surgery',
-    text: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.`,
-    href: '/services/page',
-  },
-  {
-    name: 'Zirconia Restored Dental Implants',
-    text: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.`,
-    href: '/services/page',
-  },
-  {
-    name: 'Fixed-Removable Implant Dentures',
-    text: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.`,
-    href: '/services/page',
-  },
-  {
-    name: 'Implant Overdentures',
-    text: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.`,
-    href: '/services/page',
-  },
-  {
-    name: 'Crestal Approach Sinus Lift',
-    text: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.`,
-    href: '/services/page',
-  },
-  {
-    name: 'In-House CBCT Scan Technology',
-    text: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.`,
-    href: '/services/page',
-  },
-]
 
-export default function List() {
+export default function List({ data }) {
   const sectionEl = useRef(null)
 
   useGSAP(
@@ -103,11 +61,15 @@ export default function List() {
           <P>{splitText(DESCRIPTION)}</P>
         </TextWrapper>
         <CustomGrid>
-          {SERVICES.map((service, index) => (
-            <HollowCard key={index} href={service.href} className="anim-item">
+          {data?.map((_, index) => (
+            <HollowCard
+              key={index}
+              href={`/services/${_?.attributes.slug}`}
+              className="anim-item"
+            >
               <CardTextWrapper>
-                <H3>{service.name}</H3>
-                <P>{service.text}</P>
+                <H3>{_?.attributes?.name}</H3>
+                <P>{_?.attributes?.short_description}</P>
               </CardTextWrapper>
               <ServiceButton>
                 <P className="link-text">Read More</P>

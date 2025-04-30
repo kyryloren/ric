@@ -56,11 +56,11 @@ export default function CustomHeader({
               <CustomButton
                 key={index}
                 className="custom-button anim-button"
-                $primary={_.primary}
-                $secondary={!_.primary}
-                href={_.url}
+                $primary={_?.primary}
+                $secondary={!_?.primary}
+                href={_?.url}
               >
-                {_.text}
+                {_?.text}
               </CustomButton>
             ))}
         </ButtonsWrapper>

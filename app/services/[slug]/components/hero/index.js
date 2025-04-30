@@ -1,25 +1,22 @@
 'use client'
 
 import { useEffect, useRef } from 'react'
-import { Container, H1, P, splitText } from 'styles'
+import { Container, P, RenderMedia } from 'styles'
 import {
   BackButton,
-  ButtonWrapper,
   GridWrapper,
   HeroSection,
   ImageWrapper,
-  ParagraphWrapper,
   RightCol,
-  TextWrapper,
 } from './syles'
-import { CustomButton, CustomImage, Icon } from 'components'
+import { CustomHeader, Icon } from 'components'
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
 import { useLenis } from 'lenis/react'
 
 gsap.registerPlugin(useGSAP)
 
-export default function Hero() {
+export default function Hero({ data }) {
   const sectionEl = useRef(null)
   const lenis = useLenis()
 
@@ -71,7 +68,7 @@ export default function Hero() {
       <Container>
         <GridWrapper>
           <ImageWrapper className="anim-image">
-            <CustomImage src={'/1.webp'} alt={'Image ALT tag'} />
+            <RenderMedia data={data?.media?.data?.attributes} />
           </ImageWrapper>
 
           <RightCol>
@@ -79,32 +76,14 @@ export default function Hero() {
               <Icon name="left-arrow" />
               <P>Back to all services</P>
             </BackButton>
-            <TextWrapper>
-              <H1>{splitText(`Fixed-Removable Implant Dentures`)}</H1>
-              <ParagraphWrapper>
-                <P>
-                  {splitText(
-                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-                  )}
-                </P>
-              </ParagraphWrapper>
-              <ButtonWrapper>
-                <CustomButton
-                  className="anim-button primary"
-                  $primary
-                  href={'/'}
-                >
-                  Schedule Free Consultation
-                </CustomButton>
-                <CustomButton
-                  className="anim-button secondary"
-                  $secondary
-                  href="/"
-                >
-                  Call Now
-                </CustomButton>
-              </ButtonWrapper>
-            </TextWrapper>
+
+            <CustomHeader
+              title={data?.name}
+              description={data?.long_description}
+              center={false}
+              book
+              call
+            />
           </RightCol>
         </GridWrapper>
       </Container>

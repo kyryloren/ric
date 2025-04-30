@@ -43,43 +43,25 @@ export const RightCol = tw.div`
 
 export const GridWrapper = styled(CustomGrid)`
   ${tw`items-center`}
-`
 
-export const TextWrapper = tw.div`
-  flex
-  flex-col
-  gap-md
+  .description {
+    ${tw`
+      max-w-[50%]
+      portrait:max-w-full
+    `}
+  }
 
-  xl:gap-md-xl
-`
-
-export const ParagraphWrapper = tw.div`
-  max-w-[50%]
-
-  portrait:max-w-full
-`
-
-export const ButtonWrapper = styled.div`
-  ${tw`
-    flex
-    gap-xs
-    flex-col
-
-    xs:flex-row
-    xl:gap-xs-xl
-  `}
-  .primary,
-  .secondary {
+  .book-button,
+  .call-button {
     ${tw`border-cocoa w-full text-center xs:text-left xs:w-fit`}
   }
-  .primary {
+  .book-button {
     ${tw`bg-cocoa text-rose`}
   }
-  .secondary {
+  .call-button {
     ${tw`text-cocoa`}
   }
 `
-
 export const BackButton = styled(Link)`
   ${tw`
     flex

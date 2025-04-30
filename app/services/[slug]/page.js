@@ -1,6 +1,7 @@
 import { FAQ, Info, Insurance } from 'templates'
 import { Hero } from './components'
 import { Footer, Nav } from 'components'
+import { fetchAPI } from 'lib'
 
 const TITLE = 'About this service'
 const DESCRIPTION = `Getting dental implants is a big decision.
@@ -48,14 +49,44 @@ const FAQ_ITEMS = [
   },
 ]
 
-export default function Page() {
+export default async function Page(props) {
+  const params = await props.params
+  const { slug } = params
+
+  const serviceData = await fetchAPI('/services', {
+    filters: {
+      slug: {
+        $eq: slug,
+      },
+    },
+    populate: {
+      fields: ['name', 'short_description', 'long_description'],
+      media: {
+        populate: '*',
+      },
+      FAQ_header: {
+        populate: '*',
+      },
+      FAQ: {
+        populate: '*',
+      },
+      finances: {
+        populate: '*',
+      },
+      info_col: {
+        populate: '*',
+      },
+    },
+  })
+  const serviceDoc = serviceData?.data[0]?.attributes
+
   return (
     <>
       <Nav />
-      <Hero />
-      <FAQ TITLE={TITLE} DESCRIPTION={DESCRIPTION} FAQ_ITEMS={FAQ_ITEMS} />
-      <Insurance />
-      <Info />
+      <Hero data={serviceDoc} />
+      <FAQ headerData={serviceDoc?.FAQ_header} data={serviceDoc.FAQ} />
+      <Insurance data={serviceDoc?.finances} />
+      <Info data={serviceDoc?.info_col} />
       <Footer />
     </>
   )
