@@ -1,25 +1,20 @@
 'use client'
 
 import { useRef } from 'react'
-import { Container, CustomGrid, H2, H4, P, splitText } from 'styles'
+import { Container, CustomGrid, H4 } from 'styles'
 import {
   AllServicesButton,
   ServiceButton,
   ServicesCol,
   ServicesSection,
-  TextWrapper,
 } from './styles'
-import { CustomButton, Icon } from 'components'
+import { CustomHeader, Icon } from 'components'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/all'
 
 gsap.registerPlugin(ScrollTrigger, useGSAP)
 
-const TITLE = `We Simply
-Deliver More`
-const DESCRIPTION = `Getting dental implants is a big decision.
-We’re here for you every step of the way.`
 const SERVICES = [
   { name: 'Full Mouth Reconstruction', href: '/' },
   { name: 'Single Tooth Dental Implants', href: '/' },
@@ -31,8 +26,9 @@ const SERVICES = [
   { name: 'In-House CBCT Scan Technology', href: '/' },
 ]
 
-const Services = () => {
+const Services = ({ data }) => {
   const sectionEl = useRef(null)
+  const headerData = data?.services_header
 
   useGSAP(
     () => {
@@ -79,13 +75,17 @@ const Services = () => {
     <ServicesSection ref={sectionEl}>
       <Container>
         <CustomGrid>
-          <TextWrapper>
-            <H2>{splitText(TITLE)}</H2>
-            <P>{splitText(DESCRIPTION)}</P>
-            <CustomButton className="anim-button" $primary href={'/book'}>
-              Book Now
-            </CustomButton>
-          </TextWrapper>
+          <CustomHeader
+            title={headerData?.title}
+            description={headerData?.description}
+            book={headerData?.book}
+            call={headerData?.call}
+            buttons={headerData?.button}
+            className={'text-wrapper'}
+            center={false}
+            size="md"
+          />
+
           <ServicesCol>
             {SERVICES.map((service, index) => (
               <ServiceButton

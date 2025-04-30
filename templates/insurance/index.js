@@ -1,14 +1,16 @@
-import { Container, H2, P } from 'styles'
+'use client'
+
+import { Container } from 'styles'
 import {
   ContentWrapper,
   ImageObject,
   ImageWrapper,
   InsuranceSection,
-  TextWrapper,
 } from './styles'
-import { CustomImage, CustomButton, Marquee } from 'components'
+import { CustomImage, Marquee, CustomHeader } from 'components'
+import { getStrapiURL } from 'lib'
 
-const Insurance = () => {
+const Insurance = ({ data }) => {
   return (
     <InsuranceSection>
       <Container>
@@ -20,57 +22,30 @@ const Insurance = () => {
               sizes="(min-width: 780px) 59.01vw, (min-width: 580px) 95.56vw, (min-width: 420px) calc(23.57vw + 380px), (min-width: 380px) calc(95vw - 21px), 468px"
             />
           </ImageWrapper>
-          <TextWrapper>
-            <H2>
-              Happier Smiles at
-              <br />
-              Happier Prices
-            </H2>
-            <P>
-              With affordable, transparent, and hassle-free
-              <br />
-              financing options, your path to a new smile
-              <br />
-              can be as comfortable as it is rewarding.
-            </P>
-            <CustomButton $secondary href={'/finances'}>
-              Explore Financing
-            </CustomButton>
+
+          <CustomHeader
+            title={data?.title}
+            description={data?.description}
+            className={'text-wrapper'}
+            buttons={[data?.button]}
+            center={false}
+            size="md"
+          >
             <Marquee className={'marquee'} repeat={3}>
-              <ImageObject
-                src="/zip.svg"
-                alt="Zip"
-                width={200}
-                height={200}
-                loading="lazy"
-                priority={false}
-              />
-              <ImageObject
-                src="/afterpay.svg"
-                alt="Afterpay"
-                width={200}
-                height={200}
-                loading="lazy"
-                priority={false}
-              />
-              <ImageObject
-                src="/humm.svg"
-                alt="Humm"
-                width={200}
-                height={200}
-                loading="lazy"
-                priority={false}
-              />
-              <ImageObject
-                src="/affirm.svg"
-                alt="Affirm"
-                width={200}
-                height={200}
-                loading="lazy"
-                priority={false}
-              />
+              {data?.icons?.data?.map((_, index) => (
+                <ImageObject
+                  key={index}
+                  src={getStrapiURL(_?.attributes?.url + '?format=webp')}
+                  alt={
+                    _?.attributes?.alternativeText ||
+                    'Robotic Implant Center Image'
+                  }
+                  width={100}
+                  height={100}
+                />
+              ))}
             </Marquee>
-          </TextWrapper>
+          </CustomHeader>
         </ContentWrapper>
       </Container>
     </InsuranceSection>

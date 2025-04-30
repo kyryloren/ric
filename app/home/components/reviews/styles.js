@@ -7,27 +7,15 @@ export const ReviewsSection = styled.section`
   ${tw`relative py-xxl xl:py-xxl-xl`}
 
   .slider {
-    ${tw`md:hidden`}
+    ${tw`mt-lg md:hidden`}
   }
-`
-export const TextWrapper = tw.div`
-  mx-auto
-  flex
-  flex-col
-  gap-xxs
-  mb-lg
-
-  sm:text-center
-  sm:items-center
-  sm:gap-sm
-
-  xl:gap-sm
-  xl:mb-lg-xl
 `
 export const DesktopGrid = tw(CustomGrid)`
   hidden
-  
+
+  mt-lg
   md:grid
+  xl:mt-lg-xl
 `
 export const Col = styled.div`
   ${tw`grid grid-cols-1 gap-sm xl:gap-sm-xl`}
@@ -70,7 +58,7 @@ export const CustomQuoteText = styled.q`
   ${tw`relative text-h4 xl:text-h4-xl`}
 
   &::before {
-    ${tw`absolute -left-[3.5%]`}
+    ${tw`absolute -left-[0.6rem] md:-left-[0.8rem]`}
   }
 `
 export const CreditWrapper = tw.div`
@@ -80,12 +68,12 @@ export const CreditWrapper = tw.div`
 
   xl:gap-xs-xl
 `
-export const PfP = styled.div`
-  ${tw`relative w-[50px] h-[50px] [border-radius: 50%] overflow-hidden`}
-
-  img {
-    ${tw`w-full h-full object-cover [border-radius: inherit]`}
-  }
+export const PfP = tw.div`
+  relative
+  w-[50px]
+  h-[50px]
+  [border-radius: 50%]
+  overflow-hidden
 `
 export const CreditName = tw(P)`
   text-black

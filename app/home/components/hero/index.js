@@ -1,17 +1,11 @@
 'use client'
 
-import { useContext, useRef } from 'react'
-import { Container, H1, P, RenderMedia, splitText } from 'styles'
-import {
-  ButtonsWrapper,
-  VideoWrapper,
-  HeroSection,
-  TextWrapper,
-} from './styles'
-import { CustomButton } from 'components'
+import { useRef } from 'react'
+import { Container, RenderMedia } from 'styles'
+import { VideoWrapper, HeroSection } from './styles'
+import { CustomHeader } from 'components'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
-import { GlobalAPIContext } from 'context'
 
 gsap.registerPlugin(useGSAP)
 
@@ -19,7 +13,6 @@ const Hero = ({ data }) => {
   const sectionEl = useRef(null)
 
   const headerData = data?.hero_header
-  const globalData = useContext(GlobalAPIContext)
 
   useGSAP(
     () => {
@@ -55,26 +48,15 @@ const Hero = ({ data }) => {
   return (
     <HeroSection id="hero" ref={sectionEl}>
       <Container>
-        <TextWrapper>
-          <H1>{splitText(headerData?.title)}</H1>
-          <P className="description">{splitText(headerData?.description)}</P>
-          <ButtonsWrapper>
-            {headerData?.book && (
-              <CustomButton className="anim-button" $primary href={'/book'}>
-                Book Now
-              </CustomButton>
-            )}
-            {headerData?.call && (
-              <CustomButton
-                className="anim-button"
-                $secondary
-                href={`tel:${globalData?.contact?.phone}`}
-              >
-                Call Now
-              </CustomButton>
-            )}
-          </ButtonsWrapper>
-        </TextWrapper>
+        <CustomHeader
+          title={headerData?.title}
+          description={headerData?.description}
+          book={headerData?.book}
+          call={headerData?.call}
+          buttons={headerData?.button}
+          center
+          padded
+        />
 
         <VideoWrapper className="anim-video">
           <RenderMedia data={data?.hero_media?.data?.attributes} />

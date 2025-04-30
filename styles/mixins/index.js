@@ -28,6 +28,9 @@ export function RenderMedia({
   speed = 0.75,
   sizes,
   data,
+  fill = true,
+  width,
+  height,
   ...props
 }) {
   if (data?.mime?.startsWith('image/')) {
@@ -37,6 +40,8 @@ export function RenderMedia({
         alt={data?.alternativeText || 'Robotic Implant Center Image'}
         priority={priority}
         sizes={sizes}
+        parallax={parallax}
+        {...(!fill && { width: data?.width, height: data?.height })}
         {...props}
       />
     )

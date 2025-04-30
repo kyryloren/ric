@@ -8,26 +8,14 @@ export const TechnologySection = tw.section`
 
   xl:pb-xxl
 `
-export const TextWrapper = tw.div`
-  mx-auto
-  flex
-  flex-col
-  gap-sm
-  mb-lg
-
-  sm:text-center
-  sm:items-center
-
-  xl:gap-sm-xl
-  xl:mb-lg-xl
-`
 export const ImageWrapper = tw.div`
   relative
   w-full
   h-[20rem]
-  [border-radius: 10px]
+  mt-lg
   
   md:h-[80svh]
+  xl:mt-lg-xl
 `
 export const ColInfoWrapper = tw.div`
   flex

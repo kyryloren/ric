@@ -11,7 +11,7 @@ import { useGSAP } from '@gsap/react'
 gsap.registerPlugin(ScrollTrigger, useGSAP)
 
 const ParallaxContainer = styled.div`
-  ${tw`relative w-full h-full overflow-hidden [border-radius:inherit]`}
+  ${tw`relative w-full h-full overflow-hidden [border-radius:10px]`}
 `
 
 const Inner = styled.div`

@@ -7,24 +7,9 @@ import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/all'
 
-gsap.registerPlugin(useGSAP)
-gsap.registerPlugin(ScrollTrigger)
+gsap.registerPlugin(useGSAP, ScrollTrigger)
 
-const TITLE1 = `25 Years
-of Experience`
-const TITLE2 = `Unique Science-
-Based Care`
-const TITLE3 = `Outcomes, Not
-Quotas`
-
-const TEXT1 = `Our clinical team is led by renowned
-clinicians.`
-const TEXT2 = `We’re a leader in implant technology.
-We take advantage of all the latest research.`
-const TEXT3 = `We prioritize your health and confidence,
-and recommend only the care you need.`
-
-const Info = () => {
+const Info = ({ data }) => {
   const sectionEl = useRef(null)
 
   useGSAP(
@@ -62,18 +47,12 @@ const Info = () => {
     <InfoSection className="info-section" ref={sectionEl}>
       <Container>
         <ColInfoWrapper className="anim-wrapper">
-          <Col>
-            <H3>{splitText(TITLE1)}</H3>
-            <P>{splitText(TEXT1)}</P>
-          </Col>
-          <Col>
-            <H3>{splitText(TITLE2)}</H3>
-            <P>{splitText(TEXT2)}</P>
-          </Col>
-          <Col>
-            <H3>{splitText(TITLE3)}</H3>
-            <P>{splitText(TEXT3)}</P>
-          </Col>
+          {data?.map((_, index) => (
+            <Col key={index}>
+              <H3>{splitText(_?.title)}</H3>
+              <P>{splitText(_?.description)}</P>
+            </Col>
+          ))}
         </ColInfoWrapper>
       </Container>
     </InfoSection>

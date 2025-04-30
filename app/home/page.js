@@ -19,6 +19,39 @@ export default async function Home() {
           },
         },
       },
+      reviews_header: {
+        populate: '*',
+      },
+      review_card: {
+        populate: '*',
+      },
+      review_media_left: {
+        populate: '*',
+      },
+      review_media_center: {
+        populate: '*',
+      },
+      review_media_right: {
+        populate: '*',
+      },
+      technology_header: {
+        populate: '*',
+      },
+      technology_media: {
+        populate: '*',
+      },
+      technology_col: {
+        populate: '*',
+      },
+      finances: {
+        populate: '*',
+      },
+      services_header: {
+        populate: '*',
+      },
+      info_col: {
+        populate: '*',
+      },
     },
   })
   const homeDoc = homeData?.data?.attributes
@@ -28,11 +61,11 @@ export default async function Home() {
       <Nav hideNav={homeDoc?.hero_header?.book} />
       <Hero data={homeDoc} />
       <About data={homeDoc?.about} />
-      <Reviews />
-      <Technology />
-      <Insurance />
-      <Services />
-      <Info />
+      <Reviews data={homeDoc} />
+      <Technology data={homeDoc} />
+      <Insurance data={homeDoc?.finances} />
+      <Services data={homeDoc} />
+      <Info data={homeDoc?.info_col} />
       <Articles />
       <Footer />
     </>

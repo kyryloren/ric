@@ -3,22 +3,22 @@
 import Link from 'next/link'
 import tw, { styled } from 'twin.macro'
 
-export const ServicesSection = tw.section`
-  relative
-  py-xxl
+export const ServicesSection = styled.section`
+  ${tw`
+    relative
+    py-xxl
 
-  xl:py-xxl-xl
-`
-export const TextWrapper = tw.div`
-  col-start-1
-  col-end-13
-  flex
-  flex-col
-  gap-sm
+    xl:py-xxl-xl
+  `}
 
-  md:col-end-7
-  md:gap-sm
-  xl:gap-xs-xl
+  .text-wrapper {
+    ${tw`
+      col-start-1
+      col-end-13
+
+      md:col-end-7
+    `}
+  }
 `
 export const ServicesCol = tw.div`
   flex

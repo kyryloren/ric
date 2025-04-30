@@ -4,12 +4,26 @@ import Image from 'next/image'
 import { CustomGrid } from 'styles'
 import tw, { styled } from 'twin.macro'
 
-export const InsuranceSection = tw.section`
-  relative
-  bg-azure
-  py-xl
+export const InsuranceSection = styled.section`
+  ${tw`
+    relative
+    bg-azure
+    py-xl
 
-  xl:py-xl-xl
+    xl:py-xl-xl
+  `}
+
+  .text-wrapper {
+    ${tw`col-start-1 col-end-13 md:col-start-8`}
+
+    .marquee {
+      ${tw`mt-lg xl:mt-lg-xl`}
+
+      &:before {
+        ${tw`content-[''] absolute z-20 w-full h-full bg-gradient-to-r from-azure via-[rgba(0, 0, 0, 0)] to-azure`}
+      }
+    }
+  }
 `
 export const ContentWrapper = tw(CustomGrid)`
   items-center
@@ -26,22 +40,10 @@ export const ImageWrapper = tw.div`
   md:h-[70svh]
   md:col-end-7
 `
-export const TextWrapper = styled.div`
-  ${tw`flex flex-col gap-sm col-end-13 xl:gap-sm-xl`}
-  ${tw`col-start-1 md:col-start-8`}
-
-  .marquee {
-    ${tw`mt-lg xl:mt-lg-xl`}
-
-    &:before {
-      ${tw`content-[''] absolute z-20 w-full h-full bg-gradient-to-r from-azure via-[rgba(0, 0, 0, 0)] to-azure`}
-    }
-  }
-`
 export const ImageObject = tw(Image)`
   relative
-  mr-sm
+  mr-md
   w-[100px]
 
-  xl:mr-sm-xl
+  xl:mr-md-xl
 `

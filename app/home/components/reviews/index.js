@@ -1,7 +1,7 @@
 'use client'
 
 import { useRef } from 'react'
-import { Container, H2, P, splitText } from 'styles'
+import { Container, P, RenderMedia } from 'styles'
 import {
   CardWrapper,
   Col,
@@ -15,18 +15,20 @@ import {
   ReviewsSection,
   SlideButtonsWrapper,
   SlideContainer,
-  TextWrapper,
 } from './styles'
-import { CustomImage, Icon, Parallax, Slider, useSlider } from 'components'
-import Image from 'next/image'
+import {
+  CustomHeader,
+  CustomImage,
+  Icon,
+  Parallax,
+  Slider,
+  useSlider,
+} from 'components'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/all'
 import { useGSAP } from '@gsap/react'
 
 gsap.registerPlugin(ScrollTrigger, useGSAP)
-
-const DESCRIPTION = `Why patients are saying we’re the top
-choice for their dental implant provider.`
 
 const SliderButtons = () => {
   const { scrollPrev, scrollNext } = useSlider()
@@ -43,8 +45,18 @@ const SliderButtons = () => {
   )
 }
 
-const Reviews = () => {
+const Reviews = ({ data }) => {
   const sectionEl = useRef(null)
+  const headerData = data?.reviews_header
+  const reviewCards = data?.review_card
+
+  const mediaLeft = data?.review_media_left?.data?.attributes
+  const mediaCenter = data?.review_media_center?.data?.attributes
+  const mediaRight = data?.review_media_right?.data?.attributes
+
+  const leftReviews = reviewCards.slice(0, 2)
+  const centerReviews = reviewCards.slice(2, 4)
+  const rightReviews = reviewCards.slice(4, 6)
 
   useGSAP(
     () => {
@@ -66,123 +78,77 @@ const Reviews = () => {
   return (
     <ReviewsSection ref={sectionEl}>
       <Container>
-        <TextWrapper>
-          <H2>{splitText('Patient-First Excellence')}</H2>
-          <P>{splitText(DESCRIPTION)}</P>
-        </TextWrapper>
+        <CustomHeader
+          title={headerData?.title}
+          description={headerData?.description}
+          book={headerData?.book}
+          call={headerData?.call}
+          buttons={headerData?.button}
+          size="md"
+          center
+        />
 
         <DesktopGrid>
           <Parallax trigger={sectionEl} speed={-3}>
             <Col>
               <ImageWrapper>
-                <CustomImage
-                  src={'/1.webp'}
-                  alt={'One'}
+                <RenderMedia
+                  data={mediaLeft}
                   sizes="(min-width: 1380px) 41.05vw, (min-width: 1060px) calc(10vw + 423px), calc(-21.54vw + 750px)"
                 />
               </ImageWrapper>
-              <CardWrapper $yellow>
-                <CustomQuoteText>
-                  Dr. Pedro was so thoughtful and took his time to explain
-                  everything- I had a great experience and highly recommend Dr
-                  Pedro.
-                </CustomQuoteText>
-                <CreditWrapper>
-                  <PfP>
-                    <Image
-                      src={'/person1.webp'}
-                      alt="Person 1"
-                      fill
-                      sizes="(min-width: 940px) 50px, calc(5vw + 4px)"
-                    />
-                  </PfP>
-                  <CreditTextWrapper>
-                    <CreditName>
-                      <b>Katherine Contino</b>
-                    </CreditName>
-                    <P>Google Review</P>
-                  </CreditTextWrapper>
-                </CreditWrapper>
-              </CardWrapper>
-              <CardWrapper>
-                <CustomQuoteText>
-                  Truly the best dental experience I’ve ever had. The office was
-                  immaculate and the customer attention was impeccable. I highly
-                  recommend this dental office with no hesitation.
-                </CustomQuoteText>
-                <CreditWrapper>
-                  <PfP>
-                    <Image
-                      src={'/person1.webp'}
-                      alt="Person 1"
-                      fill
-                      sizes="(min-width: 940px) 50px, calc(5vw + 4px)"
-                    />
-                  </PfP>
-                  <CreditTextWrapper>
-                    <CreditName>
-                      <b>Katherine Contino</b>
-                    </CreditName>
-                    <P>Google Review</P>
-                  </CreditTextWrapper>
-                </CreditWrapper>
-              </CardWrapper>
+              {leftReviews.map((_, index) => (
+                <CardWrapper key={index} $yellow={index === 0}>
+                  <CustomQuoteText>{_?.quote}</CustomQuoteText>
+                  <CreditWrapper>
+                    <PfP>
+                      <RenderMedia
+                        data={_?.pfp?.data?.attributes}
+                        sizes="(min-width: 940px) 50px, calc(5vw + 4px)"
+                        parallax={false}
+                      />
+                    </PfP>
+                    <CreditTextWrapper>
+                      <CreditName>
+                        <b>{_?.name}</b>
+                      </CreditName>
+                      <P>{_?.source}</P>
+                    </CreditTextWrapper>
+                  </CreditWrapper>
+                </CardWrapper>
+              ))}
             </Col>
           </Parallax>
           <Parallax trigger={sectionEl} speed={-1}>
             <Col>
-              <CardWrapper $blue>
-                <CustomQuoteText>
-                  Other dentists did not want to try– with time and expertise,
-                  Dr. Pedro succeeded in creating a perfect bridge! He has
-                  successfully branched into the field of aesthetics. It’s
-                  heaven!!!
-                </CustomQuoteText>
-                <CreditWrapper>
-                  <PfP>
-                    <Image
-                      src={'/person1.webp'}
-                      alt="Person 1"
-                      fill
-                      sizes="(min-width: 940px) 50px, calc(5vw + 4px)"
-                    />
-                  </PfP>
-                  <CreditTextWrapper>
-                    <CreditName>
-                      <b>Katherine Contino</b>
-                    </CreditName>
-                    <P>Google Review</P>
-                  </CreditTextWrapper>
-                </CreditWrapper>
-              </CardWrapper>
-              <CardWrapper $orange>
-                <CustomQuoteText>
-                  The finished result was amazing and over our expectations. I
-                  can write this review with a great big smile. I would highly
-                  recommend anyone who wishes to have their smile restored.
-                </CustomQuoteText>
-                <CreditWrapper>
-                  <PfP>
-                    <Image
-                      src={'/person1.webp'}
-                      alt="Person 1"
-                      fill
-                      sizes="(min-width: 940px) 50px, calc(5vw + 4px)"
-                    />
-                  </PfP>
-                  <CreditTextWrapper>
-                    <CreditName>
-                      <b>Katherine Contino</b>
-                    </CreditName>
-                    <P>Google Review</P>
-                  </CreditTextWrapper>
-                </CreditWrapper>
-              </CardWrapper>
+              {centerReviews.map((_, index) => (
+                <CardWrapper
+                  key={index}
+                  $blue={index === 0}
+                  $orange={index === 1}
+                >
+                  <CustomQuoteText>{_?.quote}</CustomQuoteText>
+                  <CreditWrapper>
+                    <PfP>
+                      <RenderMedia
+                        data={_?.pfp?.data?.attributes}
+                        sizes="(min-width: 940px) 50px, calc(5vw + 4px)"
+                        parallax={false}
+                      />
+                    </PfP>
+                    <CreditTextWrapper>
+                      <CreditName>
+                        <b>{_?.name}</b>
+                      </CreditName>
+                      <P>{_?.source}</P>
+                    </CreditTextWrapper>
+                  </CreditWrapper>
+                </CardWrapper>
+              ))}
               <ImageWrapper>
-                <CustomImage
-                  src={'/2.webp'}
-                  alt={'Two'}
-                  sizes="(min-width: 1400px) 41vw, (min-width: 1120px) calc(15.77vw + 348px), calc(-17.81vw + 721px)"
+                <RenderMedia
+                  data={mediaCenter}
+                  sizes="(min-width: 1380px) 41.05vw, (min-width: 1060px) calc(10vw + 423px), calc(-21.54vw + 750px)"
                 />
               </ImageWrapper>
             </Col>
@@ -190,56 +156,46 @@ const Reviews = () => {
           <Parallax trigger={sectionEl} speed={-3}>
             <Col>
               <CardWrapper $orange>
-                <CustomQuoteText>
-                  The finished result was amazing and over our expectations. I
-                  can write this review with a great big smile. I would highly
-                  recommend anyone who wishes to have their smile restored.
-                </CustomQuoteText>
+                <CustomQuoteText>{rightReviews[0]?.quote}</CustomQuoteText>
                 <CreditWrapper>
                   <PfP>
-                    <Image
-                      src={'/person1.webp'}
-                      alt="Person 1"
-                      fill
+                    <RenderMedia
+                      data={rightReviews[0]?.pfp?.data?.attributes}
                       sizes="(min-width: 940px) 50px, calc(5vw + 4px)"
+                      parallax={false}
                     />
                   </PfP>
                   <CreditTextWrapper>
                     <CreditName>
-                      <b>Katherine Contino</b>
+                      <b>{rightReviews[0]?.name}</b>
                     </CreditName>
-                    <P>Google Review</P>
+                    <P>{rightReviews[0]?.source}</P>
                   </CreditTextWrapper>
                 </CreditWrapper>
               </CardWrapper>
+
               <ImageWrapper>
-                <CustomImage
-                  src={'/3.webp'}
-                  alt={'Three'}
-                  sizes="(min-width: 1400px) 41vw, (min-width: 1120px) calc(15.77vw + 348px), calc(-17.81vw + 721px)"
+                <RenderMedia
+                  data={mediaRight}
+                  sizes="(min-width: 1380px) 41.05vw, (min-width: 1060px) calc(10vw + 423px), calc(-21.54vw + 750px)"
                 />
               </ImageWrapper>
+
               <CardWrapper $yellow>
-                <CustomQuoteText>
-                  I had my first appointment at this office today. My experience
-                  with each staff member was excellent. I had a gentle and
-                  thorough cleaning. There was no wait time. I highly recommend
-                  this office.
-                </CustomQuoteText>
+                <CustomQuoteText>{rightReviews[1]?.quote}</CustomQuoteText>
                 <CreditWrapper>
                   <PfP>
-                    <Image
-                      src={'/person1.webp'}
-                      alt="Person 1"
-                      fill
+                    <RenderMedia
+                      data={rightReviews[1]?.pfp?.data?.attributes}
                       sizes="(min-width: 940px) 50px, calc(5vw + 4px)"
+                      parallax={false}
                     />
                   </PfP>
                   <CreditTextWrapper>
                     <CreditName>
-                      <b>Katherine Contino</b>
+                      <b>{rightReviews[1]?.name}</b>
                     </CreditName>
-                    <P>Google Review</P>
+                    <P>{rightReviews[1]?.source}</P>
                   </CreditTextWrapper>
                 </CreditWrapper>
               </CardWrapper>
@@ -258,133 +214,32 @@ const Reviews = () => {
           }}
         >
           <Slider.Slides className={'slider'}>
-            <SlideContainer>
-              <CardWrapper $yellow>
-                <CustomQuoteText>
-                  Dr. Pedro was so thoughtful and took his time to explain
-                  everything- I had a great experience and highly recommend Dr
-                  Pedro.
-                </CustomQuoteText>
-                <CreditWrapper>
-                  <PfP>
-                    <Image
-                      src={'/person1.webp'}
-                      alt="Person 1"
-                      sizes="(min-width: 940px) 50px, calc(5vw + 4px)"
-                      fill
-                    />
-                  </PfP>
-                  <CreditTextWrapper>
-                    <CreditName>
-                      <b>Katherine Contino</b>
-                    </CreditName>
-                    <P>Google Review</P>
-                  </CreditTextWrapper>
-                </CreditWrapper>
-              </CardWrapper>
-            </SlideContainer>
-            <SlideContainer>
-              <CardWrapper>
-                <CustomQuoteText>
-                  Truly the best dental experience I’ve ever had. The office was
-                  immaculate and the customer attention was impeccable. I highly
-                  recommend this dental office with no hesitation.
-                </CustomQuoteText>
-                <CreditWrapper>
-                  <PfP>
-                    <Image src={'/person1.webp'} alt="Person 1" fill />
-                  </PfP>
-                  <CreditTextWrapper>
-                    <CreditName>
-                      <b>Katherine Contino</b>
-                    </CreditName>
-                    <P>Google Review</P>
-                  </CreditTextWrapper>
-                </CreditWrapper>
-              </CardWrapper>
-            </SlideContainer>
-            <SlideContainer>
-              <CardWrapper $blue>
-                <CustomQuoteText>
-                  Other dentists did not want to try– with time and expertise,
-                  Dr. Pedro succeeded in creating a perfect bridge! He has
-                  successfully branched into the field of aesthetics. It’s
-                  heaven!!!
-                </CustomQuoteText>
-                <CreditWrapper>
-                  <PfP>
-                    <Image src={'/person1.webp'} alt="Person 1" fill />
-                  </PfP>
-                  <CreditTextWrapper>
-                    <CreditName>
-                      <b>Katherine Contino</b>
-                    </CreditName>
-                    <P>Google Review</P>
-                  </CreditTextWrapper>
-                </CreditWrapper>
-              </CardWrapper>
-            </SlideContainer>
-            <SlideContainer>
-              <CardWrapper $orange>
-                <CustomQuoteText>
-                  The finished result was amazing and over our expectations. I
-                  can write this review with a great big smile. I would highly
-                  recommend anyone who wishes to have their smile restored.
-                </CustomQuoteText>
-                <CreditWrapper>
-                  <PfP>
-                    <Image src={'/person1.webp'} alt="Person 1" fill />
-                  </PfP>
-                  <CreditTextWrapper>
-                    <CreditName>
-                      <b>Katherine Contino</b>
-                    </CreditName>
-                    <P>Google Review</P>
-                  </CreditTextWrapper>
-                </CreditWrapper>
-              </CardWrapper>
-            </SlideContainer>
-            <SlideContainer>
-              <CardWrapper $orange>
-                <CustomQuoteText>
-                  The finished result was amazing and over our expectations. I
-                  can write this review with a great big smile. I would highly
-                  recommend anyone who wishes to have their smile restored.
-                </CustomQuoteText>
-                <CreditWrapper>
-                  <PfP>
-                    <Image src={'/person1.webp'} alt="Person 1" fill />
-                  </PfP>
-                  <CreditTextWrapper>
-                    <CreditName>
-                      <b>Katherine Contino</b>
-                    </CreditName>
-                    <P>Google Review</P>
-                  </CreditTextWrapper>
-                </CreditWrapper>
-              </CardWrapper>
-            </SlideContainer>
-            <SlideContainer>
-              <CardWrapper $yellow>
-                <CustomQuoteText>
-                  I had my first appointment at this office today. My experience
-                  with each staff member was excellent. I had a gentle and
-                  thorough cleaning. There was no wait time. I highly recommend
-                  this office.
-                </CustomQuoteText>
-                <CreditWrapper>
-                  <PfP>
-                    <Image src={'/person1.webp'} alt="Person 1" fill />
-                  </PfP>
-                  <CreditTextWrapper>
-                    <CreditName>
-                      <b>Katherine Contino</b>
-                    </CreditName>
-                    <P>Google Review</P>
-                  </CreditTextWrapper>
-                </CreditWrapper>
-              </CardWrapper>
-            </SlideContainer>
+            {reviewCards.map((_, index) => (
+              <SlideContainer key={index}>
+                <CardWrapper
+                  $orange={index % 3 === 0}
+                  $blue={index % 3 === 1}
+                  $yellow={index % 3 === 2}
+                >
+                  <CustomQuoteText>{_?.quote}</CustomQuoteText>
+                  <CreditWrapper>
+                    <PfP>
+                      <RenderMedia
+                        data={_?.pfp?.data?.attributes}
+                        sizes="(min-width: 940px) 50px, calc(5vw + 4px)"
+                        parallax={false}
+                      />
+                    </PfP>
+                    <CreditTextWrapper>
+                      <CreditName>
+                        <b>{_?.name}</b>
+                      </CreditName>
+                      <P>{_?.source}</P>
+                    </CreditTextWrapper>
+                  </CreditWrapper>
+                </CardWrapper>
+              </SlideContainer>
+            ))}
           </Slider.Slides>
 
           <SliderButtons />
