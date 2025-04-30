@@ -30,20 +30,13 @@ function customSplitText(text) {
   )
 }
 
-const TOP_TEXT = `After 25 years
-of dental implants`
-const BOTTOM_TEXT = `we created the
-perfect solution.`
-const BOTTOM_FLOATING_TEXT = `Restoring lives through
-technology and excellence.`
-
 const generateImagePaths = () =>
   Array.from(
     { length: frameCount },
     (_, i) => `/videos/about/frame-${(i + 1).toString().padStart(3, '0')}.webp`,
   )
 
-export default function Hero() {
+export default function Hero({ data }) {
   const sectionEl = useRef(null)
   const canvasEl = useRef(null)
   const [currentFrameIndex, setCurrentFrameIndex] = useState(0)
@@ -149,12 +142,16 @@ export default function Hero() {
         <StyledCanvas ref={canvasEl} />
       </MovementWrapper>
       <CenterTextWrapper>
-        <H1 className="anim-text-top">{customSplitText(TOP_TEXT)}</H1>
-        <H1 className="anim-text-bottom">{customSplitText(BOTTOM_TEXT)}</H1>
+        <H1 className="anim-text-top">
+          {customSplitText(data?.hero_title_one)}
+        </H1>
+        <H1 className="anim-text-bottom">
+          {customSplitText(data?.hero_title_two)}
+        </H1>
       </CenterTextWrapper>
 
       <BottomTextWrapper>
-        <H4>{customSplitText(BOTTOM_FLOATING_TEXT)}</H4>
+        <H4>{customSplitText(data?.hero_description)}</H4>
       </BottomTextWrapper>
     </HeroSection>
   )

@@ -1,7 +1,7 @@
 'use client'
 
 import { useRef, useState, useEffect } from 'react'
-import { Container, CustomGrid, H1, H4, splitText } from 'styles'
+import { Container, CustomGrid, H1, H4, RenderMedia, splitText } from 'styles'
 import {
   ImageWrapper,
   StickyWrapper,
@@ -12,17 +12,8 @@ import {
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/all'
 import { theme } from 'twin.macro'
-import { CustomImage } from 'components'
 
 gsap.registerPlugin(ScrollTrigger)
-
-const ALL_TEXT = `Born and raised on Staten Island, Dr. Greg Pedro is what some consider a local hero. Inducted into the Staten Island Hall of Fame, Dr. Pedro returned to “The Rock” to give back to the community that means the world to him.
-
-A 1983 graduate from the award-winning St. Peter’s Boy’s Basketball team, Dr. Pedro earned full-scholarships to both Michigan State and Fordham University for his undergraduate Bachelor of Science degree in General Science. He graduated from Temple University’s School of Dentistry with his DMD and an ADA certification in the highly specialized and deeply competitive field of Prosthodontics.
-
-Presciently seeing the future of high-end dentistry, Dr. Pedro was one of the first 30 candidates to extensively train in Computer Guided Dental Implant Surgery under world-renowned prosthodontist, Thomas Ballshi.  This insight and experience makes Dr. Pedro the most sought after surgical prosthodontist on Staten Island.   
-
-Dr. Pedro’s mission is simple: to make world-class implant dentistry more accessible, precise, and stress-free. Whether you're looking for a single implant, a full-mouth transformation, or a second opinion, he and the Robotic Implant Center team are ready to help you take the next step with confidence and clarity.`
 
 const frameCount = 20
 const generateImagePaths = () =>
@@ -31,7 +22,7 @@ const generateImagePaths = () =>
     (_, i) => `/videos/team/frame-${(i + 1).toString().padStart(3, '0')}.webp`,
   )
 
-export default function Team() {
+export default function Team({ data }) {
   const wrapperRef = useRef(null)
   const textRef = useRef(null)
   const canvasRef = useRef(null)
@@ -136,18 +127,14 @@ export default function Team() {
       <Container>
         <CustomGrid>
           <StickyWrapper ref={wrapperRef}>
-            <H1>Meet Dr. Pedro</H1>
+            <H1>{data?.team_title}</H1>
             <StyledCanvas ref={canvasRef} />
             <ImageWrapper>
-              <CustomImage
-                src={'/drpedro.webp'}
-                alt={'Dr. Pedro'}
-                sizes="calc(96.79vw - 30px)"
-              />
+              <RenderMedia data={data?.team_image?.data?.attributes} />
             </ImageWrapper>
           </StickyWrapper>
           <TextWrapper ref={textRef}>
-            <H4>{splitText(ALL_TEXT)}</H4>
+            <H4>{splitText(data?.team_description)}</H4>
           </TextWrapper>
         </CustomGrid>
       </Container>

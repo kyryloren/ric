@@ -1,7 +1,7 @@
 'use client'
 
 import { useRef, useState } from 'react'
-import { Container, CustomGrid, H2, H4, P, splitText } from 'styles'
+import { Container, CustomGrid, H4, P } from 'styles'
 import {
   AccordionCol,
   AccordionItemContent,
@@ -10,9 +10,8 @@ import {
   AccordionItemIconWrapper,
   AccordionItemWrapper,
   FAQSection,
-  TextWrapper,
 } from './styles'
-import { CustomButton } from 'components'
+import { CustomHeader } from 'components'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/all'
@@ -97,7 +96,7 @@ function AccordionItem({ data, id, expanded, setExpanded, className }) {
   )
 }
 
-export default function FAQ({ TITLE, DESCRIPTION, FAQ_ITEMS }) {
+export default function FAQ({ headerData, data }) {
   const sectionEl = useRef(null)
   const [expanded, setExpanded] = useState(0)
 
@@ -146,19 +145,22 @@ export default function FAQ({ TITLE, DESCRIPTION, FAQ_ITEMS }) {
     <FAQSection id="faq" ref={sectionEl}>
       <Container>
         <CustomGrid>
-          <TextWrapper>
-            <H2>{splitText(TITLE)}</H2>
-            <P>{splitText(DESCRIPTION)}</P>
-            <CustomButton className="anim-button" $primary href={'/book'}>
-              Book Now
-            </CustomButton>
-          </TextWrapper>
+          <CustomHeader
+            title={headerData?.title}
+            description={headerData?.description}
+            book={headerData?.book}
+            call={headerData?.call}
+            buttons={headerData?.button}
+            className={'text-wrapper'}
+            center={false}
+            size="md"
+          />
 
           <AccordionCol>
-            {FAQ_ITEMS.map((item, index) => (
+            {data?.map((_, index) => (
               <AccordionItem
                 key={index}
-                data={item}
+                data={_}
                 id={index}
                 expanded={expanded}
                 setExpanded={setExpanded}
