@@ -9,35 +9,7 @@ import { ScrollTrigger } from 'gsap/all'
 
 gsap.registerPlugin(useGSAP, ScrollTrigger)
 
-const TITLE = `Staten Island’s First Robotically\nAssisted Dental Implant`
-const ITEMS = [
-  {
-    title: '± 0.2mm',
-    text: 'Our clinical team is led by renowned clinicians.',
-  },
-  {
-    title: '50% Faster',
-    text: 'We’re a leader in implant technology. We take advantage of all the latest research.',
-  },
-  {
-    title: '50% Faster',
-    text: 'We prioritize your health and confidence, and recommend only the care you need.',
-  },
-  {
-    title: '± 0.2mm',
-    text: 'Our clinical team is led by renowned clinicians.',
-  },
-  {
-    title: '50% Faster',
-    text: 'We’re a leader in implant technology. We take advantage of all the latest research.',
-  },
-  {
-    title: '50% Faster',
-    text: 'We prioritize your health and confidence, and recommend only the care you need.',
-  },
-]
-
-export default function About() {
+export default function About({ data }) {
   const sectionEl = useRef(null)
 
   useGSAP(
@@ -75,14 +47,14 @@ export default function About() {
     <AboutSection ref={sectionEl}>
       <Container>
         <TextWrapper>
-          <H2>{splitText(TITLE)}</H2>
+          <H2>{splitText(data?.info_col_title)}</H2>
         </TextWrapper>
 
         <ColInfoWrapper className="anim-wrapper">
-          {ITEMS.map((item, index) => (
+          {data?.info_col?.map((_, index) => (
             <Col key={index}>
-              <H3>{splitText(item.title)}</H3>
-              <P>{splitText(item.text)}</P>
+              <H3>{splitText(_?.title)}</H3>
+              <P>{splitText(_?.description)}</P>
             </Col>
           ))}
         </ColInfoWrapper>

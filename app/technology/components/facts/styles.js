@@ -1,12 +1,26 @@
 'use client'
 
-import { CustomGrid } from 'styles'
 import tw, { styled } from 'twin.macro'
 
-export const FactsSection = tw.section`
-  relative
-`
-export const CustomRow = tw(CustomGrid)`
+export const FactsSection = styled.section`
+  ${tw`relative`}
+
+  .text-wrapper {
+    ${tw`
+      pb-xxl
+      pt-md
+
+      md:py-0
+      md:pb-0
+    `}
+
+    &.hide {
+      ${tw`flex md:hidden`}
+    }
+    &:not(.hide) {
+      ${tw`hidden md:flex`}
+    }
+  }
 `
 export const LeftCol = tw.div`
   col-start-1
@@ -39,27 +53,4 @@ export const ImageWrapper = tw.div`
   lg:h-[50vh]
   xl:h-[70vh]
   md:absolute
-`
-export const TextWrapper = styled.div`
-  ${tw`
-    w-full
-    flex-col
-    justify-center
-    gap-xxs
-    pb-xxl
-    pt-md
-
-    md:py-0
-    md:pb-0
-    xl:gap-xxs-xl
-  `}
-
-  .line-wrapper {
-    ${tw`
-      inline
-      md:block
-    `}
-  }
-
-  ${({ $hide }) => ($hide ? tw`flex md:hidden` : tw`hidden md:flex`)}
 `

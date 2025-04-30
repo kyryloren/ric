@@ -1,19 +1,17 @@
 'use client'
 
 import { useRef } from 'react'
-import { Container, H1, P, splitText } from 'styles'
-import { HeroSection, ImageWrapper, TextWrapper } from './styles'
-import { CustomImage } from 'components'
+import { Container, RenderMedia } from 'styles'
+import { HeroSection, ImageWrapper } from './styles'
+import { CustomHeader } from 'components'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
 
 gsap.registerPlugin(useGSAP)
 
-const TITLE = `State-of-the-Art\nRobotic Assisted Care`
-const DESCRIPTION = `Our cutting-edge technology allows for an\nincredibly efficient, accurate, and minimally\ninvasive experience for our patients.`
-
-const Hero = () => {
+const Hero = ({ data }) => {
   const sectionEl = useRef(null)
+  const headerData = data?.hero_header
 
   useGSAP(
     () => {
@@ -40,13 +38,17 @@ const Hero = () => {
   return (
     <HeroSection ref={sectionEl}>
       <Container>
-        <TextWrapper>
-          <H1>{splitText(TITLE)}</H1>
-          <P className="description">{splitText(DESCRIPTION)}</P>
-        </TextWrapper>
+        <CustomHeader
+          title={headerData?.title}
+          description={headerData?.description}
+          book={headerData?.book}
+          call={headerData?.call}
+          buttons={headerData?.button}
+          padded
+        />
 
         <ImageWrapper className="anim-image">
-          <CustomImage src={'/tech.webp'} alt={'Yomi Robot'} />
+          <RenderMedia data={data?.hero_media?.data?.attributes} />
         </ImageWrapper>
       </Container>
     </HeroSection>

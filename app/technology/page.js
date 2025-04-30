@@ -1,6 +1,7 @@
 import { Footer, Nav } from 'components'
 import { About, Facts, Hero } from './components'
 import { FAQ } from 'templates'
+import { fetchAPI } from 'lib'
 
 const TITLE = `Technology 
 Q&A`
@@ -49,14 +50,43 @@ const FAQ_ITEMS = [
   },
 ]
 
-export default function Technology() {
+export default async function Technology() {
+  const data = await fetchAPI('/technology', {
+    populate: {
+      fields: ['info_col_title'],
+      hero_header: {
+        populate: '*',
+      },
+      hero_media: {
+        populate: '*',
+      },
+      info_col: {
+        populate: '*',
+      },
+      row: {
+        populate: {
+          media: {
+            populate: '*',
+          },
+        },
+      },
+      FAQ_header: {
+        populate: '*',
+      },
+      FAQ: {
+        populate: '*',
+      },
+    },
+  })
+  const doc = data?.data?.attributes
+
   return (
     <>
-      <Nav />
-      <Hero />
-      <About />
-      <Facts />
-      <FAQ TITLE={TITLE} DESCRIPTION={DESCRIPTION} FAQ_ITEMS={FAQ_ITEMS} />
+      <Nav hideNav={doc?.hero_header?.book} />
+      <Hero data={doc} />
+      <About data={doc} />
+      <Facts data={doc?.row} />
+      <FAQ headerData={doc?.FAQ_header} data={doc?.FAQ} />
       <Footer />
     </>
   )

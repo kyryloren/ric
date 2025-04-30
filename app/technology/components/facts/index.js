@@ -1,47 +1,17 @@
 'use client'
 
 import { Fragment, useRef } from 'react'
-import { Container, H2, P, splitText } from 'styles'
-import {
-  CustomRow,
-  FactsSection,
-  ImageWrapper,
-  LeftCol,
-  RightCol,
-  TextWrapper,
-} from './styles'
+import { Container, CustomGrid, RenderMedia } from 'styles'
+import { FactsSection, ImageWrapper, LeftCol, RightCol } from './styles'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/all'
 import { useGSAP } from '@gsap/react'
-import { CustomImage } from 'components'
 import { theme } from 'twin.macro'
+import { CustomHeader } from 'components'
 
 gsap.registerPlugin(ScrollTrigger, useGSAP)
 
-const SCREENS = [
-  {
-    title: `Introducing
-Yomi Robot`,
-    description: 'Description for screen 1',
-    href: '/1.webp',
-    alt: 'Dr. Pedro',
-  },
-  {
-    title: `Less Time.
-Less Pain.`,
-    description: 'Description for screen 2',
-    href: '/2.webp',
-    alt: 'Dr. Pedro',
-  },
-  {
-    title: 'Screen 3',
-    description: 'Description for screen 3',
-    href: '/3.webp',
-    alt: 'Dr. Pedro',
-  },
-]
-
-export default function Facts() {
+export default function Facts({ data }) {
   const sectionEl = useRef(null)
   const leftContainerEl = useRef(null)
 
@@ -89,41 +59,70 @@ export default function Facts() {
   return (
     <FactsSection ref={sectionEl}>
       <Container>
-        <CustomRow className="grid">
+        <CustomGrid className="grid">
           <LeftCol className="left-col">
             <ImageWrapper className="image-col">
-              <CustomImage src="/1.webp" alt="Dr. Pedro" parallax={false} />
+              <RenderMedia
+                data={data[0]?.media?.data?.attributes}
+                parallax={false}
+              />
             </ImageWrapper>
-            <TextWrapper $hide>
-              <H2>{splitText(SCREENS[0].title)}</H2>
-              <P>{splitText(SCREENS[0].description)}</P>
-            </TextWrapper>
+            <CustomHeader
+              title={data[0]?.title}
+              description={data[0]?.description}
+              book={false}
+              call={false}
+              center={false}
+              className={'text-wrapper hide'}
+              size="md"
+            />
             <ImageWrapper className="image-col hidden">
-              <CustomImage src="/2.webp" alt="Dr. Pedro" parallax={false} />
+              <RenderMedia
+                data={data[1]?.media?.data?.attributes}
+                parallax={false}
+              />
             </ImageWrapper>
-            <TextWrapper $hide>
-              <H2>{splitText(SCREENS[1].title)}</H2>
-              <P>{splitText(SCREENS[1].description)}</P>
-            </TextWrapper>
+            <CustomHeader
+              title={data[1]?.title}
+              description={data[1]?.description}
+              book={false}
+              call={false}
+              center={false}
+              className={'text-wrapper hide'}
+              size="md"
+            />
             <ImageWrapper className="image-col hidden">
-              <CustomImage src="/3.webp" alt="Dr. Pedro" parallax={false} />
+              <RenderMedia
+                data={data[2]?.media?.data?.attributes}
+                parallax={false}
+              />
             </ImageWrapper>
-            <TextWrapper $hide>
-              <H2>{splitText(SCREENS[2].title)}</H2>
-              <P>{splitText(SCREENS[2].description)}</P>
-            </TextWrapper>
+            <CustomHeader
+              title={data[2]?.title}
+              description={data[2]?.description}
+              book={false}
+              call={false}
+              center={false}
+              className={'text-wrapper hide'}
+              size="md"
+            />
           </LeftCol>
-          {SCREENS.map((screen, index) => (
+          {data?.map((_, index) => (
             <Fragment key={index}>
               <RightCol className={`right-col`}>
-                <TextWrapper>
-                  <H2>{splitText(screen.title)}</H2>
-                  <P>{splitText(screen.description)}</P>
-                </TextWrapper>
+                <CustomHeader
+                  title={_?.title}
+                  description={_?.description}
+                  book={false}
+                  call={false}
+                  center={false}
+                  className={'text-wrapper'}
+                  size="md"
+                />
               </RightCol>
             </Fragment>
           ))}
-        </CustomRow>
+        </CustomGrid>
       </Container>
     </FactsSection>
   )
