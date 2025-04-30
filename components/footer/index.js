@@ -1,7 +1,7 @@
 'use client'
 
 import { useContext } from 'react'
-import { Container, H1, H4, P } from 'styles'
+import { Container, H1, H4, P, splitText } from 'styles'
 import {
   BlackLinkWrapper,
   BottomSectionWrapper,
@@ -20,10 +20,12 @@ import {
 } from './styles'
 import CustomLink from 'components/link'
 import Icon from 'components/icons'
-import { ModalContext } from 'context'
+import { GlobalAPIContext, ModalContext } from 'context'
+import { formatPhone } from 'lib'
 
 const Footer = () => {
   const { setModal } = useContext(ModalContext)
+  const globalAPI = useContext(GlobalAPIContext)
 
   return (
     <BottomSectionWrapper>
@@ -47,13 +49,9 @@ const Footer = () => {
             <RightCard
               target="_blank"
               rel="noopener noreferrer"
-              href={'https://maps.app.goo.gl/c2tKb8pewzwNQdiY8'}
+              href={globalAPI?.contact?.googleMaps}
             >
-              <H4>
-                4300 Hyland Blvd.
-                <br />
-                Staten Island, NY 10305
-              </H4>
+              <H4>{splitText(globalAPI?.contact?.address)}</H4>
               <H1>Visit</H1>
             </RightCard>
           </CTAWrapper>
@@ -69,8 +67,7 @@ const Footer = () => {
 
             <LeftColWrapper>
               <BlackLinkWrapper>
-                <P>4300 Hyland Blvd.</P>
-                <P>Staten Island, NY 10305</P>
+                <P>{splitText(globalAPI?.contact?.address)}</P>
               </BlackLinkWrapper>
 
               <LinkListWrapper>
@@ -88,8 +85,10 @@ const Footer = () => {
 
             <RightColWrapper>
               <BlackLinkWrapper>
-                <CustomLink href="tel:7189480870">+1 (718) 948-0870</CustomLink>
-                <CustomLink href="mailto:hello@roboticimplantsnyc.com">
+                <CustomLink href={`tel:${globalAPI?.contact?.phone}`}>
+                  {formatPhone(globalAPI?.contact?.phone)}
+                </CustomLink>
+                <CustomLink href={`mailto:${globalAPI?.contact?.email}`}>
                   Click to email
                 </CustomLink>
               </BlackLinkWrapper>
@@ -108,21 +107,43 @@ const Footer = () => {
             </LogoWrapper>
 
             <SocialsWrapper>
-              <SocialLink aria-label="Instagram" href="/">
-                <Icon name="instagram" />
-              </SocialLink>
-              <SocialLink aria-label="Facebook" href="/">
-                <Icon name="facebook" />
-              </SocialLink>
-              <SocialLink aria-label="TikTok" href="/">
-                <Icon name="tiktok" />
-              </SocialLink>
-              <SocialLink aria-label="LinkedIn" href="/">
-                <Icon name="linkedin" />
-              </SocialLink>
-              <SocialLink aria-label="X" href="/">
-                <Icon name="x" />
-              </SocialLink>
+              {globalAPI?.socials?.instagram && (
+                <SocialLink
+                  aria-label="Instagram"
+                  href={globalAPI?.socials?.instagram}
+                >
+                  <Icon name="instagram" />
+                </SocialLink>
+              )}
+              {globalAPI?.socials?.facebook && (
+                <SocialLink
+                  aria-label="Facebook"
+                  href={globalAPI?.socials?.facebook}
+                >
+                  <Icon name="facebook" />
+                </SocialLink>
+              )}
+              {globalAPI?.socials?.tiktok && (
+                <SocialLink
+                  aria-label="TikTok"
+                  href={globalAPI?.socials?.tiktok}
+                >
+                  <Icon name="tiktok" />
+                </SocialLink>
+              )}
+              {globalAPI?.socials?.linkedin && (
+                <SocialLink
+                  aria-label="LinkedIn"
+                  href={globalAPI?.socials?.linkedin}
+                >
+                  <Icon name="linkedin" />
+                </SocialLink>
+              )}
+              {globalAPI?.socials?.x && (
+                <SocialLink aria-label="X" href={globalAPI?.socials?.x}>
+                  <Icon name="x" />
+                </SocialLink>
+              )}
             </SocialsWrapper>
           </FooterWrapper>
         </InnerWrapper>
