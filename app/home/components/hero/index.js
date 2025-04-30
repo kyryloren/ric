@@ -1,19 +1,25 @@
 'use client'
 
-import { useRef } from 'react'
-import { Container, H1, P, splitText } from 'styles'
-import { ButtonsWrapper, CustomVideo, HeroSection, TextWrapper } from './styles'
+import { useContext, useRef } from 'react'
+import { Container, H1, P, RenderMedia, splitText } from 'styles'
+import {
+  ButtonsWrapper,
+  VideoWrapper,
+  HeroSection,
+  TextWrapper,
+} from './styles'
 import { CustomButton } from 'components'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
+import { GlobalAPIContext } from 'context'
 
 gsap.registerPlugin(useGSAP)
 
-const TITLE = `Get the Perfect\nSmile You Deserve`
-const DESCRIPTION = `We specialize in advanced dental implants using\ncutting-edge robotic technology, making the procedure\nsafer, more precise, and less stressful than ever before.`
-
-const Hero = () => {
+const Hero = ({ data }) => {
   const sectionEl = useRef(null)
+
+  const headerData = data?.hero_header
+  const globalData = useContext(GlobalAPIContext)
 
   useGSAP(
     () => {
@@ -50,21 +56,29 @@ const Hero = () => {
     <HeroSection id="hero" ref={sectionEl}>
       <Container>
         <TextWrapper>
-          <H1>{splitText(TITLE)}</H1>
-          <P className="description">{splitText(DESCRIPTION)}</P>
+          <H1>{splitText(headerData?.title)}</H1>
+          <P className="description">{splitText(headerData?.description)}</P>
           <ButtonsWrapper>
-            <CustomButton className="anim-button" $primary href={'/book'}>
-              Book Now
-            </CustomButton>
-            <CustomButton className="anim-button" $secondary href={'/'}>
-              Call Now
-            </CustomButton>
+            {headerData?.book && (
+              <CustomButton className="anim-button" $primary href={'/book'}>
+                Book Now
+              </CustomButton>
+            )}
+            {headerData?.call && (
+              <CustomButton
+                className="anim-button"
+                $secondary
+                href={`tel:${globalData?.contact?.phone}`}
+              >
+                Call Now
+              </CustomButton>
+            )}
           </ButtonsWrapper>
         </TextWrapper>
 
-        <CustomVideo className="anim-video" playsInline autoPlay muted loop>
-          <source src="/hero.webm" />
-        </CustomVideo>
+        <VideoWrapper className="anim-video">
+          <RenderMedia data={data?.hero_media?.data?.attributes} />
+        </VideoWrapper>
       </Container>
     </HeroSection>
   )

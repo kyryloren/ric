@@ -44,19 +44,10 @@ const CustomStyles = createGlobalStyle`
     }
   }
 
-  .line-wrapper {
-    display: block;
-  }
-
   .overflow {
     overflow: hidden;
     display: inline-block;
     margin-top: -3%;
-  }
-
-  .anim-word {
-    position: relative;
-    display: inline-block;
   }
 `
 

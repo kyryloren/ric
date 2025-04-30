@@ -36,7 +36,7 @@ export const ButtonsWrapper = tw.div`
   
   xl:gap-xs-xl
 `
-export const CustomVideo = tw.video`
+export const VideoWrapper = tw.div`
   w-full
   aspect-video
   [border-radius: 10px]

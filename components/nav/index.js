@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import { useLenis } from 'lenis/react'
 import Icon from 'components/icons'
 import {
@@ -23,11 +23,10 @@ import gsap from 'gsap'
 import { usePathname, useRouter } from 'next/navigation'
 import Menu from './menu'
 import { ScrollTrigger } from 'gsap/all'
-import { theme } from 'twin.macro'
 
 gsap.registerPlugin(useGSAP, ScrollTrigger)
 
-const Nav = () => {
+const Nav = ({ hideNav = true }) => {
   const navEl = useRef(null)
 
   const pathname = usePathname()
@@ -36,18 +35,11 @@ const Nav = () => {
 
   const [menuOpen, setMenuOpen] = useState(false)
 
-  useEffect(() => {
-    if (pathname !== '/about') {
-      document.getElementById('main').style.paddingTop =
-        document.getElementById('header').offsetHeight + 'px'
-    }
-  }, [pathname])
-
   useGSAP(
     () => {
       const heroSection = document.getElementById('hero')
 
-      if (heroSection) {
+      if (heroSection && hideNav) {
         gsap.from('.primary-button', {
           opacity: 0,
           scrollTrigger: {
@@ -67,22 +59,31 @@ const Nav = () => {
         })
       }
     },
-    { dependencies: [navEl, pathname], scope: navEl },
+    { dependencies: [navEl, pathname, hideNav], scope: navEl },
   )
 
   useGSAP(
     () => {
       let tl = gsap.timeline({ delay: 0.5 })
 
-      tl.from(
-        '.anim-logo',
+      tl.to(
+        '.anim-line',
         {
-          opacity: 0,
-          duration: 1.5,
+          '--width': '100%',
+          duration: 1,
           ease: 'power3.out',
         },
-        0.5,
+        0,
       )
+        .from(
+          '.anim-logo',
+          {
+            opacity: 0,
+            duration: 1.5,
+            ease: 'power3.out',
+          },
+          0.5,
+        )
         .from(
           gsap.utils.toArray('.anim-link'),
           {
@@ -102,15 +103,6 @@ const Nav = () => {
             ease: 'power3.out',
           },
           0.5,
-        )
-        .to(
-          '.anim-line',
-          {
-            '--width': '100%',
-            duration: 1,
-            ease: 'power3.out',
-          },
-          0,
         )
     },
     { dependencies: [navEl, pathname], scope: navEl },

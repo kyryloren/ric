@@ -20,9 +20,9 @@ import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import CustomLink from 'components/link'
 import CustomButton from 'components/button'
-import { ModalContext } from 'lib'
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
+import { ModalContext } from 'context'
 
 gsap.registerPlugin(useGSAP)
 

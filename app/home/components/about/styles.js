@@ -64,10 +64,3 @@ export const Overlay = tw.div`
   xl:py-sm-xl
   xl:gap-xs-xl
 `
-export const CustomVideo = tw.video`
-  object-cover
-  w-full
-  h-full
-  scale-150
-  [border-radius: inherit]
-`

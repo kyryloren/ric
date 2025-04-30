@@ -4,7 +4,7 @@ import { useContext } from 'react'
 import { P } from 'styles'
 import { FormButton, StyledCustomButton } from './styles'
 import { Icon } from 'components'
-import { ModalContext } from 'lib'
+import { ModalContext } from 'context'
 
 const CustomButton = ({
   $primary,

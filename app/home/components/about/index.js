@@ -1,11 +1,10 @@
 'use client'
 
 import { useRef } from 'react'
-import { Container, H2, H3, P, splitText } from 'styles'
+import { Container, H2, H3, P, RenderMedia, splitText } from 'styles'
 import {
   AboutSection,
   CardWrapper,
-  CustomVideo,
   GridWrapper,
   Overlay,
   TextWrapper,
@@ -16,22 +15,7 @@ import { ScrollTrigger } from 'gsap/all'
 
 gsap.registerPlugin(ScrollTrigger, useGSAP)
 
-const TEXT = `We are pioneering the future of precision dentistry, utilizing cutting-edge robotic technology to deliver faster, safer, and more personalized dental implants.`
-
-const CARDS = [
-  {
-    src: '/doctors.webm',
-    href: '/about',
-    title: `Our Doctors,\nPractice, & History`,
-  },
-  {
-    src: '/technology.webm',
-    href: '/technology',
-    title: `Our Latest\nTechnology`,
-  },
-]
-
-const About = () => {
+const About = ({ data }) => {
   const sectionEl = useRef(null)
   const { contextSafe } = useGSAP({ scope: sectionEl })
 
@@ -68,24 +52,22 @@ const About = () => {
     <AboutSection ref={sectionEl}>
       <Container>
         <TextWrapper>
-          <H2>{splitText(TEXT)}</H2>
+          <H2>{splitText(data?.description)}</H2>
         </TextWrapper>
 
         <GridWrapper className="anim-grid">
-          {CARDS.map((info, index) => (
+          {data?.col?.map((_, index) => (
             <CardWrapper
-              href={info.href}
+              href={'/about'}
               key={index}
               onMouseEnter={() => handleMouseEnter(index + 1)}
               onMouseLeave={handleLeave}
             >
               <Overlay>
-                <H3>{splitText(info.title)}</H3>
-                <P>Learn More</P>
+                <H3>{splitText(_?.title)}</H3>
+                <P>{_?.description}</P>
               </Overlay>
-              <CustomVideo autoPlay loop muted playsInline>
-                <source src={info.src} type="video/webm" />
-              </CustomVideo>
+              <RenderMedia data={_?.media?.data?.attributes} />
             </CardWrapper>
           ))}
         </GridWrapper>

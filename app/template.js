@@ -1,26 +1,24 @@
-'use client'
-
 import { GlobalStyle } from 'styles'
 import { Book, Lenis, Scrollbar } from 'components'
-import { useGSAP } from '@gsap/react'
-import gsap from 'gsap'
-import { ModalProvider } from 'lib'
+import { fetchAPI, ResetAnimation } from 'lib'
+import { Providers } from 'context'
 
-export default function Template({ children }) {
-  useGSAP(() => {
-    gsap.set('#main', { autoAlpha: 1 })
+export default async function Template({ children }) {
+  const globalData = await fetchAPI('/global', {
+    populate: '*',
   })
+  const globalDoc = globalData?.data?.attributes
 
   return (
-    <>
+    <Providers globalAPI={globalDoc}>
       <GlobalStyle />
       <Scrollbar />
 
-      <ModalProvider>
-        <Book />
-        <main id="main">{children}</main>
-      </ModalProvider>
+      <Book />
+      <ResetAnimation />
+      <main id="main">{children}</main>
+
       <Lenis root />
-    </>
+    </Providers>
   )
 }

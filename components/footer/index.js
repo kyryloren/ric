@@ -20,7 +20,7 @@ import {
 } from './styles'
 import CustomLink from 'components/link'
 import Icon from 'components/icons'
-import { ModalContext } from 'lib'
+import { ModalContext } from 'context'
 
 const Footer = () => {
   const { setModal } = useContext(ModalContext)
