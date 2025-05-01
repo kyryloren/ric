@@ -1,5 +1,5 @@
 import { Footer, Nav } from 'components'
-import { About, Hero, InfoSide } from './components'
+import { Hero, InfoSide } from './components'
 import { FAQ, Info } from 'templates'
 import { fetchAPI, getStrapiURL } from 'lib'
 
@@ -38,17 +38,36 @@ export async function generateMetadata() {
 
 export default async function Finances() {
   const data = await fetchAPI('/finances', {
-    populate: '*',
+    populate: {
+      hero_header: {
+        populate: '*',
+      },
+      info_col: {
+        populate: '*',
+      },
+      info_row: {
+        populate: {
+          media: {
+            populate: '*',
+          },
+        },
+      },
+      FAQ_header: {
+        populate: '*',
+      },
+      FAQ: {
+        populate: '*',
+      },
+    },
   })
   const doc = data?.data?.attributes
 
   return (
     <>
-      <Nav />
+      <Nav hideNav={doc?.hero_header?.book} />
       <Hero data={doc} />
       <Info data={doc?.info_col} />
-      <About />
-      <InfoSide />
+      <InfoSide data={doc} />
       <FAQ headerData={doc?.FAQ_header} data={doc?.FAQ} />
       <Footer />
     </>

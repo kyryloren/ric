@@ -5,49 +5,53 @@ import tw, { styled } from 'twin.macro'
 
 export const InfoWrapper = tw.section`
   relative
+  pt-xxl
   pb-xl
-  
-  md:pb-0
-`
-const RowWrapper = tw(CustomGrid)`
-  items-center
-`
-export const RowOne = styled(RowWrapper)`
-  ${tw`
-    mb-lg
 
-    xl:mb-lg-xl
-  `}
-  .image-wrapper {
+  xl:pt-xxl-xl
+  xl:pb-xl-xl
+`
+export const RowWrapper = styled(CustomGrid)`
+  ${tw`items-center`}
+
+  &:nth-child(1) {
     ${tw`
-      col-start-1
-      col-end-13
+      mb-lg
 
-      md:col-end-7
+      xl:mb-lg-xl
     `}
-  }
-  .text-wrapper {
-    ${tw`
-      col-start-1
-      col-end-13
 
-      md:col-start-8
-      md:col-end-12
+    .image-wrapper {
+      ${tw`
+        col-start-1
+        col-end-13
+
+        md:col-end-7
     `}
+    }
+    .text-wrapper {
+      ${tw`
+        col-start-1
+        col-end-13
+
+        md:col-start-8
+        md:col-end-12
+      `}
+    }
   }
-`
-export const RowTwo = styled(RowWrapper)`
-  .image-wrapper {
-    ${tw`
+  &:nth-child(2) {
+    .image-wrapper {
+      ${tw`
       col-start-1
       col-end-13
       [grid-row: 1]
 
       md:col-start-7
     `}
-  }
-  .text-wrapper {
-    ${tw`
+    }
+
+    .text-wrapper {
+      ${tw`
       col-start-1
       col-end-13
       [grid-row: 2]
@@ -56,6 +60,7 @@ export const RowTwo = styled(RowWrapper)`
       md:col-start-2
       md:col-end-6
     `}
+    }
   }
 `
 export const ImageWrapper = tw.div`

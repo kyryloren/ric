@@ -9,28 +9,6 @@ export const ListSection = tw.section`
 
   xl:pb-xxl-xl
 `
-export const TextWrapper = styled.div`
-  ${tw`
-    w-full
-    flex
-    flex-col
-    py-xxl
-    text-left
-    justify-center
-    gap-md
-
-    sm:text-center
-    sm:items-center
-    sm:py-lg
-
-    xl:py-lg-xl
-    xl:gap-md-xl
-  `}
-
-  .line-wrapper {
-    ${tw`inline xs:block`}
-  }
-`
 export const HollowCard = styled(Link)`
   ${tw`
     col-span-12

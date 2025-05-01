@@ -1,27 +1,20 @@
 'use client'
 
 import { useRef } from 'react'
-import { Container, CustomGrid, H1, H3, P, splitText } from 'styles'
+import { Container, CustomGrid, H3, P } from 'styles'
 import {
   CardTextWrapper,
   HollowCard,
   ListSection,
   ServiceButton,
-  TextWrapper,
 } from './styles'
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
-import { Icon } from 'components'
+import { CustomHeader, Icon } from 'components'
 
 gsap.registerPlugin(useGSAP)
 
-const TITLE = `Dental Implant
-Services at RIC`
-const DESCRIPTION = `At RIC, we’re here to give you your smile back with
-the help of dental implants. Learn more when you
-schedule your FREE consultation with a 3D scan.`
-
-export default function List({ data }) {
+export default function List({ headerData, data }) {
   const sectionEl = useRef(null)
 
   useGSAP(
@@ -56,10 +49,14 @@ export default function List({ data }) {
   return (
     <ListSection ref={sectionEl}>
       <Container>
-        <TextWrapper>
-          <H1>{splitText(TITLE)}</H1>
-          <P>{splitText(DESCRIPTION)}</P>
-        </TextWrapper>
+        <CustomHeader
+          title={headerData?.title}
+          description={headerData?.description}
+          book={headerData?.book}
+          call={headerData?.call}
+          buttons={headerData?.button}
+          padded
+        />
         <CustomGrid>
           {data?.map((_, index) => (
             <HollowCard
