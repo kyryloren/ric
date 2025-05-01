@@ -1,63 +1,55 @@
 import { Footer, Nav } from 'components'
 import { About, Hero, InfoSide } from './components'
 import { FAQ, Info } from 'templates'
+import { fetchAPI, getStrapiURL } from 'lib'
 
-const TITLE = `Learn More
-About Financing`
-const DESCRIPTION = `Getting dental implants is a big decision.
-We're here for you every step of the way.`
-const FAQ_ITEMS = [
-  {
-    question: 'What are dental implants?',
-    answer:
-      'Dental implants are titanium posts that are surgically positioned into the jawbone beneath your gums to replace missing tooth roots. Once in place, they allow your dentist to mount replacement teeth onto them.',
-  },
-  {
-    question: 'How long do dental implants last?',
-    answer:
-      'With proper care and maintenance, dental implants can last a lifetime. Regular dental check-ups, good oral hygiene, and avoiding habits like smoking can significantly extend their lifespan.',
-  },
-  {
-    question: 'Is the implant procedure painful?',
-    answer:
-      "The procedure is typically performed under local anesthesia, so you shouldn't feel pain during the surgery. Some discomfort may occur during the healing process, which can be managed with prescribed medications.",
-  },
-  {
-    question: 'How long is the recovery period?',
-    answer:
-      'Recovery time varies by individual, but most patients can return to normal activities within 1-2 days. Complete healing and osseointegration (when the implant fuses with the jawbone) typically takes 3-6 months.',
-  },
-  {
-    question: 'Are dental implants covered by insurance?',
-    answer:
-      'Coverage varies by insurance plan. Some plans cover a portion of the cost, while others may not cover implants at all. We recommend checking with your insurance provider for specific details.',
-  },
-  {
-    question: 'What are the benefits of dental implants?',
-    answer:
-      "Dental implants provide a permanent solution for missing teeth, improve appearance, restore chewing ability, prevent bone loss, and maintain facial structure. They also don't require adjacent teeth to be modified, unlike bridges.",
-  },
-  {
-    question: 'Who is a good candidate for dental implants?',
-    answer:
-      'Most adults in good general health with adequate bone density are candidates for dental implants. Factors like smoking, certain medical conditions, or insufficient bone may affect eligibility, but many of these can be addressed.',
-  },
-  {
-    question: 'How do I care for my dental implants?',
-    answer:
-      'Care for implants like natural teeth with regular brushing, flossing, and professional cleanings. Avoid tobacco products and maintain regular dental check-ups to ensure long-term success.',
-  },
-]
+export async function generateMetadata() {
+  const seoData = await fetchAPI('/finances', {
+    populate: {
+      SEO: {
+        populate: '*',
+      },
+    },
+  })
+  const seoDoc = seoData?.data?.attributes.SEO
 
-export default function Finances() {
+  return {
+    title: seoDoc?.metaTitle || 'About',
+    description: seoDoc?.metaDescription,
+    keywords: seoDoc?.keywords?.split(', '),
+    alternates: {
+      canonical: `${process.env.NEXT_PUBLIC_BASE_URL}/about`,
+    },
+    noIndex: seoDoc?.preventIndexing || false,
+    openGraph: {
+      title: seoDoc?.metaTitle,
+      description: seoDoc?.metaDescription,
+      url: `${process.env.NEXT_PUBLIC_BASE_URL}/about`,
+      images: {
+        url: getStrapiURL(
+          `${seoDoc?.metaImage?.data?.attributes?.url}?format=jpg&resize=1200x630`,
+        ),
+        width: 1200,
+        height: 630,
+      },
+    },
+  }
+}
+
+export default async function Finances() {
+  const data = await fetchAPI('/finances', {
+    populate: '*',
+  })
+  const doc = data?.data?.attributes
+
   return (
     <>
       <Nav />
-      <Hero />
-      <Info />
+      <Hero data={doc} />
+      <Info data={doc?.info_col} />
       <About />
       <InfoSide />
-      <FAQ TITLE={TITLE} DESCRIPTION={DESCRIPTION} FAQ_ITEMS={FAQ_ITEMS} />
+      <FAQ headerData={doc?.FAQ_header} data={doc?.FAQ} />
       <Footer />
     </>
   )

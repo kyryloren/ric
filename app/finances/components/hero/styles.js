@@ -2,11 +2,17 @@
 
 import tw, { styled } from 'twin.macro'
 
-export const HeroSection = tw.section`
-  relative
-  bg-azure
-  h-[90vh]
-  mb-[15%]
+export const HeroSection = styled.section`
+  ${tw`
+    relative
+    bg-azure
+    h-[90vh]
+    mb-[15%]
+  `}
+
+  h1 {
+    ${tw`text-klm`}
+  }
 `
 export const TextWrapper = styled.div`
   ${tw`
@@ -34,35 +40,46 @@ export const TextWrapper = styled.div`
     ${tw`inline xs:block`}
   }
 `
-const ImageWrapper = tw.div`
-  relative
-  z-10
-  [border-radius: 10px]
-  mr-md
+export const ImageWrapper = styled.div`
+  ${tw`
+    relative
+    z-10
+    [border-radius: 10px]
+    mr-md
 
-  xl:mr-md-xl
-`
-export const ImageOne = tw(ImageWrapper)`
-  h-[20rem]
-  w-[20rem]
-  md:w-[15vw]
-  md:h-[22vw]
-`
-export const ImageTwo = tw(ImageWrapper)`
-  h-[20rem]
-  w-[20rem]
-  md:w-[40vw]
-  md:h-[25vw]
-`
-export const ImageThree = tw(ImageWrapper)`
-  h-[20rem]
-  w-[20rem]
-  md:w-[20vw]
-  md:h-[12vw]
-`
-export const ImageFour = tw(ImageWrapper)`
-  h-[20rem]
-  w-[20rem]
-  md:w-[25vw]
-  md:h-[20vw]
+    xl:mr-md-xl
+  `}
+
+  &:nth-child(1) {
+    ${tw`
+      h-[20rem]
+      w-[20rem]
+      md:w-[15vw]
+      md:h-[22vw]
+    `}
+  }
+  &:nth-child(2) {
+    ${tw`
+      h-[20rem]
+      w-[20rem]
+      md:w-[20vw]
+      md:h-[12vw]
+    `}
+  }
+  &:nth-child(3) {
+    ${tw`
+      h-[20rem]
+      w-[20rem]
+      md:w-[15vw]
+      md:h-[22vw]
+    `}
+  }
+  &:nth-child(4) {
+    ${tw`
+      h-[20rem]
+      w-[20rem]
+      md:w-[25vw]
+      md:h-[20vw]
+    `}
+  }
 `

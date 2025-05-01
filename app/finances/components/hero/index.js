@@ -1,29 +1,17 @@
 'use client'
 
 import { useRef } from 'react'
-import { Container, H1, P, splitText } from 'styles'
-import {
-  HeroSection,
-  ImageFour,
-  ImageOne,
-  ImageThree,
-  ImageTwo,
-  TextWrapper,
-} from './styles'
-import { CustomButton, CustomImage, Marquee, Parallax } from 'components'
+import { Container } from 'styles'
+import { HeroSection, ImageWrapper } from './styles'
+import { CustomHeader, CustomImage, Marquee } from 'components'
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
 
 gsap.registerPlugin(useGSAP)
 
-const TEXT = `Happier Smiles
-at Happier Prices`
-const DESCRIPTION = `We work with third-party financiers to help you afford dental
-implants.​ Learn more about our dental implant costs and treatment
-options when you attend your FREE consultation with a 3D scan.`
-
-export default function Hero() {
+export default function Hero({ data }) {
   const sectionEl = useRef(null)
+  const headerData = data?.hero_header
 
   useGSAP(
     () => {
@@ -60,48 +48,50 @@ export default function Hero() {
   return (
     <HeroSection id="hero" ref={sectionEl}>
       <Container>
-        <TextWrapper>
-          <H1>{splitText(TEXT)}</H1>
-          <P className="description">{splitText(DESCRIPTION)}</P>
-          <CustomButton className="anim-button" $primary href={'/book'}>
-            Book Now
-          </CustomButton>
-        </TextWrapper>
+        <CustomHeader
+          title={headerData?.title}
+          description={headerData?.description}
+          book={headerData?.book}
+          call={headerData?.call}
+          buttons={headerData?.button}
+          padded
+          center
+        />
       </Container>
 
       <Marquee duration={10}>
-        <ImageOne className="anim-image">
+        <ImageWrapper className="anim-image">
           <CustomImage
             priority={true}
             src={'/teeth.webp'}
             alt={'Teeth'}
             parallax={false}
           />
-        </ImageOne>
-        <ImageThree className="anim-image">
+        </ImageWrapper>
+        <ImageWrapper className="anim-image">
           <CustomImage
             priority={true}
             src={'/1.webp'}
             alt={'Dr. Pedro'}
             parallax={false}
           />
-        </ImageThree>
-        <ImageTwo className="anim-image">
+        </ImageWrapper>
+        <ImageWrapper className="anim-image">
           <CustomImage
             priority={true}
             src={'/2.webp'}
             alt={'Awards'}
             parallax={false}
           />
-        </ImageTwo>
-        <ImageFour className="anim-image">
+        </ImageWrapper>
+        <ImageWrapper className="anim-image">
           <CustomImage
             priority={true}
             src={'/tech.webp'}
             alt={'Tech'}
             parallax={false}
           />
-        </ImageFour>
+        </ImageWrapper>
       </Marquee>
     </HeroSection>
   )

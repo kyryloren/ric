@@ -19,7 +19,9 @@ const TEXT2 = `With affordable, transparent, and hassle-free
 financing options, your path to a new smile
 can be as comfortable as it is rewarding.`
 
-export default function Info() {
+export default function Info({ data }) {
+  console.log(data)
+
   return (
     <InfoWrapper>
       <Container>
@@ -30,7 +32,7 @@ export default function Info() {
           <TextWrapper className={'text-wrapper'}>
             <H2>{splitText(TITLE1)}</H2>
             <P>{TEXT1}</P>
-            <CustomButton $secondary href={'/'}>
+            <CustomButton $secondary href={'/contact'}>
               Ask us
             </CustomButton>
           </TextWrapper>
@@ -39,7 +41,7 @@ export default function Info() {
           <TextWrapper className={'text-wrapper'}>
             <H2>{splitText(TITLE2)}</H2>
             <P>{TEXT2}</P>
-            <CustomButton $secondary href={'/'}>
+            <CustomButton $secondary href={'/contact'}>
               Ask us
             </CustomButton>
           </TextWrapper>
