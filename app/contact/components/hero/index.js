@@ -1,16 +1,16 @@
 'use client'
 
-import { Container, H1, P, splitText } from 'styles'
-import { HeroSection, TextWrapper } from './styles'
 import { useRef } from 'react'
+import { Container } from 'styles'
+import { HeroSection } from './styles'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
+import { CustomHeader } from 'components'
 
 gsap.registerPlugin(useGSAP)
 
 const TITLE = `Your New Smile is
 One Step Away`
-const DESCRIPTION = `We specialize in advanced dental implants using\ncutting-edge robotic technology, making the procedure\nsafer, more precise, and less stressful than ever before.`
 
 export default function Hero() {
   const sectionEl = useRef(null)
@@ -32,10 +32,7 @@ export default function Hero() {
   return (
     <HeroSection ref={sectionEl}>
       <Container>
-        <TextWrapper>
-          <H1>{splitText(TITLE)}</H1>
-          <P>{splitText(DESCRIPTION)}</P>
-        </TextWrapper>
+        <CustomHeader title={TITLE} padded />
       </Container>
     </HeroSection>
   )

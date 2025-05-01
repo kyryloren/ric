@@ -1,7 +1,7 @@
 'use client'
 
-import { useRef } from 'react'
-import { Container, H2, P } from 'styles'
+import { useContext, useRef } from 'react'
+import { Container, H2, P, splitText } from 'styles'
 import {
   ContactCard,
   ContactCardsWrapper,
@@ -17,11 +17,14 @@ import {
 import { CustomLink } from 'components'
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
+import { GlobalAPIContext } from 'context'
+import { formatPhone } from 'lib'
 
 gsap.registerPlugin(useGSAP)
 
 export default function Info() {
   const sectionEl = useRef(null)
+  const globalAPI = useContext(GlobalAPIContext)
 
   useGSAP(
     () => {
@@ -46,34 +49,12 @@ export default function Info() {
               <HoursCard className="anim-card">
                 <H2>Hours</H2>
                 <HoursList>
-                  <TimeItemWrapper>
-                    <P>Monday</P>
-                    <P>10am - 4pm</P>
-                  </TimeItemWrapper>
-                  <TimeItemWrapper>
-                    <P>Tuesday</P>
-                    <P>10am - 4pm</P>
-                  </TimeItemWrapper>
-                  <TimeItemWrapper>
-                    <P>Wednesday</P>
-                    <P>10am - 4pm</P>
-                  </TimeItemWrapper>
-                  <TimeItemWrapper>
-                    <P>Thursday</P>
-                    <P>10am - 4pm</P>
-                  </TimeItemWrapper>
-                  <TimeItemWrapper>
-                    <P>Friday</P>
-                    <P>10am - 4pm</P>
-                  </TimeItemWrapper>
-                  <TimeItemWrapper>
-                    <P>Saturday</P>
-                    <P>10am - 1pm</P>
-                  </TimeItemWrapper>
-                  <TimeItemWrapper>
-                    <P>Sunday</P>
-                    <P>Closed</P>
-                  </TimeItemWrapper>
+                  {globalAPI?.hours?.map((_, index) => (
+                    <TimeItemWrapper key={index}>
+                      <P>{_?.day}</P>
+                      <P>{_?.time}</P>
+                    </TimeItemWrapper>
+                  ))}
                 </HoursList>
               </HoursCard>
 
@@ -92,23 +73,20 @@ export default function Info() {
             <ContactCardsWrapper>
               <ContactCard className="anim-card">
                 <H2>Address</H2>
-                <P>
-                  4300 Hyland Blvd. <br />
-                  Staten Island, NY 10305
-                </P>
+                <P>{splitText(globalAPI?.contact?.address)}</P>
               </ContactCard>
 
               <ContactCard className="anim-card">
                 <H2>Email</H2>
-                <CustomLink href={'mailto:hello@roboticimplantsnyc.com'}>
+                <CustomLink href={`mailto:${globalAPI?.contact?.email}`}>
                   Click to email
                 </CustomLink>
               </ContactCard>
 
               <ContactCard className="anim-card">
                 <H2>Phone</H2>
-                <CustomLink href={'tel:+17189480870'}>
-                  +1 (718) 948-0870
+                <CustomLink href={`tel:${globalAPI?.contact?.phone}`}>
+                  {formatPhone(globalAPI?.contact?.phone)}
                 </CustomLink>
               </ContactCard>
             </ContactCardsWrapper>
