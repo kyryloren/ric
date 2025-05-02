@@ -30,7 +30,17 @@ const DESCRIPTION = `Leave your details below and a staff member
 will get back to you in 1-2 business days.
 `
 
-// 1. Define your Yup validation schema
+function formatPhoneNumber(value) {
+  const digits = value.replace(/\D/g, '').slice(0, 10)
+  const parts = []
+  if (digits.length > 0)
+    parts.push('(' + digits.slice(0, Math.min(3, digits.length)))
+  if (digits.length >= 4)
+    parts.push(') ' + digits.slice(3, Math.min(6, digits.length)))
+  if (digits.length >= 7) parts.push('-' + digits.slice(6))
+  return parts.join('')
+}
+
 const validationSchema = Yup.object({
   fname: Yup.string().required('First name is required'),
   lname: Yup.string().required('Last name is required'),
@@ -82,6 +92,7 @@ export default function Book() {
     errors,
     touched,
     resetForm,
+    setFieldValue,
   } = formik
 
   useGSAP(
@@ -216,10 +227,13 @@ export default function Book() {
               id="phone"
               name="phone"
               type="text"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.phone}
               placeholder="(XXX) XXX-XXXX"
+              value={values.phone}
+              onChange={(e) => {
+                const formatted = formatPhoneNumber(e.target.value)
+                setFieldValue('phone', formatted)
+              }}
+              onBlur={handleBlur}
             />
             {touched.phone && errors.phone && <span>{errors.phone}</span>}
           </Question>
