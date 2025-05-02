@@ -74,9 +74,6 @@ export default function Book() {
       details: '',
     },
     validationSchema,
-    onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2))
-    },
   })
 
   const { contextSafe } = useGSAP({
@@ -93,6 +90,9 @@ export default function Book() {
     touched,
     resetForm,
     setFieldValue,
+    dirty,
+    isValid,
+    isSubmitting,
   } = formik
 
   useGSAP(
@@ -163,7 +163,10 @@ export default function Book() {
         </TitleLine>
         <P>{splitText(DESCRIPTION)}</P>
 
-        <FormWrapper onSubmit={handleSubmit}>
+        <FormWrapper
+          action="https://formsubmit.co/kyrylo.orlov@gmail.com"
+          method="POST"
+        >
           <Split>
             <Question className="anim-question">
               <InputLabel htmlFor="fname">Patient First Name</InputLabel>
@@ -258,7 +261,12 @@ export default function Book() {
                 (718) 948-0870
               </CustomLink>
             </P>
-            <CustomButton type="submit" $primary className="submit">
+            <CustomButton
+              disabled={isSubmitting || !dirty || !isValid}
+              type="submit"
+              $primary
+              className="submit"
+            >
               Submit Form
             </CustomButton>
           </SubmitWrapper>

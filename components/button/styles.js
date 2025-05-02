@@ -6,7 +6,10 @@ import tw, { styled, css, theme } from 'twin.macro'
 const SharedButtonStyles = css`
   ${tw`relative w-fit py-xxs px-xs flex items-center justify-center gap-xxs [border-radius: 5px] no-underline`}
   ${tw`xl:gap-xxs-xl xl:py-xxs-xl xl:px-xs-xl`}
-  ${tw`hover:opacity-80 transition-opacity ease-default duration-500`}
+  ${tw`transition-opacity ease-default duration-500`}
+
+  ${({ disabled }) =>
+    !disabled && tw`hover:opacity-80 border-[1px] border-solid`}
 
   .secondary {
     ${tw`whitespace-nowrap`}
@@ -41,10 +44,12 @@ const SharedButtonStyles = css`
     }
   }
 
-  ${({ $primary }) =>
-    $primary && tw`bg-blue text-white border-[1px] border-blue border-solid`}
-  ${({ $secondary }) =>
-    $secondary && tw`border-[1px] border-gray text-black border-solid`}
+  ${({ disabled, $primary, $secondary }) =>
+    disabled
+      ? tw`bg-gray text-black text-opacity-80 opacity-50`
+      : $primary
+        ? tw`bg-blue text-white border-blue`
+        : $secondary && tw`border-gray text-black`}
 `
 
 export const StyledCustomButton = styled(Link)`

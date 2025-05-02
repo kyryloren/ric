@@ -9,6 +9,7 @@ import { ModalContext } from 'context'
 const CustomButton = ({
   $primary,
   $secondary = $primary === false ? true : false,
+  disabled = false,
   href,
   ref,
   onClick,
@@ -23,6 +24,7 @@ const CustomButton = ({
         $primary={$primary}
         $secondary={$secondary}
         onClick={() => setModal(true)}
+        disabled={disabled}
         {...props}
       >
         <P>{children}</P>
@@ -37,6 +39,7 @@ const CustomButton = ({
         $primary={$primary}
         $secondary={$secondary}
         onClick={onClick}
+        disabled={disabled}
         {...props}
       >
         <P>{children}</P>
@@ -64,6 +67,7 @@ const CustomButton = ({
         onClick?.(e)
       }}
       href={href}
+      disabled={disabled}
       {...internalLinkProps}
     >
       {$secondary && <Icon className="left" name="right-arrow" />}
