@@ -74,6 +74,9 @@ export default function Book() {
       details: '',
     },
     validationSchema,
+    onSubmit: (values) => {
+      alert(JSON.stringify(values, null, 2))
+    },
   })
 
   const { contextSafe } = useGSAP({
@@ -163,10 +166,7 @@ export default function Book() {
         </TitleLine>
         <P>{splitText(DESCRIPTION)}</P>
 
-        <FormWrapper
-          action="https://formsubmit.co/kyrylo.orlov@gmail.com"
-          method="POST"
-        >
+        <FormWrapper onSubmit={handleSubmit}>
           <Split>
             <Question className="anim-question">
               <InputLabel htmlFor="fname">Patient First Name</InputLabel>
