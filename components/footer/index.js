@@ -96,7 +96,6 @@ const Footer = () => {
               <LinkListWrapper>
                 <CustomLink href="/privacy">Privacy Policy</CustomLink>
                 <CustomLink href="/terms">Terms & Conditions</CustomLink>
-                <CustomLink href="/sitemap">Sitemap</CustomLink>
               </LinkListWrapper>
 
               <P className="copy">&copy; 2025 Robotic Implant Center</P>
