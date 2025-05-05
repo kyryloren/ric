@@ -14,17 +14,17 @@ export async function generateMetadata() {
   const seoDoc = seoData?.data?.attributes.SEO
 
   return {
-    title: seoDoc?.metaTitle || 'About',
+    title: seoDoc?.metaTitle || 'Finances',
     description: seoDoc?.metaDescription,
     keywords: seoDoc?.keywords?.split(', '),
     alternates: {
-      canonical: `${process.env.NEXT_PUBLIC_BASE_URL}/about`,
+      canonical: `${process.env.NEXT_PUBLIC_BASE_URL}/finances`,
     },
     noIndex: seoDoc?.preventIndexing || false,
     openGraph: {
       title: seoDoc?.metaTitle,
       description: seoDoc?.metaDescription,
-      url: `${process.env.NEXT_PUBLIC_BASE_URL}/about`,
+      url: `${process.env.NEXT_PUBLIC_BASE_URL}/finances`,
       images: {
         url: getStrapiURL(
           `${seoDoc?.metaImage?.data?.attributes?.url}?format=jpg&resize=1200x630`,

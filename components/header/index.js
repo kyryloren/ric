@@ -15,6 +15,7 @@ export default function CustomHeader({
   buttons = [],
   size = 'lg',
   children,
+  id,
 }) {
   const globalData = useContext(GlobalAPIContext)
 
@@ -24,6 +25,7 @@ export default function CustomHeader({
       $padding={padded}
       $size={size}
       className={className}
+      id={id}
     >
       {size === 'lg' ? (
         <H1>{splitText(title)}</H1>

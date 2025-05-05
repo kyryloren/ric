@@ -55,6 +55,7 @@ export default function List({ headerData, data }) {
           book={headerData?.book}
           call={headerData?.call}
           buttons={headerData?.button}
+          id={'hero'}
           padded
         />
         <CustomGrid>
