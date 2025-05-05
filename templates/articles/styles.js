@@ -23,7 +23,6 @@ export const SliderContainer = tw.div`
   flex-[0 0 66%]
 
   sm:flex-[0 0 40%]
-  md:flex-[0 0 25%]
 `
 export const CardWrapper = tw(Link)`
   flex

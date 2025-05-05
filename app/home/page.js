@@ -54,7 +54,12 @@ export default async function Home() {
       },
     },
   })
+  const articlesData = await fetchAPI('/articles', {
+    populate: '*',
+    sort: ['publishedAt:desc'],
+  })
   const homeDoc = homeData?.data?.attributes
+  const articlesDoc = articlesData?.data
 
   return (
     <>
@@ -66,7 +71,7 @@ export default async function Home() {
       <Insurance data={homeDoc?.finances} />
       <Services data={homeDoc} />
       <Info data={homeDoc?.info_col} />
-      <Articles />
+      <Articles data={articlesDoc} />
       <Footer />
     </>
   )

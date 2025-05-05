@@ -7,10 +7,10 @@ import {
   SliderContainer,
   TitleLine,
 } from './styles'
-import { Container, H2, H4 } from 'styles'
-import { CustomButton, CustomImage, Slider } from 'components'
+import { Container, H2, H4, RenderMedia } from 'styles'
+import { CustomButton, Slider } from 'components'
 
-const Articles = () => {
+const Articles = ({ data }) => {
   return (
     <ArticlesSection>
       <Container>
@@ -22,66 +22,19 @@ const Articles = () => {
         </TitleLine>
         <Slider>
           <Slider.Slides className={'slider'}>
-            <SliderContainer>
-              <CardWrapper href="/">
-                <ImageWrapper>
-                  <CustomImage
-                    src="/1.webp"
-                    alt="Image"
-                    sizes="(min-width: 600px) 45vw, (min-width: 420px) 477px, (min-width: 380px) calc(65vw - 23px), 468px"
-                  />
-                </ImageWrapper>
-                <H4>Lorem ipsum dolor sit amet, consectetur.</H4>
-              </CardWrapper>
-            </SliderContainer>
-            <SliderContainer>
-              <CardWrapper href="/">
-                <ImageWrapper>
-                  <CustomImage
-                    src="/1.webp"
-                    alt="Image"
-                    sizes="(min-width: 600px) 45vw, (min-width: 420px) 477px, (min-width: 380px) calc(65vw - 23px), 468px"
-                  />
-                </ImageWrapper>
-                <H4>Lorem ipsum dolor sit amet, consectetur.</H4>
-              </CardWrapper>
-            </SliderContainer>
-            <SliderContainer>
-              <CardWrapper href="/">
-                <ImageWrapper>
-                  <CustomImage
-                    src="/1.webp"
-                    alt="Image"
-                    sizes="(min-width: 600px) 45vw, (min-width: 420px) 477px, (min-width: 380px) calc(65vw - 23px), 468px"
-                  />
-                </ImageWrapper>
-                <H4>Lorem ipsum dolor sit amet, consectetur.</H4>
-              </CardWrapper>
-            </SliderContainer>
-            <SliderContainer>
-              <CardWrapper href="/">
-                <ImageWrapper>
-                  <CustomImage
-                    src="/1.webp"
-                    alt="Image"
-                    sizes="(min-width: 600px) 45vw, (min-width: 420px) 477px, (min-width: 380px) calc(65vw - 23px), 468px"
-                  />
-                </ImageWrapper>
-                <H4>Lorem ipsum dolor sit amet, consectetur.</H4>
-              </CardWrapper>
-            </SliderContainer>
-            <SliderContainer>
-              <CardWrapper href="/">
-                <ImageWrapper>
-                  <CustomImage
-                    src="/1.webp"
-                    alt="Image"
-                    sizes="(min-width: 600px) 45vw, (min-width: 420px) 477px, (min-width: 380px) calc(65vw - 23px), 468px"
-                  />
-                </ImageWrapper>
-                <H4>Lorem ipsum dolor sit amet, consectetur.</H4>
-              </CardWrapper>
-            </SliderContainer>
+            {data?.map((_, index) => (
+              <SliderContainer key={index}>
+                <CardWrapper href={`/articles/${_?.attributes?.slug}`}>
+                  <ImageWrapper>
+                    <RenderMedia
+                      data={_?.attributes?.media?.data?.attributes}
+                      sizes="(min-width: 600px) 45vw, (min-width: 420px) 477px, (min-width: 380px) calc(65vw - 23px), 468px"
+                    />
+                  </ImageWrapper>
+                  <H4>{_?.attributes?.title}</H4>
+                </CardWrapper>
+              </SliderContainer>
+            ))}
           </Slider.Slides>
         </Slider>
       </Container>
