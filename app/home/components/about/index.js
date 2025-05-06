@@ -67,7 +67,20 @@ const About = ({ data }) => {
                 <H3>{splitText(_?.title)}</H3>
                 <P>{_?.description}</P>
               </Overlay>
-              <RenderMedia data={_?.media?.data?.attributes} />
+              <RenderMedia
+                data={_?.media?.data?.attributes}
+                fallback={
+                  index === 0
+                    ? {
+                        url: '/about.webp',
+                        alternativeText: 'Robotic Implant Center About',
+                      }
+                    : {
+                        url: '/robot.webp',
+                        alternativeText: 'Robotic Implant Center Technology',
+                      }
+                }
+              />
             </CardWrapper>
           ))}
         </GridWrapper>

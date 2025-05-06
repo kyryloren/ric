@@ -1,6 +1,7 @@
 import { CustomImage } from 'components'
 import { AnimWord, CustomVideo, LineWrapper } from './styles'
 import { getStrapiURL } from 'lib'
+import Vid from './video'
 
 export function pxCutOff(px) {
   return `${(px / 1280) * 100}vw`
@@ -31,6 +32,7 @@ export function RenderMedia({
   fill = true,
   width,
   height,
+  fallback,
   ...props
 }) {
   if (data?.mime?.startsWith('image/')) {
@@ -46,18 +48,7 @@ export function RenderMedia({
       />
     )
   } else if (data?.mime?.startsWith('video/')) {
-    return (
-      <CustomVideo
-        playsInline
-        autoPlay
-        muted
-        loop
-        aria-label={data?.alternativeText || 'Robotic Implant Center Video'}
-        {...props}
-      >
-        <source src={getStrapiURL(data?.url)} />
-      </CustomVideo>
-    )
+    return <Vid fallback={fallback} data={data} />
   }
 
   return null

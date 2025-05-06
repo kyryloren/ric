@@ -59,7 +59,13 @@ const Hero = ({ data }) => {
         />
 
         <VideoWrapper className="anim-video">
-          <RenderMedia data={data?.hero_media?.data?.attributes} />
+          <RenderMedia
+            data={data?.hero_media?.data?.attributes}
+            fallback={{
+              url: '/hero.webp',
+              alternativeText: 'Robotic Implant Center',
+            }}
+          />
         </VideoWrapper>
       </Container>
     </HeroSection>
