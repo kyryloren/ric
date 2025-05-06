@@ -15,18 +15,7 @@ import { ScrollTrigger } from 'gsap/all'
 
 gsap.registerPlugin(ScrollTrigger, useGSAP)
 
-const SERVICES = [
-  { name: 'Full Mouth Reconstruction', href: '/' },
-  { name: 'Single Tooth Dental Implants', href: '/' },
-  { name: 'Computer-Guided Implant Surgery', href: '/' },
-  { name: 'Zirconia Restored Dental Implants', href: '/' },
-  { name: 'Fixed-Removable Implant Dentures', href: '/' },
-  { name: 'Implant Overdentures', href: '/' },
-  { name: 'Crestal Approach Sinus Lift', href: '/' },
-  { name: 'In-House CBCT Scan Technology', href: '/' },
-]
-
-const Services = ({ data }) => {
+const Services = ({ data, services }) => {
   const sectionEl = useRef(null)
   const headerData = data?.services_header
 
@@ -87,13 +76,13 @@ const Services = ({ data }) => {
           />
 
           <ServicesCol>
-            {SERVICES.map((service, index) => (
+            {services?.data?.map((_, index) => (
               <ServiceButton
                 key={index}
-                href={service.href}
+                href={`/services/${_?.attributes?.slug}`}
                 className="list-anim"
               >
-                <H4 className="text">{service.name}</H4>
+                <H4 className="text">{_?.attributes?.name}</H4>
                 <Icon name="right-arrow" />
               </ServiceButton>
             ))}

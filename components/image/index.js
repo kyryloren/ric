@@ -15,7 +15,7 @@ const ParallaxContainer = styled.div`
 `
 
 const Inner = styled.div`
-  ${tw`absolute top-0 left-0 w-full h-full`}
+  ${tw`absolute top-0 left-0 w-full h-full will-change-transform`}
 `
 
 const ParallaxImage = styled(Image)`

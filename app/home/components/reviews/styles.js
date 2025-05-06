@@ -18,7 +18,7 @@ export const DesktopGrid = tw(CustomGrid)`
   xl:mt-lg-xl
 `
 export const Col = styled.div`
-  ${tw`grid grid-cols-1 gap-sm xl:gap-sm-xl`}
+  ${tw`grid grid-cols-1 gap-sm will-change-transform xl:gap-sm-xl`}
 
   &:nth-child(1) {
     ${tw`col-start-1 col-end-5`}

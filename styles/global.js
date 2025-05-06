@@ -49,6 +49,11 @@ const CustomStyles = createGlobalStyle`
     display: inline-block;
     margin-top: -3%;
   }
+
+  [class^="anim-"],
+  [class*=" anim-"] {
+    ${tw`will-change-transform`}
+  }
 `
 
 const GlobalStyle = () => (

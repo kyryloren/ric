@@ -10,7 +10,7 @@ export const StyledMarquee = styled.div`
   }
 
   .inner {
-    ${tw`flex items-center whitespace-nowrap w-fit shrink-0`}
+    ${tw`flex items-center whitespace-nowrap w-fit shrink-0 will-change-transform`}
     animation: marquee var(--duration) linear infinite;
     animation-play-state: var(--animation-status);
 
