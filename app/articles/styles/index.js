@@ -31,6 +31,8 @@ export const ImageWrapper = tw.div`
   w-full
   h-[25rem]
   [border-radius: 10px]
+
+  sm:h-[25svw]
 `
 export const Header = ({ data }) => {
   return (
