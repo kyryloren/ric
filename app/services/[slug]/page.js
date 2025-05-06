@@ -19,7 +19,7 @@ export async function generateMetadata(props) {
       },
     },
   })
-  const seoDoc = seoData?.data?.attributes.SEO
+  const seoDoc = seoData?.data[0]?.attributes.SEO
 
   return {
     title: seoDoc?.metaTitle || 'Services',
