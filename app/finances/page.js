@@ -42,6 +42,9 @@ export default async function Finances() {
       hero_header: {
         populate: '*',
       },
+      reel: {
+        populate: '*',
+      },
       info_col: {
         populate: '*',
       },

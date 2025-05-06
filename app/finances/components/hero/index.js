@@ -1,7 +1,7 @@
 'use client'
 
 import { useRef } from 'react'
-import { Container } from 'styles'
+import { Container, RenderMedia } from 'styles'
 import { HeroSection, ImageWrapper } from './styles'
 import { CustomHeader, CustomImage, Marquee } from 'components'
 import gsap from 'gsap'
@@ -45,6 +45,8 @@ export default function Hero({ data }) {
     { dependencies: [sectionEl], scope: sectionEl },
   )
 
+  console.log(data)
+
   return (
     <HeroSection id="hero" ref={sectionEl}>
       <Container>
@@ -60,38 +62,15 @@ export default function Hero({ data }) {
       </Container>
 
       <Marquee duration={10}>
-        <ImageWrapper className="anim-image">
-          <CustomImage
-            priority={true}
-            src={'/teeth.webp'}
-            alt={'Teeth'}
-            parallax={false}
-          />
-        </ImageWrapper>
-        <ImageWrapper className="anim-image">
-          <CustomImage
-            priority={true}
-            src={'/1.webp'}
-            alt={'Dr. Pedro'}
-            parallax={false}
-          />
-        </ImageWrapper>
-        <ImageWrapper className="anim-image">
-          <CustomImage
-            priority={true}
-            src={'/2.webp'}
-            alt={'Awards'}
-            parallax={false}
-          />
-        </ImageWrapper>
-        <ImageWrapper className="anim-image">
-          <CustomImage
-            priority={true}
-            src={'/tech.webp'}
-            alt={'Tech'}
-            parallax={false}
-          />
-        </ImageWrapper>
+        {data?.reel?.data?.map((_, index) => (
+          <ImageWrapper key={index} className="anim-image">
+            <RenderMedia
+              data={_?.attributes}
+              priority={true}
+              parallax={false}
+            />
+          </ImageWrapper>
+        ))}
       </Marquee>
     </HeroSection>
   )
