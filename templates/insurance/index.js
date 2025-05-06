@@ -1,13 +1,13 @@
 'use client'
 
-import { Container } from 'styles'
+import { Container, RenderMedia } from 'styles'
 import {
   ContentWrapper,
   ImageObject,
   ImageWrapper,
   InsuranceSection,
 } from './styles'
-import { CustomImage, Marquee, CustomHeader } from 'components'
+import { Marquee, CustomHeader } from 'components'
 import { getStrapiURL } from 'lib'
 
 const Insurance = ({ data }) => {
@@ -16,9 +16,8 @@ const Insurance = ({ data }) => {
       <Container>
         <ContentWrapper>
           <ImageWrapper>
-            <CustomImage
-              src={'/smiles.webp'}
-              alt={'Smiles'}
+            <RenderMedia
+              data={data?.media?.data?.attributes}
               sizes="(min-width: 780px) 59.01vw, (min-width: 580px) 95.56vw, (min-width: 420px) calc(23.57vw + 380px), (min-width: 380px) calc(95vw - 21px), 468px"
             />
           </ImageWrapper>
