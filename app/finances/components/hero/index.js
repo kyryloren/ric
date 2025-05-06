@@ -45,8 +45,6 @@ export default function Hero({ data }) {
     { dependencies: [sectionEl], scope: sectionEl },
   )
 
-  console.log(data)
-
   return (
     <HeroSection id="hero" ref={sectionEl}>
       <Container>
