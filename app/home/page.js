@@ -67,8 +67,8 @@ export default async function Home() {
   return (
     <>
       <Nav hideNav={homeDoc?.hero_header?.book} />
-      {/* <Hero data={homeDoc} /> */}
-      {/* <About data={homeDoc?.about} /> */}
+      <Hero data={homeDoc} />
+      <About data={homeDoc?.about} />
       <Reviews data={homeDoc} />
       <Technology data={homeDoc} />
       <Insurance data={homeDoc?.finances} />
