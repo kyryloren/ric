@@ -148,4 +148,4 @@ const config = {
   },
 }
 
-export default config
+export default { ...config, experimental: { optimizeUniversalDefaults: true } }
