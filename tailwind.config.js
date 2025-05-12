@@ -146,6 +146,7 @@ const config = {
     },
     borderRadius: '1px',
   },
+  experimental: { optimizeUniversalDefaults: true },
 }
 
-export default { ...config, experimental: { optimizeUniversalDefaults: true } }
+export default config
