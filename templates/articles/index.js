@@ -28,7 +28,7 @@ const Articles = ({ data }) => {
                   <ImageWrapper>
                     <RenderMedia
                       data={_?.attributes?.media?.data?.attributes}
-                      sizes="(min-width: 600px) 45vw, (min-width: 420px) 477px, (min-width: 380px) calc(65vw - 23px), 468px"
+                      sizes="(min-width: 600px) 45vw, 480px"
                     />
                   </ImageWrapper>
                   <H4>{_?.attributes?.title}</H4>

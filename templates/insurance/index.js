@@ -18,7 +18,7 @@ const Insurance = ({ data }) => {
           <ImageWrapper>
             <RenderMedia
               data={data?.media?.data?.attributes}
-              sizes="(min-width: 780px) 59.01vw, (min-width: 580px) 95.56vw, (min-width: 420px) calc(23.57vw + 380px), (min-width: 380px) calc(95vw - 21px), 468px"
+              sizes="(min-width: 780px) 59.19vw, (min-width: 560px) 95.5vw, 462px"
             />
           </ImageWrapper>
 

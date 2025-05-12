@@ -61,7 +61,7 @@ const Technology = ({ data }) => {
         <ImageWrapper>
           <RenderMedia
             data={data?.technology_media?.data?.attributes}
-            sizes="(min-width: 660px) 94.27vw, (min-width: 420px) calc(8.64vw + 533px), (min-width: 380px) calc(95vw - 21px), 570px"
+            sizes="(min-width: 660px) 94.96vw, 554px"
           />
         </ImageWrapper>
 

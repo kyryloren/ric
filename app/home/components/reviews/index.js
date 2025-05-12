@@ -94,7 +94,7 @@ const Reviews = ({ data }) => {
               <ImageWrapper>
                 <RenderMedia
                   data={mediaLeft}
-                  sizes="(min-width: 1380px) 41.05vw, (min-width: 1060px) calc(10vw + 423px), calc(-21.54vw + 750px)"
+                  sizes="(min-width: 1380px) 40.99vw, (min-width: 1100px) calc(13.08vw + 381px), calc(-19.33vw + 734px)"
                 />
               </ImageWrapper>
               {leftReviews.map((_, index) => (
@@ -104,7 +104,7 @@ const Reviews = ({ data }) => {
                     <PfP>
                       <RenderMedia
                         data={_?.pfp?.data?.attributes}
-                        sizes="(min-width: 940px) 50px, calc(5vw + 4px)"
+                        sizes="50px"
                         parallax={false}
                       />
                     </PfP>
@@ -132,7 +132,7 @@ const Reviews = ({ data }) => {
                     <PfP>
                       <RenderMedia
                         data={_?.pfp?.data?.attributes}
-                        sizes="(min-width: 940px) 50px, calc(5vw + 4px)"
+                        sizes="50px"
                         parallax={false}
                       />
                     </PfP>
@@ -148,7 +148,7 @@ const Reviews = ({ data }) => {
               <ImageWrapper>
                 <RenderMedia
                   data={mediaCenter}
-                  sizes="(min-width: 1380px) 41.05vw, (min-width: 1060px) calc(10vw + 423px), calc(-21.54vw + 750px)"
+                  sizes="(min-width: 1380px) 40.99vw, (min-width: 1100px) calc(13.08vw + 381px), calc(-19.33vw + 734px)"
                 />
               </ImageWrapper>
             </Col>
@@ -161,7 +161,7 @@ const Reviews = ({ data }) => {
                   <PfP>
                     <RenderMedia
                       data={rightReviews[0]?.pfp?.data?.attributes}
-                      sizes="(min-width: 940px) 50px, calc(5vw + 4px)"
+                      sizes="50px"
                       parallax={false}
                     />
                   </PfP>
@@ -177,7 +177,7 @@ const Reviews = ({ data }) => {
               <ImageWrapper>
                 <RenderMedia
                   data={mediaRight}
-                  sizes="(min-width: 1380px) 41.05vw, (min-width: 1060px) calc(10vw + 423px), calc(-21.54vw + 750px)"
+                  sizes="(min-width: 1380px) 40.99vw, (min-width: 1100px) calc(13.08vw + 381px), calc(-19.33vw + 734px)"
                 />
               </ImageWrapper>
 
@@ -187,7 +187,7 @@ const Reviews = ({ data }) => {
                   <PfP>
                     <RenderMedia
                       data={rightReviews[1]?.pfp?.data?.attributes}
-                      sizes="(min-width: 940px) 50px, calc(5vw + 4px)"
+                      sizes="50px"
                       parallax={false}
                     />
                   </PfP>
@@ -226,7 +226,7 @@ const Reviews = ({ data }) => {
                     <PfP>
                       <RenderMedia
                         data={_?.pfp?.data?.attributes}
-                        sizes="(min-width: 940px) 50px, calc(5vw + 4px)"
+                        sizes="50px"
                         parallax={false}
                       />
                     </PfP>
