@@ -4,6 +4,7 @@ import {
   RealViewport,
   StyledComponentsRegistry,
 } from 'lib'
+import { GoogleAnalytics } from '@next/third-parties/google'
 
 const title = 'Robotic Implant Center | Tooth Implant Solutions | RIC'
 const description = `Dental implants can help you achieve the smile you’ve always wanted. Discover Robotic Implant Center for expert care. Book your consultation today!`
@@ -71,6 +72,7 @@ export default function RootLayout({ children }) {
       <body suppressHydrationWarning>
         <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
         <RealViewport />
+        <GoogleAnalytics gaId="G-2T5E3D5P14" />
       </body>
     </html>
   )
