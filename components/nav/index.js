@@ -225,7 +225,7 @@ const Nav = ({ hideNav = true }) => {
                 </CustomButton>
               </div>
               <div className="anim-button call">
-                <CustomButton $secondary href={'/'}>
+                <CustomButton $secondary href={'tel:7183569700'}>
                   Call Now
                 </CustomButton>
               </div>

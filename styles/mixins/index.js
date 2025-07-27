@@ -1,7 +1,6 @@
-import { CustomImage } from 'components'
-import { AnimWord, CustomVideo, LineWrapper } from './styles'
+import { CustomImage, VideoPlayer } from 'components'
+import { AnimWord, LineWrapper } from './styles'
 import { getStrapiURL } from 'lib'
-import Vid from './video'
 
 export function pxCutOff(px) {
   return `${(px / 1280) * 100}vw`
@@ -48,7 +47,21 @@ export function RenderMedia({
       />
     )
   } else if (data?.mime?.startsWith('video/')) {
-    return <Vid fallback={fallback} data={data} />
+    const videoUrl = process.env.NEXT_PUBLIC_STRAPI_API_URL + data?.url
+
+    return (
+      <VideoPlayer
+        src={videoUrl}
+        poster={data?.placeholder || data?.preview}
+        alt={data?.alternativeText || 'New Studio Case Study Video'}
+        autoPlay={true}
+        muted={true}
+        loop={true}
+        playsInline={true}
+        controls={false}
+        {...props}
+      />
+    )
   }
 
   return null
