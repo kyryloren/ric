@@ -40,7 +40,7 @@ export default function Body({ data }) {
             )
           }
 
-          if (section.__component === 'articles.text') {
+          if (section.__component === 'articles.content') {
             return section.text.map((block, i) => {
               const key = `${idx}-${i}`
 
