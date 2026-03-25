@@ -22,7 +22,7 @@ export default function Hero({ data }) {
         duration: 1.5,
         stagger: 0.02,
       }).from(
-        '.anim-button',
+        gsap.utils.toArray('.anim-button'),
         {
           scale: 0,
           duration: 1,
