@@ -26,6 +26,7 @@ POST handler that:
 4. Calls `resend.emails.send()`:
    - **from:** `noreply@contact.roboticimplantsnyc.com`
    - **to:** `Aboutfacedds@gmail.com`
+   - **reply_to:** `{email}` (the submitter's email, so the office can reply directly)
    - **subject:** `New Booking Request from {fname} {lname}`
    - **text:** Plain text with all form fields labeled
 5. Returns `{ success: true }` on success
@@ -41,10 +42,10 @@ Changes to the existing Book component:
    - On success: sets `submitted = true`
    - On error: sets `submitError` with a user-friendly message
    - Uses Formik's `setSubmitting` for loading state
-3. **Success state:** When `submitted` is true, the form content is replaced with a success message ("Thank you! We'll be in touch within 1-2 business days."). After ~3 seconds, the existing `onClose` animation fires (which resets form and closes modal).
+3. **Success state:** When `submitted` is true, the form content is replaced with a success message ("Thank you! We'll be in touch within 1-2 business days."). After ~3 seconds, the existing `onClose` animation fires (which resets form and closes modal). The auto-close timer ID is stored in a `useRef` so it can be cleared if the user manually closes the modal first (prevents double-firing `onClose`).
 4. **Error state:** An inline error message appears below the submit button. Form stays open for retry. Error clears on next submission attempt.
 5. **Loading state:** Submit button already respects `isSubmitting` via `disabled` prop — no visual changes needed beyond what Formik provides.
-6. **Reset behavior:** The existing `onClose` callback already calls `resetForm()`. The `submitted` and `submitError` states also reset when the modal closes.
+6. **Reset behavior:** The existing `onClose` callback already calls `resetForm()`. The `submitted` and `submitError` states also reset when the modal closes. The auto-close timer ref is also cleared in `onClose`.
 
 ## Data Flow
 
@@ -62,9 +63,13 @@ User fills form → Formik validates (Yup) → onSubmit fires
 ## Error Handling
 
 - **Client-side validation:** Yup schema (already exists) prevents submission of invalid data
-- **Server-side validation:** API route checks required fields are present before calling Resend
+- **Server-side validation:** API route checks all six fields are non-empty strings (sufficient safety net given client-side Yup validation handles format constraints)
 - **Resend failure:** API route catches errors, returns 500 with message. Component shows inline error, form stays open.
 - **Network failure:** Fetch catch block sets `submitError`, same UX as Resend failure.
+
+## Out of Scope (Future Consideration)
+
+- **Rate limiting / abuse protection:** This is a public unauthenticated endpoint. A bot could hit `/api/contact` in a loop. Consider adding rate limiting (e.g., `next-rate-limit` or Vercel's built-in rate limiting) as a fast follow-up. Not included here to keep scope tight.
 
 ## No New Dependencies
 
