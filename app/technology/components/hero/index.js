@@ -22,15 +22,24 @@ const Hero = ({ data }) => {
         opacity: 0,
         duration: 1.5,
         stagger: 0.02,
-      }).from(
-        '.anim-image',
-        {
-          yPercent: 10,
-          opacity: 0,
-          duration: 1,
-        },
-        0.75,
-      )
+      })
+        .from(
+          gsap.utils.toArray('.anim-button'),
+          {
+            scale: 0,
+            duration: 1,
+          },
+          0.5,
+        )
+        .from(
+          '.anim-image',
+          {
+            yPercent: 10,
+            opacity: 0,
+            duration: 1,
+          },
+          0.75,
+        )
     },
     { dependencies: [sectionEl], scope: sectionEl },
   )
