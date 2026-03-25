@@ -28,13 +28,43 @@ Pages that already follow this pattern: Home, Technology, Services, Finances (pa
 
 ### 1. Articles Listing Page — Add Hero Animation
 
-**Current state:** `app/articles/styles/index.js` exports a `Header` component that wraps `CustomHeader` with no animation logic. The page (`app/articles/page.js`) renders `<Header>` inside a `<ListWrapper>` section — there is no dedicated hero section element.
+**Current state:** `app/articles/styles/index.js` exports a `Header` component that wraps `CustomHeader` with no animation logic. The page (`app/articles/page.js`) renders `<Header>` inside a `<ListWrapper>` section. There is no dedicated hero component.
 
-**Change:** Convert the `Header` wrapper into a proper animated hero component. This requires:
+**Change:** Create a dedicated hero component following the established codebase convention. Every other page hero lives in its own component directory (`app/<page>/components/hero/index.js` + `styles.js`). The articles page should follow this same pattern rather than embedding animation logic in a styles file.
 
-- Adding a `useRef` for GSAP scoping
-- Wrapping the `CustomHeader` in a section element with the ref
-- Adding the standard `useGSAP` timeline
+**New files:**
+- `app/articles/components/hero/index.js` — Hero component with `useRef`, `useGSAP` timeline, and `gsap.registerPlugin(useGSAP)` at module scope. Renders a `HeroSection` ref wrapper around `CustomHeader`.
+- `app/articles/components/hero/styles.js` — `HeroSection` styled-component (simple, matching home hero's minimal styling).
+
+**Modified files:**
+- `app/articles/page.js` — Render `Hero` as a top-level sibling before `ListWrapper` (matching how every other page renders its hero). Remove the `Header` import and its wrapping `Container` from inside `ListWrapper`. Target structure:
+  ```jsx
+  <>
+    <Nav hideNav={allArticlesDoc?.all_articles_header?.book} />
+    <Hero data={allArticlesDoc?.all_articles_header} />
+    <ListWrapper>
+      <Container>
+        <CustomGrid>
+          {articlesDoc.map(...)}
+        </CustomGrid>
+      </Container>
+    </ListWrapper>
+    <Footer />
+  </>
+  ```
+- `app/articles/styles/index.js` — Remove the `Header` export (moved to the new hero component).
+
+**Required imports for the hero component:**
+```
+import { useRef } from 'react'
+import { Container } from 'styles'
+import { HeroSection } from './styles'
+import { CustomHeader } from 'components'
+import { useGSAP } from '@gsap/react'
+import gsap from 'gsap'
+
+gsap.registerPlugin(useGSAP)
+```
 
 **Elements to animate:**
 - Title and description words (`.anim-word`) — already wrapped by `splitText()` inside `CustomHeader`
@@ -50,34 +80,43 @@ Pages that already follow this pattern: Home, Technology, Services, Finances (pa
 
 Timeline defaults: `ease: 'power3.out', delay: 0.5`
 
-**File changes:**
-- `app/articles/styles/index.js` — Rewrite the `Header` export to include `useRef`, `useGSAP`, `gsap`, and the timeline. Add a wrapper section element with the ref for GSAP scoping.
+**Edge case:** If the CMS returns no buttons (`book: false`, `call: false`, empty or null `buttons`), the `.anim-button` selector finds zero elements and GSAP silently skips that step — the timeline still plays the word animation normally.
 
 ### 2. Finances Page — Debug and Fix Button Animation
 
 **Current state:** `app/finances/components/hero/index.js` has a GSAP timeline that targets `.anim-button` with `scale: 0, duration: 1` at position 0.5. The `CustomHeader` correctly passes `book`, `call`, and `buttons` props, and the buttons receive the `anim-button` class. Yet the buttons appear instantly without animation.
 
-**Debugging approach:**
-1. Verify the `.anim-button` elements exist in the DOM when the `useGSAP` callback fires (the scope is `sectionEl` which wraps the entire hero including `CustomHeader`)
-2. Check for CSS conflicts — the buttons have `transition-opacity ease-default duration-500` in their shared styles which could interact with GSAP transforms
-3. Verify GSAP's `from` is actually setting initial values on the button elements (not finding zero matches for the selector)
-4. Test whether the issue is that `gsap.utils.toArray` is needed (like the `.anim-word` selector uses) vs a plain string selector
+**Key observation:** The finances hero animation code is character-for-character identical to the home hero's `.anim-button` animation. Both use a plain string selector (not wrapped in `gsap.utils.toArray`), both use `scope: sectionEl`. The home hero buttons animate correctly. So the root cause is not the selector format — it must be something specific to the finances hero's environment.
 
-**Most likely fix:** The `.anim-button` selector may need `gsap.utils.toArray()` wrapping to properly find elements within the scoped ref, matching how `.anim-word` is handled. If the selector returns zero matches, GSAP silently does nothing — which would explain buttons appearing instantly with no error.
+**Structured investigation plan:**
+
+1. **Verify selector matches:** Add a temporary `console.log` inside the `useGSAP` callback to log `gsap.utils.toArray('.anim-button')` within the scoped context. If the array is empty, the buttons aren't in the DOM when the animation fires.
+
+2. **Check the Marquee component interaction:** The finances hero is unique in that it includes a `<Marquee>` component inside the scoped `HeroSection`. The Marquee uses `useIntersectionObserver` which triggers state updates and re-renders. Investigate whether the Marquee's re-render cycle disrupts the GSAP context or causes buttons to remount after the timeline has already set their initial `scale: 0` state.
+
+3. **Compare CSS stacking:** The finances `HeroSection` has `h-[90vh]`, `bg-azure`, and `mb-[15%]` — unlike the home hero which is just `relative`. Check whether `overflow` or layout clipping is hiding the scale animation visually.
+
+4. **Check CSS transition conflict:** All buttons have `transition-opacity ease-default duration-500` from `SharedButtonStyles`. While this affects all pages (so it shouldn't be finances-specific), verify it isn't interacting with GSAP's `from` differently when combined with the finances-specific layout.
+
+5. **Compare with the services hero:** The services `[slug]` hero is the only one that wraps `.anim-button` in `gsap.utils.toArray()` and adds `stagger: 0.02`. If services buttons animate correctly, compare its CSS/structure with finances to isolate the difference.
 
 **File changes:**
-- `app/finances/components/hero/index.js` — Apply the fix to the `.anim-button` selector (likely wrapping with `gsap.utils.toArray` or similar). Verify the fix resolves the issue.
+- `app/finances/components/hero/index.js` — Apply the fix identified through investigation.
 
 ## Files Affected
 
 | File | Change |
 |------|--------|
-| `app/articles/styles/index.js` | Rewrite `Header` to animated hero with GSAP timeline |
+| `app/articles/components/hero/index.js` | **New** — Hero component with GSAP timeline |
+| `app/articles/components/hero/styles.js` | **New** — HeroSection styled-component |
+| `app/articles/page.js` | Import new Hero instead of Header, pass data |
+| `app/articles/styles/index.js` | Remove `Header` export |
 | `app/finances/components/hero/index.js` | Fix `.anim-button` animation not firing |
 
 ## Testing
 
-- Navigate to `/articles` — title words should slide up, description words should follow in the stagger, buttons should scale in at 0.5s offset
+- Navigate to `/articles` — title words should slide up, description words should follow in the stagger, buttons (if present in CMS) should scale in at 0.5s offset
+- Navigate to `/articles` with no CMS buttons — animation should play title/description normally without errors
 - Navigate to `/finances` — buttons should scale in from 0, matching the home page hero behavior
 - Verify no regressions on other pages (home, technology, services) by spot-checking their hero animations
-- Check that animations respect the global `ResetAnimation` reveal timing
+- Check that animations respect the global `ResetAnimation` reveal timing (no flash of content before animation starts)
