@@ -201,25 +201,33 @@ export default function Book() {
   return (
     <BookWrapper ref={sectionEl}>
       <SideBar className="sidebar" id="modal">
-        <TitleLine>
-          <H1>{splitText(`Book Now`)}</H1>
-          <button aria-label="Close" onClick={onClose}>
-            <Icon name="close" />
-          </button>
-        </TitleLine>
-        <P>{splitText(DESCRIPTION)}</P>
-
         {submitted ? (
-          <SuccessMessage>
-            <H1>{splitText('Thank You!')}</H1>
-            <P>
-              {splitText(
-                `We've received your request and will be in touch within 1-2 business days.`,
-              )}
-            </P>
-          </SuccessMessage>
+          <>
+            <TitleLine>
+              <div />
+              <button aria-label="Close" onClick={onClose}>
+                <Icon name="close" />
+              </button>
+            </TitleLine>
+            <SuccessMessage>
+              <H1>{splitText('Thank You!')}</H1>
+              <P>
+                {splitText(
+                  `We've received your request and will be in touch within 1-2 business days.`,
+                )}
+              </P>
+            </SuccessMessage>
+          </>
         ) : (
-          <FormWrapper onSubmit={handleSubmit}>
+          <>
+            <TitleLine>
+              <H1>{splitText(`Book Now`)}</H1>
+              <button aria-label="Close" onClick={onClose}>
+                <Icon name="close" />
+              </button>
+            </TitleLine>
+            <P>{splitText(DESCRIPTION)}</P>
+            <FormWrapper onSubmit={handleSubmit}>
             <Split>
               <Question className="anim-question">
                 <InputLabel htmlFor="fname">Patient First Name</InputLabel>
@@ -325,6 +333,7 @@ export default function Book() {
               </CustomButton>
             </SubmitWrapper>
           </FormWrapper>
+          </>
         )}
       </SideBar>
       <ScreenOverlay className="overlay" onClick={onClose} />
