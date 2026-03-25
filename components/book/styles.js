@@ -141,3 +141,21 @@ export const SubmitWrapper = styled.div`
     ${tw`w-full`}
   }
 `
+export const SuccessMessage = tw.div`
+  flex
+  flex-col
+  items-center
+  justify-center
+  gap-sm
+  text-center
+  mt-lg
+
+  xl:mt-lg-xl
+  xl:gap-sm-xl
+`
+export const ErrorMessage = tw.span`
+  text-red
+  text-p
+  font-sans
+  xl:text-p-xl
+`
