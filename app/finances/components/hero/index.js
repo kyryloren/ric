@@ -24,7 +24,7 @@ export default function Hero({ data }) {
         stagger: 0.02,
       })
         .from(
-          '.anim-button',
+          gsap.utils.toArray('.anim-button'),
           {
             scale: 0,
             duration: 1,
@@ -32,7 +32,7 @@ export default function Hero({ data }) {
           0.5,
         )
         .from(
-          '.anim-image',
+          gsap.utils.toArray('.anim-image'),
           {
             yPercent: 10,
             opacity: 0,
@@ -42,7 +42,7 @@ export default function Hero({ data }) {
           0.75,
         )
     },
-    { dependencies: [sectionEl], scope: sectionEl },
+    { dependencies: [sectionEl, data], scope: sectionEl },
   )
 
   return (
