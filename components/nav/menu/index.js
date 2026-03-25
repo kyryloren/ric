@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect } from 'react'
+import { useContext, useEffect } from 'react'
 import { Container } from 'styles'
 import { useLenis } from 'lenis/react'
 import {
@@ -14,10 +14,13 @@ import {
 import { usePathname } from 'next/navigation'
 import CustomLink from 'components/link'
 import Icon from 'components/icons'
+import { GlobalAPIContext } from 'context'
+import { formatPhone } from 'lib/api'
 
 export default function Menu({ menuOpen }) {
   const lenis = useLenis()
   const pathname = usePathname()
+  const globalAPI = useContext(GlobalAPIContext)
 
   useEffect(() => {
     if (menuOpen) {
@@ -55,10 +58,12 @@ export default function Menu({ menuOpen }) {
         </LinksWrapper>
 
         <BottomContact>
-          <CustomLink href={'mailto:hello@roboticimplantsnyc.com'}>
-            hello@roboticimplantsnyc.com
+          <CustomLink href={`mailto:${globalAPI?.contact?.email}`}>
+            {globalAPI?.contact?.email}
           </CustomLink>
-          <CustomLink href={'tel:7189480870'}>+1 (718) 948-0870</CustomLink>
+          <CustomLink href={`tel:${globalAPI?.contact?.phone}`}>
+            {formatPhone(globalAPI?.contact?.phone || '')}
+          </CustomLink>
         </BottomContact>
 
         <SocialsWrapper>

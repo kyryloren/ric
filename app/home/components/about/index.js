@@ -72,13 +72,13 @@ const About = ({ data }) => {
                 fallback={
                   index === 0
                     ? {
-                        url: '/about.webp',
-                        alternativeText: 'Robotic Implant Center About',
-                      }
+                      url: '/about.webp',
+                      alternativeText: 'Robotic Implant Center About',
+                    }
                     : {
-                        url: '/robot.webp',
-                        alternativeText: 'Robotic Implant Center Technology',
-                      }
+                      url: '/robot.webp',
+                      alternativeText: 'Robotic Implant Center Technology',
+                    }
                 }
               />
             </CardWrapper>

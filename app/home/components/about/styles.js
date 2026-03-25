@@ -42,6 +42,14 @@ export const CardWrapper = styled(Link)`
     sm:h-[20rem]
     lg:h-[50svh]
   `}
+
+  div {
+    ${tw`w-full h-full`}
+  }
+
+  video {
+    ${tw`w-full h-full object-cover`}
+  }
 `
 export const Overlay = tw.div`
   absolute

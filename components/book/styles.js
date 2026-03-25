@@ -91,6 +91,8 @@ export const InputLabel = tw.label`
 `
 export const Input = tw.input`
   w-full
+  min-w-0
+  max-w-full
   px-xs
   py-xxs
   bg-white

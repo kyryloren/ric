@@ -22,7 +22,8 @@ import CustomLink from 'components/link'
 import CustomButton from 'components/button'
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
-import { ModalContext } from 'context'
+import { ModalContext, GlobalAPIContext } from 'context'
+import { formatPhone } from 'lib/api'
 
 gsap.registerPlugin(useGSAP)
 
@@ -62,6 +63,7 @@ const validationSchema = Yup.object({
 export default function Book() {
   const sectionEl = useRef()
   const { modal, setModal } = useContext(ModalContext)
+  const globalAPI = useContext(GlobalAPIContext)
 
   // 2. Hook up validationSchema to Formik
   const formik = useFormik({
@@ -257,8 +259,8 @@ export default function Book() {
           <SubmitWrapper className="anim-question">
             <P>
               Need further assistance? Call{' '}
-              <CustomLink href={'tel:7189480870'} className="call-button">
-                (718) 948-0870
+              <CustomLink href={`tel:${globalAPI?.contact?.phone}`} className="call-button">
+                {formatPhone(globalAPI?.contact?.phone || '')}
               </CustomLink>
             </P>
             <CustomButton

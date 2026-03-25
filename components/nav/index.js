@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef, useState } from 'react'
+import { useContext, useRef, useState } from 'react'
 import { useLenis } from 'lenis/react'
 import Icon from 'components/icons'
 import {
@@ -23,11 +23,13 @@ import gsap from 'gsap'
 import { usePathname, useRouter } from 'next/navigation'
 import Menu from './menu'
 import { ScrollTrigger } from 'gsap/all'
+import { GlobalAPIContext } from 'context'
 
 gsap.registerPlugin(useGSAP, ScrollTrigger)
 
 const Nav = ({ hideNav = true }) => {
   const navEl = useRef(null)
+  const globalAPI = useContext(GlobalAPIContext)
 
   const pathname = usePathname()
   const router = useRouter()
@@ -225,7 +227,7 @@ const Nav = ({ hideNav = true }) => {
                 </CustomButton>
               </div>
               <div className="anim-button call">
-                <CustomButton $secondary href={'tel:7183569700'}>
+                <CustomButton $secondary href={`tel:${globalAPI?.contact?.phone}`}>
                   Call Now
                 </CustomButton>
               </div>

@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef } from 'react'
 import { H1, H4 } from 'styles'
 import {
   BottomTextWrapper,
@@ -30,48 +30,47 @@ function customSplitText(text) {
   )
 }
 
-const generateImagePaths = () =>
-  Array.from(
-    { length: frameCount },
-    (_, i) => `/videos/about/frame-${(i + 1).toString().padStart(3, '0')}.webp`,
-  )
+const imagePaths = Array.from(
+  { length: frameCount },
+  (_, i) => `/videos/about/frame-${(i + 1).toString().padStart(3, '0')}.webp`,
+)
 
 export default function Hero({ data }) {
   const sectionEl = useRef(null)
   const canvasEl = useRef(null)
-  const [currentFrameIndex, setCurrentFrameIndex] = useState(0)
-  const images = useRef(generateImagePaths())
+  const frameIndexRef = useRef(0)
+  const imagesRef = useRef([])
+  const drawRef = useRef(null)
 
-  // draw + resize canvas (always)
   useEffect(() => {
     const canvas = canvasEl.current
     if (!canvas) return
     const ctx = canvas.getContext('2d')
-    const imgEls = images.current.map((src) => {
-      const img = new Image()
-      img.src = src
-      return img
-    })
-    const maxRatio = Math.max(...imgEls.map((img) => img.height / img.width))
 
     const draw = (idx) => {
-      const img = imgEls[idx]
-      const aspect = img.width / img.height
-      const w = canvas.width / window.devicePixelRatio
+      const img = imagesRef.current[idx]
+      if (!img?.complete || !img.naturalWidth) return
+
+      const dpr = window.devicePixelRatio || 1
+      const aspect = img.naturalWidth / img.naturalHeight
+      const w = canvas.width / dpr
       const h = w / aspect
 
       ctx.clearRect(0, 0, canvas.width, canvas.height)
-      ctx.drawImage(
-        img,
-        0,
-        (canvas.height / window.devicePixelRatio - h) / 2,
-        w,
-        h,
-      )
+      ctx.drawImage(img, 0, (canvas.height / dpr - h) / 2, w, h)
     }
+    drawRef.current = draw
 
     const resize = () => {
       const dpr = window.devicePixelRatio || 1
+      const loaded = imagesRef.current.filter(
+        (img) => img?.complete && img.naturalWidth,
+      )
+      if (!loaded.length) return
+
+      const maxRatio = Math.max(
+        ...loaded.map((img) => img.naturalHeight / img.naturalWidth),
+      )
       const w = window.innerWidth * 0.65
       const h = w * maxRatio
 
@@ -79,15 +78,22 @@ export default function Hero({ data }) {
       canvas.height = h * dpr
       canvas.style.width = `${w}px`
       canvas.style.height = `${h}px`
-      ctx.scale(dpr, dpr)
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
 
-      draw(currentFrameIndex)
+      draw(frameIndexRef.current)
     }
 
+    imagesRef.current = imagePaths.map((src) => {
+      const img = new Image()
+      img.onload = () => resize()
+      img.src = src
+      return img
+    })
+
     window.addEventListener('resize', resize)
-    resize()
+
     return () => window.removeEventListener('resize', resize)
-  }, [currentFrameIndex])
+  }, [])
 
   useGSAP(
     () => {
@@ -115,7 +121,8 @@ export default function Hero({ data }) {
                 frameCount - 1,
                 Math.floor(progress * (frameCount - 1)),
               )
-              setCurrentFrameIndex(idx)
+              frameIndexRef.current = idx
+              drawRef.current?.(idx)
             },
           },
           defaults: { ease: 'linear' },
