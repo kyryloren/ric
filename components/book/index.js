@@ -1,9 +1,10 @@
 'use client'
 
-import { useContext, useRef } from 'react'
+import { useContext, useRef, useState } from 'react'
 import { H1, P, splitText } from 'styles'
 import {
   BookWrapper,
+  ErrorMessage,
   FormWrapper,
   Input,
   InputLabel,
@@ -12,6 +13,7 @@ import {
   SideBar,
   Split,
   SubmitWrapper,
+  SuccessMessage,
   TextArea,
   TitleLine,
 } from './styles'
@@ -64,8 +66,10 @@ export default function Book() {
   const sectionEl = useRef()
   const { modal, setModal } = useContext(ModalContext)
   const globalAPI = useContext(GlobalAPIContext)
+  const [submitted, setSubmitted] = useState(false)
+  const [submitError, setSubmitError] = useState(null)
+  const autoCloseTimer = useRef(null)
 
-  // 2. Hook up validationSchema to Formik
   const formik = useFormik({
     initialValues: {
       fname: '',
@@ -76,8 +80,30 @@ export default function Book() {
       details: '',
     },
     validationSchema,
-    onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2))
+    onSubmit: async (values, { setSubmitting }) => {
+      setSubmitError(null)
+      try {
+        const res = await fetch('/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(values),
+        })
+        const data = await res.json()
+
+        if (!res.ok) {
+          setSubmitError(data.error || 'Something went wrong. Please try again.')
+          return
+        }
+
+        setSubmitted(true)
+        autoCloseTimer.current = setTimeout(() => {
+          onClose()
+        }, 3000)
+      } catch {
+        setSubmitError('Something went wrong. Please try again.')
+      } finally {
+        setSubmitting(false)
+      }
     },
   })
 
@@ -135,12 +161,19 @@ export default function Book() {
   )
 
   const onClose = contextSafe(() => {
+    if (autoCloseTimer.current) {
+      clearTimeout(autoCloseTimer.current)
+      autoCloseTimer.current = null
+    }
+
     const tl = gsap.timeline({
       defaults: {
         ease: 'power3.out',
         onComplete: () => {
           setModal(false)
           resetForm()
+          setSubmitted(false)
+          setSubmitError(null)
         },
       },
     })
@@ -168,111 +201,123 @@ export default function Book() {
         </TitleLine>
         <P>{splitText(DESCRIPTION)}</P>
 
-        <FormWrapper onSubmit={handleSubmit}>
-          <Split>
-            <Question className="anim-question">
-              <InputLabel htmlFor="fname">Patient First Name</InputLabel>
-              <Input
-                id="fname"
-                name="fname"
-                type="text"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.fname}
-                placeholder="First Name"
-              />
-              {touched.fname && errors.fname && <span>{errors.fname}</span>}
-            </Question>
-
-            <Question className="anim-question">
-              <InputLabel htmlFor="lname">Patient Last Name</InputLabel>
-              <Input
-                id="lname"
-                name="lname"
-                type="text"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.lname}
-                placeholder="Last Name"
-              />
-              {touched.lname && errors.lname && <span>{errors.lname}</span>}
-            </Question>
-          </Split>
-
-          <Question className="anim-question">
-            <InputLabel htmlFor="dob">Patient Date of Birth</InputLabel>
-            <Input
-              id="dob"
-              name="dob"
-              type="date"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.dob}
-            />
-            {touched.dob && errors.dob && <span>{errors.dob}</span>}
-          </Question>
-
-          <Question className="anim-question">
-            <InputLabel htmlFor="email">Email</InputLabel>
-            <Input
-              id="email"
-              name="email"
-              type="email"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.email}
-              placeholder="email@domain.com"
-            />
-            {touched.email && errors.email && <span>{errors.email}</span>}
-          </Question>
-
-          <Question className="anim-question">
-            <InputLabel htmlFor="phone">Phone</InputLabel>
-            <Input
-              id="phone"
-              name="phone"
-              type="text"
-              placeholder="(XXX) XXX-XXXX"
-              value={values.phone}
-              onChange={(e) => {
-                const formatted = formatPhoneNumber(e.target.value)
-                setFieldValue('phone', formatted)
-              }}
-              onBlur={handleBlur}
-            />
-            {touched.phone && errors.phone && <span>{errors.phone}</span>}
-          </Question>
-
-          <Question className="anim-question">
-            <InputLabel htmlFor="details">Details</InputLabel>
-            <TextArea
-              id="details"
-              name="details"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.details}
-              placeholder="Any details we should know about?"
-            />
-            {touched.details && errors.details && <span>{errors.details}</span>}
-          </Question>
-
-          <SubmitWrapper className="anim-question">
+        {submitted ? (
+          <SuccessMessage>
+            <H1>{splitText('Thank You!')}</H1>
             <P>
-              Need further assistance? Call{' '}
-              <CustomLink href={`tel:${globalAPI?.contact?.phone}`} className="call-button">
-                {formatPhone(globalAPI?.contact?.phone || '')}
-              </CustomLink>
+              {splitText(
+                `We've received your request and will be in touch within 1-2 business days.`,
+              )}
             </P>
-            <CustomButton
-              disabled={isSubmitting || !dirty || !isValid}
-              type="submit"
-              $primary
-              className="submit"
-            >
-              Submit Form
-            </CustomButton>
-          </SubmitWrapper>
-        </FormWrapper>
+          </SuccessMessage>
+        ) : (
+          <FormWrapper onSubmit={handleSubmit}>
+            <Split>
+              <Question className="anim-question">
+                <InputLabel htmlFor="fname">Patient First Name</InputLabel>
+                <Input
+                  id="fname"
+                  name="fname"
+                  type="text"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.fname}
+                  placeholder="First Name"
+                />
+                {touched.fname && errors.fname && <span>{errors.fname}</span>}
+              </Question>
+
+              <Question className="anim-question">
+                <InputLabel htmlFor="lname">Patient Last Name</InputLabel>
+                <Input
+                  id="lname"
+                  name="lname"
+                  type="text"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.lname}
+                  placeholder="Last Name"
+                />
+                {touched.lname && errors.lname && <span>{errors.lname}</span>}
+              </Question>
+            </Split>
+
+            <Question className="anim-question">
+              <InputLabel htmlFor="dob">Patient Date of Birth</InputLabel>
+              <Input
+                id="dob"
+                name="dob"
+                type="date"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.dob}
+              />
+              {touched.dob && errors.dob && <span>{errors.dob}</span>}
+            </Question>
+
+            <Question className="anim-question">
+              <InputLabel htmlFor="email">Email</InputLabel>
+              <Input
+                id="email"
+                name="email"
+                type="email"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.email}
+                placeholder="email@domain.com"
+              />
+              {touched.email && errors.email && <span>{errors.email}</span>}
+            </Question>
+
+            <Question className="anim-question">
+              <InputLabel htmlFor="phone">Phone</InputLabel>
+              <Input
+                id="phone"
+                name="phone"
+                type="text"
+                placeholder="(XXX) XXX-XXXX"
+                value={values.phone}
+                onChange={(e) => {
+                  const formatted = formatPhoneNumber(e.target.value)
+                  setFieldValue('phone', formatted)
+                }}
+                onBlur={handleBlur}
+              />
+              {touched.phone && errors.phone && <span>{errors.phone}</span>}
+            </Question>
+
+            <Question className="anim-question">
+              <InputLabel htmlFor="details">Details</InputLabel>
+              <TextArea
+                id="details"
+                name="details"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.details}
+                placeholder="Any details we should know about?"
+              />
+              {touched.details && errors.details && <span>{errors.details}</span>}
+            </Question>
+
+            <SubmitWrapper className="anim-question">
+              <P>
+                Need further assistance? Call{' '}
+                <CustomLink href={`tel:${globalAPI?.contact?.phone}`} className="call-button">
+                  {formatPhone(globalAPI?.contact?.phone || '')}
+                </CustomLink>
+              </P>
+              {submitError && <ErrorMessage>{submitError}</ErrorMessage>}
+              <CustomButton
+                disabled={isSubmitting || !dirty || !isValid}
+                type="submit"
+                $primary
+                className="submit"
+              >
+                {isSubmitting ? 'Sending...' : 'Submit Form'}
+              </CustomButton>
+            </SubmitWrapper>
+          </FormWrapper>
+        )}
       </SideBar>
       <ScreenOverlay className="overlay" onClick={onClose} />
     </BookWrapper>
