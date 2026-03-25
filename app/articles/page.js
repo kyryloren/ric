@@ -1,7 +1,8 @@
 import { Footer, Nav } from 'components'
 import { fetchAPI, getStrapiURL } from 'lib'
-import { ArticleItem, Header, ImageWrapper, ListWrapper } from './styles'
+import { ArticleItem, ImageWrapper, ListWrapper } from './styles'
 import { Container, CustomGrid, H4, RenderMedia } from 'styles'
+import Hero from './components/hero'
 
 export async function generateMetadata() {
   const seoData = await fetchAPI('/all-articles', {
@@ -53,10 +54,10 @@ export default async function Services() {
   return (
     <>
       <Nav hideNav={allArticlesDoc?.all_articles_header?.book} />
+      <Hero data={allArticlesDoc?.all_articles_header} />
 
       <ListWrapper>
         <Container>
-          <Header data={allArticlesDoc?.all_articles_header} />
           <CustomGrid>
             {articlesDoc.map((_, index) => (
               <ArticleItem

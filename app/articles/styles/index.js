@@ -1,6 +1,5 @@
 'use client'
 
-import { CustomHeader } from 'components'
 import Link from 'next/link'
 import tw, { styled } from 'twin.macro'
 
@@ -34,17 +33,3 @@ export const ImageWrapper = tw.div`
 
   sm:h-[25svw]
 `
-export const Header = ({ data }) => {
-  return (
-    <CustomHeader
-      title={data?.title}
-      description={data?.description}
-      book={data?.book}
-      call={data?.call}
-      buttons={data?.button}
-      id={'hero'}
-      center
-      padded
-    />
-  )
-}
