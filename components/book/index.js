@@ -1,6 +1,6 @@
 'use client'
 
-import { useContext, useRef, useState } from 'react'
+import { useContext, useEffect, useRef, useState } from 'react'
 import { H1, P, splitText } from 'styles'
 import {
   BookWrapper,
@@ -69,6 +69,14 @@ export default function Book() {
   const [submitted, setSubmitted] = useState(false)
   const [submitError, setSubmitError] = useState(null)
   const autoCloseTimer = useRef(null)
+
+  useEffect(() => {
+    return () => {
+      if (autoCloseTimer.current) {
+        clearTimeout(autoCloseTimer.current)
+      }
+    }
+  }, [])
 
   const formik = useFormik({
     initialValues: {
